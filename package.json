@@ -8,7 +8,11 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:build": "tsc --project tsconfig.test.json && node scripts/rename-test-output.cjs",
+    "test:run": "node --test dist-tests/src/components/home/__tests__/HomeSections.test.cjs",
+    "test:clean": "node -e \"try{require('fs').rmSync('dist-tests',{recursive:true,force:true});}catch(e){}\"",
+    "test": "pnpm test:build && pnpm test:run && pnpm test:clean"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.53.4",
