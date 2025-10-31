@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
@@ -18,7 +17,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Loader2 } from 'lucide-react'; // Importar o ícone de carregamento
+import { Loader2 } from 'lucide-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  CONTACT_REQUESTS_QUERY_KEY,
+  createContactRequest,
+  ContactRequestInput,
+} from '@/lib/storage/contactRequests';
 
 // Define o esquema de validação com Zod
 const formSchema = z.object({
@@ -41,7 +46,14 @@ const formSchema = z.object({
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation('contact');
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = React.useState(false); // Estado para controlar o carregamento
+  const queryClient = useQueryClient();
+  const contactMutation = useMutation({
+    mutationFn: async (payload: ContactRequestInput) => createContactRequest(payload),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: CONTACT_REQUESTS_QUERY_KEY });
+    },
+  });
+  const isSubmitting = contactMutation.isPending;
 
   // Inicializa o formulário com react-hook-form e zodResolver
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,35 +68,22 @@ const Contact: React.FC = () => {
 
   // Função de submissão do formulário
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    setIsSubmitting(true); // Inicia o estado de carregamento
-    console.log('Formulário de Contato Enviado:', data);
-
     try {
-      // Simula uma chamada de API
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Atraso de 2 segundos
-
-      // Simula um sucesso ou falha aleatória para demonstração
-      const success = Math.random() > 0.2; // 80% de chance de sucesso
-
-      if (success) {
-        toast({
-          title: t('form.successMessage'),
-          description: "Sua mensagem foi recebida e entraremos em contato em breve.",
-          variant: "default",
-        });
-        form.reset(); // Limpa o formulário após o envio
-      } else {
-        throw new Error(t('form.errorMessage'));
-      }
+      await contactMutation.mutateAsync(data);
+      toast({
+        title: t('form.successMessage'),
+        description: "Sua mensagem foi recebida e entraremos em contato em breve.",
+        variant: "default",
+      });
+      form.reset();
     } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
+      const description =
+        error instanceof Error ? error.message : "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.";
       toast({
         title: t('form.errorMessage'),
-        description: "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.",
+        description,
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false); // Finaliza o estado de carregamento
     }
   };
 
