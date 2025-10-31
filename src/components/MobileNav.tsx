@@ -31,7 +31,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden text-boteco-wine-foreground hover:bg-boteco-wine/80">
+        <Button variant="ghost" size="icon" className="lg:hidden text-boteco-wine-foreground hover:bg-boteco-wine/80 active:scale-98">
           <Menu className="h-6 w-6" />
           <span className="sr-only">{t('openMenu', { defaultValue: 'Abrir menu' })}</span>
         </Button>

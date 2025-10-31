@@ -34,19 +34,19 @@ const Header: React.FC = () => {
           </div>
         ) : (
           <nav className="flex items-center space-x-4">
-            <Link to={getLocalizedPath('/')} className="hover:underline">
+            <Link to={getLocalizedPath('/')} className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('home:hero.title', { ns: 'home' }).split(':')[0]}
             </Link>
-            <Link to={getLocalizedPath('/sobre')} className="hover:underline">
+            <Link to={getLocalizedPath('/sobre')} className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('about:title', { ns: 'about' })}
             </Link>
-            <Link to={getLocalizedPath('/contato')} className="hover:underline">
+            <Link to={getLocalizedPath('/contato')} className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('contact:title', { ns: 'contact' })}
             </Link>
-            <Link to={getLocalizedPath('/blog')} className="hover:underline">
+            <Link to={getLocalizedPath('/blog')} className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('blog:title', { ns: 'blog' })}
             </Link>
-            <Link to="/painel" className="hover:underline">
+            <Link to="/painel" className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('painel:title', { ns: 'painel' })}
             </Link>
             <LanguageSwitcher />

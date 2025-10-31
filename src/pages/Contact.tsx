@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
         locale={i18n.language}
       />
       <div className="container mx-auto px-4 py-12 max-w-3xl">
-        <Card className="shadow-lg">
+        <Card className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-boteco-wine mb-2">
               {t('title')}
@@ -165,7 +165,7 @@ const Contact: React.FC = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-boteco-wine text-boteco-wine-foreground hover:bg-boteco-wine/90" disabled={isSubmitting}>
+                <Button type="submit" className="w-full bg-boteco-wine text-boteco-wine-foreground hover:bg-boteco-wine/90 active:scale-98 transition-transform duration-100" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

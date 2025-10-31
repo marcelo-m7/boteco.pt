@@ -14,10 +14,10 @@ const Footer: React.FC = () => {
     <footer className="bg-boteco-wine text-boteco-wine-foreground p-4 shadow-inner mt-8">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-sm">
         <div className="flex space-x-4 mb-2 md:mb-0">
-          <Link to={getLocalizedPath('/legal/privacidade')} className="hover:underline">
+          <Link to={getLocalizedPath('/legal/privacidade')} className="hover:underline hover:text-boteco-mustard transition-colors">
             {t('privacy:title', { ns: 'privacy' })}
           </Link>
-          <Link to={getLocalizedPath('/legal/termos')} className="hover:underline">
+          <Link to={getLocalizedPath('/legal/termos')} className="hover:underline hover:text-boteco-mustard transition-colors">
             {t('terms:title', { ns: 'terms' })}
           </Link>
         </div>

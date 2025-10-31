@@ -36,7 +36,7 @@ const FeaturesSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-6 text-left shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="p-6 text-left shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
                 <CardHeader>
                   <CardTitle className="text-boteco-wine flex items-center">
                     <CheckCircle className="mr-3 h-6 w-6 text-boteco-mustard" />

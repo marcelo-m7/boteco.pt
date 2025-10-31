@@ -35,7 +35,7 @@ const TestimonialsSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-2xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-6 shadow-lg bg-boteco-beige/30">
+              <Card className="p-6 shadow-lg bg-boteco-beige/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
                 <CardContent className="text-lg italic text-boteco-brown/80 mb-4">
                   "{testimonial.text}"
                 </CardContent>

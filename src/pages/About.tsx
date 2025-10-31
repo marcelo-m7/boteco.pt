@@ -73,7 +73,7 @@ const About: React.FC = () => {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
                 <CardHeader>
                   <Lightbulb className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
                   <CardTitle className="text-xl font-semibold text-boteco-wine">{values[0]}</CardTitle>
@@ -84,7 +84,7 @@ const About: React.FC = () => {
               </Card>
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
                 <CardHeader>
                   <ShieldCheck className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
                   <CardTitle className="text-xl font-semibold text-boteco-wine">{values[1]}</CardTitle>
@@ -95,7 +95,7 @@ const About: React.FC = () => {
               </Card>
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
                 <CardHeader>
                   <Users className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
                   <CardTitle className="text-xl font-semibold text-boteco-wine">{values[2]}</CardTitle>

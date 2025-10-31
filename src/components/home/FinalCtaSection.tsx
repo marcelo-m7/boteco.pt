@@ -38,7 +38,7 @@ const FinalCtaSection: React.FC = () => {
         </motion.h2>
         <motion.div variants={itemVariants}>
           <Link to={getLocalizedPath('/contato')}>
-            <Button size="lg" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300">
+            <Button size="lg" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300 active:scale-98">
               {t('finalCta.button')} <Lightbulb className="ml-2 h-5 w-5" />
             </Button>
           </Link>

@@ -41,7 +41,7 @@ const NotFound = () => {
             {t('notFound:description', { defaultValue: 'Parece que a página que você tentou acessar não existe ou foi movida.' })}
           </p>
           <Link to={`/${currentLocale}`}>
-            <Button className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300">
+            <Button className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300 active:scale-98">
               {t('notFound:returnHome', { defaultValue: 'Voltar para a Página Inicial' })}
             </Button>
           </Link>

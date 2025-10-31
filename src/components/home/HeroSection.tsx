@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
         </motion.p>
         <motion.div variants={itemVariants}>
           <Link to={getLocalizedPath('/contato')}>
-            <Button size="lg" className="bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80 hover:text-boteco-brown transition-colors duration-300">
+            <Button size="lg" className="bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80 hover:text-boteco-brown transition-colors duration-300 active:scale-98">
               {t('hero.cta')} <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
