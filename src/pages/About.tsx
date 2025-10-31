@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb, Users, ShieldCheck } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { motion, Variants, Easing } from 'framer-motion'; // Importar motion e Variants
+import { ScrollStack } from '@reactbits/navigation';
 
 const About: React.FC = () => {
   const { t, i18n } = useTranslation('about');
@@ -71,41 +71,53 @@ const About: React.FC = () => {
           <motion.h2 variants={itemVariants} className="text-3xl font-bold text-center mb-8 text-boteco-brown">
             {t('valuesTitle', { defaultValue: 'Nossos Valores' })}
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
-                <CardHeader>
-                  <Lightbulb className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
-                  <CardTitle className="text-xl font-semibold text-boteco-wine">{values[0]}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-boteco-brown/80">{t('valueDescription1', { defaultValue: 'Celebramos a individualidade e a riqueza das diferentes perspectivas.' })}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
-                <CardHeader>
-                  <ShieldCheck className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
-                  <CardTitle className="text-xl font-semibold text-boteco-wine">{values[1]}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-boteco-brown/80">{t('valueDescription2', { defaultValue: 'Buscamos constantemente novas formas de superar desafios e inovar.' })}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Card className="text-center p-6 shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
-                <CardHeader>
-                  <Users className="h-12 w-12 text-boteco-mustard mx-auto mb-4" />
-                  <CardTitle className="text-xl font-semibold text-boteco-wine">{values[2]}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-boteco-brown/80">{t('valueDescription3', { defaultValue: 'Trabalhamos juntos, com honestidade, para alcançar nossos objetivos.' })}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+          <ScrollStack
+            className="mx-auto max-w-4xl"
+            listClassName="gap-8"
+            itemClassName="bg-surface-gradient"
+            itemActiveClassName="shadow-surface-strong ring-2 ring-boteco-mustard/40"
+            ariaLabel={t('valuesTitle', { defaultValue: 'Nossos Valores' })}
+            items={[
+              {
+                id: 'value-0',
+                label: values[0],
+                description: t('valueDescription1', {
+                  defaultValue:
+                    'Celebramos a individualidade e a riqueza das diferentes perspectivas.',
+                }),
+                icon: <Lightbulb className="h-12 w-12" aria-hidden />,
+              },
+              {
+                id: 'value-1',
+                label: values[1],
+                description: t('valueDescription2', {
+                  defaultValue:
+                    'Buscamos constantemente novas formas de superar desafios e inovar.',
+                }),
+                icon: <ShieldCheck className="h-12 w-12" aria-hidden />,
+              },
+              {
+                id: 'value-2',
+                label: values[2],
+                description: t('valueDescription3', {
+                  defaultValue:
+                    'Trabalhamos juntos, com honestidade, para alcançar nossos objetivos.',
+                }),
+                icon: <Users className="h-12 w-12" aria-hidden />,
+              },
+            ]}
+            renderItem={({ item }) => (
+              <div className="flex flex-col items-center gap-4 text-center">
+                {React.isValidElement(item.icon) ? (
+                  <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-boteco-wine/10 text-boteco-mustard">
+                    {React.cloneElement(item.icon, { className: 'h-10 w-10' })}
+                  </span>
+                ) : null}
+                <h3 className="text-xl font-semibold text-boteco-wine">{item.label}</h3>
+                <p className="text-boteco-brown/80">{item.description}</p>
+              </div>
+            )}
+          />
         </motion.section>
 
         <motion.section

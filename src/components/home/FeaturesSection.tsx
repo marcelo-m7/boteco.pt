@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
 import { motion, Variants, Easing } from 'framer-motion';
+import { ScrollStack } from '@reactbits/navigation';
 
 const FeaturesSection: React.FC = () => {
   const { t } = useTranslation('home');
@@ -33,25 +33,28 @@ const FeaturesSection: React.FC = () => {
         <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown">
           {t('featuresTitle', { defaultValue: 'Nossas Funcionalidades' })}
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-6 text-left shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
-                <CardHeader>
-                  <CardTitle className="text-boteco-wine flex items-center">
-                    <CheckCircle className="mr-3 h-6 w-6 text-boteco-mustard" />
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-boteco-brown/80">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        <ScrollStack
+          ariaLabel={t('featuresTitle', { defaultValue: 'Nossas Funcionalidades' })}
+          items={features.map((feature, index) => ({
+            id: `feature-${index}`,
+            label: feature.title,
+            description: feature.description,
+          }))}
+          listClassName="gap-8"
+          itemClassName="bg-surface-gradient"
+          itemActiveClassName="shadow-surface-strong ring-2 ring-boteco-mustard/40"
+          renderItem={({ item }) => (
+            <div className="space-y-3 text-left">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-boteco-wine/10 text-boteco-mustard">
+                  <CheckCircle className="h-5 w-5" aria-hidden />
+                </span>
+                <h3 className="text-xl font-semibold text-boteco-wine">{item.label}</h3>
+              </div>
+              <p className="text-boteco-brown/80">{item.description}</p>
+            </div>
+          )}
+        />
       </div>
     </motion.section>
   );

@@ -1,16 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useUser } from '@clerk/clerk-react';
 import { Package, Utensils, DollarSign, AlertTriangle } from 'lucide-react';
 import Seo from '@/components/Seo'; // Importar o componente Seo
+import { ScrollStack } from '@reactbits/navigation';
 
 const Painel: React.FC = () => {
   const { t, i18n } = useTranslation('painel');
   const { user } = useUser();
 
   const userName = user?.firstName || t('guest', { defaultValue: 'Usuário' });
-  const cards = t('cards', { returnObjects: true }) as { title: string; value: string; description: string }[];
+  const cards = t('cards', { returnObjects: true }) as {
+    title: string;
+    value: string;
+    description: string;
+  }[];
 
   const getIcon = (title: string) => {
     switch (title) {
@@ -26,6 +30,14 @@ const Painel: React.FC = () => {
         return null;
     }
   };
+
+  const cardItems = cards.map((card, index) => ({
+    id: `painel-card-${index}`,
+    label: card.title,
+    value: card.value,
+    description: card.description,
+    icon: getIcon(card.title),
+  }));
 
   const pageTitle = t('title');
   const pageDescription = t('demoNotice');
@@ -50,27 +62,36 @@ const Painel: React.FC = () => {
           {t('demoNotice')}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cards.map((card, index) => (
-            <Card
-              key={index}
-              className="shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient"
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium text-boteco-brown">
-                  {card.title}
-                </CardTitle>
-                {getIcon(card.title)}
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-boteco-wine">{card.value}</div>
-                <p className="text-xs text-boteco-brown/80">
-                  {card.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <ScrollStack
+          items={cardItems}
+          ariaLabel={t('title')}
+          listClassName="gap-8"
+          itemClassName="bg-surface-gradient"
+          itemActiveClassName="shadow-surface-strong ring-2 ring-boteco-mustard/40"
+          renderItem={({ item }) => (
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm font-semibold uppercase tracking-wide text-boteco-brown/70">
+                    {item.label}
+                  </span>
+                  <span className="text-3xl font-bold text-boteco-wine">
+                    {item.value}
+                  </span>
+                </div>
+                {React.isValidElement(item.icon) ? (
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-boteco-wine/10 text-boteco-mustard">
+                    {React.cloneElement(item.icon, {
+                      className: 'h-7 w-7',
+                      'aria-hidden': true,
+                    })}
+                  </span>
+                ) : null}
+              </div>
+              <p className="text-sm text-boteco-brown/80">{item.description}</p>
+            </div>
+          )}
+        />
       </div>
     </>
   );

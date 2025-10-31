@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CalendarDays } from 'lucide-react';
 import Seo from '@/components/Seo'; // Importar o componente Seo
 import { Link, useParams } from 'react-router-dom'; // Importar Link e useParams
+import { ScrollStack } from '@reactbits/navigation';
 
 const Blog: React.FC = () => {
   const { t, i18n } = useTranslation('blog');
@@ -41,32 +41,40 @@ const Blog: React.FC = () => {
           {t('description')}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <Card
-              key={post.id}
-              className="shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient"
-            >
-              <CardHeader>
-                <CardTitle className="text-2xl font-semibold text-boteco-brown">
-                  {post.title}
-                </CardTitle>
-                <CardDescription className="flex items-center text-boteco-brown/80">
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  {post.date}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-boteco-brown/90">
-                  {post.excerpt}
+        <ScrollStack
+          items={posts.map((post, index) => ({
+            id: post.id || `blog-post-${index}`,
+            label: post.title,
+            description: post.excerpt,
+            meta: post.date,
+          }))}
+          ariaLabel={t('title')}
+          listClassName="gap-10"
+          itemClassName="bg-surface-gradient"
+          itemActiveClassName="shadow-surface-strong ring-2 ring-boteco-mustard/40"
+          renderItem={({ item }) => (
+            <article className="flex flex-col gap-4">
+              <header className="space-y-3">
+                <h3 className="text-2xl font-semibold text-boteco-brown">
+                  {item.label}
+                </h3>
+                <p className="flex items-center text-sm font-medium uppercase tracking-wide text-boteco-brown/70">
+                  <CalendarDays className="mr-2 h-4 w-4" aria-hidden />
+                  {item.meta}
                 </p>
-                <Link to={`/${currentLocale}/blog/${generateSlug(post.title)}`} className="text-boteco-mustard hover:underline mt-4 inline-block">
-                  {t('readMore', { defaultValue: 'Leia Mais' })}
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </header>
+              <p className="text-boteco-brown/90">
+                {item.description}
+              </p>
+              <Link
+                to={`/${currentLocale}/blog/${generateSlug(item.label)}`}
+                className="text-boteco-mustard transition-colors hover:text-boteco-mustard/80 hover:underline"
+              >
+                {t('readMore', { defaultValue: 'Leia Mais' })}
+              </Link>
+            </article>
+          )}
+        />
       </div>
     </>
   );
