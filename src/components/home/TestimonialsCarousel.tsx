@@ -1,88 +1,72 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { DepthSpotlight } from '@/components/design';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { motion, Variants, Easing } from 'framer-motion';
-import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import * as React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-interface TestimonialsCarouselProps {
+import { DepthSpotlight, DepthStack } from "@/components/design";
+
+interface TestimonialsBentoProps {
   testimonials: { text: string; author: string }[];
 }
 
-const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonials }) => {
-  const { t } = useTranslation('home');
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
-  const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
+const TestimonialsCarousel: React.FC<TestimonialsBentoProps> = ({ testimonials }) => {
+  const shouldReduceMotion = useReducedMotion();
 
-  const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onSelect = React.useCallback((emblaInstance: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaInstance.canScrollPrev());
-    setNextBtnDisabled(!emblaInstance.canScrollNext());
-  }, []);
-
-  React.useEffect(() => {
-    if (!emblaApi) return;
-    onSelect(emblaApi);
-    emblaApi.on('reInit', onSelect);
-    emblaApi.on('select', onSelect);
-  }, [emblaApi, onSelect]);
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const [highlight, ...rest] = testimonials;
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex -ml-4"> {/* Adjust margin to compensate for item padding */}
-          {testimonials.map((testimonial, index) => (
-            <div className="flex-none w-full pl-4" key={index}> {/* Add padding to items */}
-              <motion.div variants={itemVariants} custom={index}>
-                <DepthSpotlight
-                  asChild
-                  depth={200}
-                  spotlightRadius="320px"
-                  spotlightOpacity={0.26}
-                  className="h-full hover:depth-300"
-                >
-                  <Card className="p-6 h-full flex flex-col justify-between">
-                    <CardContent className="text-lg italic text-boteco-brown/80 mb-4 dark:text-boteco-beige-300/80">
-                      "{testimonial.text}"
-                    </CardContent>
-                    <CardFooter className="text-right font-semibold text-boteco-wine dark:text-boteco-mustard-300">
-                      - {testimonial.author}
-                    </CardFooter>
-                  </Card>
-                </DepthSpotlight>
-              </motion.div>
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)]">
+      {highlight && (
+        <motion.blockquote
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="h-full"
+        >
+          <DepthSpotlight
+            depth={300}
+            spotlightRadius="520px"
+            spotlightOpacity={0.28}
+            className="flex h-full flex-col justify-between rounded-3xl bg-gradient-to-br from-boteco-wine-500/85 via-boteco-wine-500/60 to-boteco-mustard-300/40 p-[1px]"
+          >
+            <div className="flex h-full flex-col justify-between rounded-3xl bg-boteco-beige-50/95 p-10 text-left dark:bg-boteco-brown-900/70">
+              <p className="text-lg font-medium leading-relaxed text-boteco-brown-800/95 dark:text-boteco-beige-100/95">
+                “{highlight.text}”
+              </p>
+              <footer className="mt-8 text-right text-sm font-semibold text-boteco-wine-600 dark:text-boteco-mustard-300">
+                {highlight.author}
+              </footer>
             </div>
-          ))}
-        </div>
+          </DepthSpotlight>
+        </motion.blockquote>
+      )}
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        {rest.map((testimonial, index) => (
+          <motion.blockquote
+            key={`${testimonial.author}-${index}`}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.05 }}
+            className="h-full"
+          >
+            <DepthStack
+              depth={200}
+              layers={3}
+              layerDepth={100}
+              layerOffset={3}
+              className="flex h-full flex-col justify-between rounded-3xl bg-boteco-beige-100/90 p-6 text-left dark:bg-boteco-brown-900/60"
+            >
+              <p className="text-sm leading-relaxed text-boteco-brown-700 dark:text-boteco-beige-200/85">“{testimonial.text}”</p>
+              <footer className="mt-6 text-right text-xs font-semibold uppercase tracking-wide text-boteco-wine-600 dark:text-boteco-mustard-300">
+                {testimonial.author}
+              </footer>
+            </DepthStack>
+          </motion.blockquote>
+        ))}
       </div>
-      <Button
-        variant="ghost"
-        onClick={scrollPrev}
-        disabled={prevBtnDisabled}
-        className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10 dark:bg-boteco-wine-700/40 dark:hover:bg-boteco-wine-600/40 dark:text-boteco-beige-200"
-      >
-        <ArrowLeft className="h-6 w-6" />
-      </Button>
-      <Button
-        variant="ghost"
-        onClick={scrollNext}
-        disabled={nextBtnDisabled}
-        className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10 dark:bg-boteco-wine-700/40 dark:hover:bg-boteco-wine-600/40 dark:text-boteco-beige-200"
-      >
-        <ArrowRight className="h-6 w-6" />
-      </Button>
     </div>
   );
 };
