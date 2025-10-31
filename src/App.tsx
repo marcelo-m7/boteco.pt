@@ -13,6 +13,7 @@ import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Painel from "./pages/Painel";
 import BlogPostDetail from "./pages/BlogPostDetail";
+import CreateIssue from "./pages/CreateIssue";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 import ScrollToTop from "./components/ScrollToTop"; // Importar o novo componente
 
@@ -50,6 +51,9 @@ const App = () => (
               </SignedOut>
             </>
           } />
+
+          {/* Create Issue route */}
+          <Route path="/create-issue" element={<CreateIssue />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
