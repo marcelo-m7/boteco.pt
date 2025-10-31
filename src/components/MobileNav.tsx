@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu } from 'lucide-react';
 import {
@@ -10,23 +10,53 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import type { BaseNavItem, NavItem } from '@/types/navigation';
 
 interface MobileNavProps {
   onOpenChange: (open: boolean) => void;
   isOpen: boolean;
+  currentLocale: string;
+  items: NavItem[];
 }
 
-const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
+const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen, currentLocale, items }) => {
   const { t } = useTranslation();
-  const { locale } = useParams<{ locale: string }>();
-  const currentLocale = locale || 'pt';
 
-  const getLocalizedPath = (path: string) => `/${currentLocale}${path}`;
+  const getLabel = React.useCallback(
+    (item: BaseNavItem) => item.label[currentLocale] ?? item.label.pt ?? Object.values(item.label)[0],
+    [currentLocale],
+  );
+
+  const getDescription = React.useCallback(
+    (item: BaseNavItem) => item.description?.[currentLocale] ?? item.description?.pt ?? '',
+    [currentLocale],
+  );
+
+  const resolveHref = React.useCallback(
+    (item: BaseNavItem) => {
+      if (!item.href) {
+        return '#';
+      }
+
+      if (item.localeAware === false || item.href.startsWith('http')) {
+        return item.href;
+      }
+
+      const normalized = item.href.startsWith('/') ? item.href : `/${item.href}`;
+      return `/${currentLocale}${normalized}`;
+    },
+    [currentLocale],
+  );
+
+  const handleNavigate = React.useCallback(() => {
+    onOpenChange(false);
+  }, [onOpenChange]);
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -45,22 +75,42 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl font-bold text-boteco-primary">Boteco Pro</SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col space-y-4 flex-grow">
-          <Link to={getLocalizedPath('/')} className="text-lg font-medium text-foreground hover:text-boteco-primary transition-colors" onClick={() => onOpenChange(false)}>
-            {t('home:hero.title', { ns: 'home' }).split(':')[0]}
-          </Link>
-          <Link to={getLocalizedPath('/sobre')} className="text-lg font-medium text-foreground hover:text-boteco-primary transition-colors" onClick={() => onOpenChange(false)}>
-            {t('about:title', { ns: 'about' })}
-          </Link>
-          <Link to={getLocalizedPath('/contato')} className="text-lg font-medium text-foreground hover:text-boteco-primary transition-colors" onClick={() => onOpenChange(false)}>
-            {t('contact:title', { ns: 'contact' })}
-          </Link>
-          <Link to={getLocalizedPath('/blog')} className="text-lg font-medium text-foreground hover:text-boteco-primary transition-colors" onClick={() => onOpenChange(false)}>
-            {t('blog:title', { ns: 'blog' })}
-          </Link>
-          <Link to="/painel" className="text-lg font-medium text-foreground hover:text-boteco-primary transition-colors" onClick={() => onOpenChange(false)}>
-            {t('painel:title', { ns: 'painel' })}
-          </Link>
+        <nav className="flex flex-col flex-grow">
+          <Accordion type="multiple" className="space-y-2">
+            {items.map((item) =>
+              item.type === 'mega' && item.items?.length ? (
+                <AccordionItem key={item.id} value={item.id} className="border-b border-border/40">
+                  <AccordionTrigger className="text-left text-lg font-medium text-foreground hover:text-boteco-primary">
+                    {getLabel(item)}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-2 pb-3">
+                    {item.items.map((child) => (
+                      <Link
+                        key={child.id}
+                        to={resolveHref(child)}
+                        onClick={handleNavigate}
+                        className="block rounded-md bg-muted/40 px-3 py-2 transition-colors hover:bg-muted"
+                      >
+                        <span className="block text-sm font-medium text-foreground">{getLabel(child)}</span>
+                        {child.description && (
+                          <span className="block text-xs text-muted-foreground">{getDescription(child)}</span>
+                        )}
+                      </Link>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ) : (
+                <Link
+                  key={item.id}
+                  to={resolveHref(item)}
+                  onClick={handleNavigate}
+                  className="block rounded-md px-3 py-2 text-lg font-medium text-foreground transition-colors hover:bg-muted/60 hover:text-boteco-primary"
+                >
+                  {getLabel(item)}
+                </Link>
+              ),
+            )}
+          </Accordion>
         </nav>
         <div className="flex flex-col space-y-4 mt-auto pb-4">
           <LanguageSwitcher />

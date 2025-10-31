@@ -1,27 +1,27 @@
 {
-  "greeting": "¡Hola, {{userName}}!",
-  "title": "Panel de Control",
+  "greeting": "Hola, {{userName}}!",
+  "title": "Panel de control",
   "demoNotice": "(Datos de ejemplo para demostración – futura integración con API interna)",
   "cards": [
     {
-      "title": "Pedidos Recientes",
+      "title": "Pedidos recientes",
       "value": "12",
       "description": "Nuevos pedidos en las últimas 24h"
     },
     {
-      "title": "Mesas Abiertas",
-      "value": "5",
-      "description": "Mesas actualmente en servicio"
+      "title": "Menú digital online",
+      "value": "24 ítems",
+      "description": "Carta sincronizada con fotos y traducciones activas"
     },
     {
-      "title": "Inventario Bajo",
-      "value": "3 artículos",
-      "description": "Productos que necesitan ser reabastecidos"
+      "title": "Campañas de fidelidad",
+      "value": "3 activas",
+      "description": "Jornadas omnicanal en marcha"
     },
     {
-      "title": "Ventas Hoy",
-      "value": "$ 1.250,00",
-      "description": "Total de ventas hasta ahora"
+      "title": "Eventos programados",
+      "value": "2 eventos",
+      "description": "Checklists completados para esta semana"
     }
   ]
 }

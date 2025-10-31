@@ -10,6 +10,11 @@ import ptBlog from './content/pt/blog.json';
 import ptPrivacy from './content/pt/legal/privacy.json';
 import ptTerms from './content/pt/legal/terms.json';
 import ptPainel from './content/pt/painel.json';
+import ptMenuDigital from './content/pt/menu-digital.json';
+import ptFornecedores from './content/pt/fornecedores.json';
+import ptFidelidade from './content/pt/fidelidade.json';
+import ptEventos from './content/pt/eventos.json';
+import ptIntegracoes from './content/pt/integracoes.json';
 import ptBlogPost1 from './content/pt/blog-posts/5-dicas-para-otimizar-seu-atendimento.json'; // Novo
 
 import enHome from './content/en/home.json';
@@ -19,6 +24,11 @@ import enBlog from './content/en/blog.json';
 import enPrivacy from './content/en/legal/privacy.json';
 import enTerms from './content/en/legal/terms.json';
 import enPainel from './content/en/painel.json';
+import enMenuDigital from './content/en/menu-digital.json';
+import enFornecedores from './content/en/fornecedores.json';
+import enFidelidade from './content/en/fidelidade.json';
+import enEventos from './content/en/eventos.json';
+import enIntegracoes from './content/en/integracoes.json';
 import enBlogPost1 from './content/en/blog-posts/5-tips-to-optimize-your-service.json'; // Novo
 
 import esHome from './content/es/home.json';
@@ -28,6 +38,11 @@ import esBlog from './content/es/blog.json';
 import esPrivacy from './content/es/legal/privacy.json';
 import esTerms from './content/es/legal/terms.json';
 import esPainel from './content/es/painel.json';
+import esMenuDigital from './content/es/menu-digital.json';
+import esFornecedores from './content/es/fornecedores.json';
+import esFidelidade from './content/es/fidelidade.json';
+import esEventos from './content/es/eventos.json';
+import esIntegracoes from './content/es/integracoes.json';
 import esBlogPost1 from './content/es/blog-posts/5-consejos-para-optimizar-tu-servicio.json'; // Novo
 
 import frHome from './content/fr/home.json';
@@ -37,6 +52,11 @@ import frBlog from './content/fr/blog.json';
 import frPrivacy from './content/fr/legal/privacy.json';
 import frTerms from './content/fr/legal/terms.json';
 import frPainel from './content/fr/painel.json';
+import frMenuDigital from './content/fr/menu-digital.json';
+import frFornecedores from './content/fr/fornecedores.json';
+import frFidelidade from './content/fr/fidelidade.json';
+import frEventos from './content/fr/eventos.json';
+import frIntegracoes from './content/fr/integracoes.json';
 import frBlogPost1 from './content/fr/blog-posts/5-astuces-pour-optimiser-votre-service.json'; // Novo
 
 const resources = {
@@ -48,6 +68,11 @@ const resources = {
     privacy: ptPrivacy,
     terms: ptTerms,
     painel: ptPainel,
+    'menu-digital': ptMenuDigital,
+    fornecedores: ptFornecedores,
+    fidelidade: ptFidelidade,
+    eventos: ptEventos,
+    integracoes: ptIntegracoes,
     "blog-posts": {
       "5-dicas-para-otimizar-seu-atendimento": ptBlogPost1,
     },
@@ -60,6 +85,11 @@ const resources = {
     privacy: enPrivacy,
     terms: enTerms,
     painel: enPainel,
+    'menu-digital': enMenuDigital,
+    fornecedores: enFornecedores,
+    fidelidade: enFidelidade,
+    eventos: enEventos,
+    integracoes: enIntegracoes,
     "blog-posts": {
       "5-tips-to-optimize-your-service": enBlogPost1,
     },
@@ -72,6 +102,11 @@ const resources = {
     privacy: esPrivacy,
     terms: esTerms,
     painel: esPainel,
+    'menu-digital': esMenuDigital,
+    fornecedores: esFornecedores,
+    fidelidade: esFidelidade,
+    eventos: esEventos,
+    integracoes: esIntegracoes,
     "blog-posts": {
       "5-consejos-para-optimizar-tu-servicio": esBlogPost1,
     },
@@ -84,6 +119,11 @@ const resources = {
     privacy: frPrivacy,
     terms: frTerms,
     painel: frPainel,
+    'menu-digital': frMenuDigital,
+    fornecedores: frFornecedores,
+    fidelidade: frFidelidade,
+    eventos: frEventos,
+    integracoes: frIntegracoes,
     "blog-posts": {
       "5-astuces-pour-optimiser-votre-service": frBlogPost1,
     },
@@ -100,7 +140,21 @@ i18n
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
-    ns: ['home', 'about', 'contact', 'blog', 'privacy', 'terms', 'painel', 'blog-posts'], // Adicionar 'blog-posts'
+    ns: [
+      'home',
+      'about',
+      'contact',
+      'blog',
+      'privacy',
+      'terms',
+      'painel',
+      'menu-digital',
+      'fornecedores',
+      'fidelidade',
+      'eventos',
+      'integracoes',
+      'blog-posts',
+    ], // Adicionar 'blog-posts'
     defaultNS: 'home',
     detection: {
       order: ['path', 'localStorage', 'navigator'],

@@ -1,53 +1,120 @@
 {
   "hero": {
-    "title": "Boteco Pro: La Solution Complète pour les Bars et Restaurants",
-    "subtitle": "Gérez votre entreprise avec praticité et efficacité.",
-    "cta": "Essai Gratuit"
+    "title": "Boteco Pro : la solution complète pour bars et restaurants",
+    "subtitle": "Gérez votre établissement avec praticité et efficacité.",
+    "cta": "Essai gratuit"
   },
   "features": [
     {
-      "title": "Gestion des Tables",
-      "description": "Contrôlez vos tables et commandes de manière intuitive."
+      "title": "Menu numérique omnicanal",
+      "description": "Mettez la carte à jour en temps réel et offrez une expérience QR inclusive."
     },
     {
-      "title": "Contrôle des Stocks",
-      "description": "Gardez votre stock toujours à jour et évitez les pertes."
+      "title": "Achats intelligents",
+      "description": "Centralisez fournisseurs, contrats et livraisons avec des alertes automatiques."
     },
     {
-      "title": "Rapports Détaillés",
-      "description": "Obtenez des informations précieuses pour optimiser vos ventes."
+      "title": "Fidélisation et insights",
+      "description": "Lancez des campagnes personnalisées et suivez les résultats via des tableaux de bord complets."
     }
   ],
+  "solutions": {
+    "title": "Des solutions connectées pour votre opération",
+    "subtitle": "Réunissez menu numérique, fournisseurs, fidélité, événements et intégrations dans un même écosystème.",
+    "items": [
+      {
+        "title": "Menu numérique",
+        "description": "QR codes avec médias responsives, traductions et suggestions d'upsell intelligentes.",
+        "href": "/menu-digital",
+        "ctaLabel": "Découvrir le menu",
+        "badge": "QR"
+      },
+      {
+        "title": "Gestion fournisseurs",
+        "description": "Devis, contrats et livraisons avec traçabilité complète et alertes préventives.",
+        "href": "/fornecedores",
+        "ctaLabel": "Optimiser les achats"
+      },
+      {
+        "title": "Programme de fidélité",
+        "description": "Portefeuille digital, campagnes segmentées et métriques de rétention en temps réel.",
+        "href": "/fidelidade",
+        "ctaLabel": "Engager les clients"
+      },
+      {
+        "title": "Événements et expériences",
+        "description": "Check-lists collaboratives, réservations intégrées et rapports post-événement.",
+        "href": "/eventos",
+        "ctaLabel": "Planifier le calendrier"
+      },
+      {
+        "title": "Intégrations natives",
+        "description": "Connecteurs pour POS, livraison, comptabilité et BI sans friction.",
+        "href": "/integracoes",
+        "ctaLabel": "Explorer les intégrations"
+      }
+    ]
+  },
   "howItWorks": {
-    "title": "Comment ça Marche",
+    "title": "Comment ça marche",
     "steps": [
       {
-        "title": "Enregistrez Votre Entreprise",
-        "description": "Commencez en quelques minutes, c'est simple et rapide."
+        "title": "Inscrivez votre établissement",
+        "description": "Démarrez en quelques minutes, c'est simple et rapide."
       },
       {
-        "title": "Configurez Votre Menu",
-        "description": "Ajoutez facilement vos produits et prix."
+        "title": "Configurez votre carte",
+        "description": "Ajoutez vos produits et tarifs en toute simplicité."
       },
       {
-        "title": "Commencez à Vendre",
-        "description": "Servez vos clients avec agilité et efficacité."
+        "title": "Commencez à servir",
+        "description": "Servez vos clients avec rapidité et efficacité."
       }
     ]
   },
   "plans": {
-    "title": "Nos Plans",
-    "description": "Choisissez le plan idéal pour votre entreprise.",
+    "title": "Nos offres",
+    "description": "Choisissez la formule idéale pour votre établissement.",
     "options": [
       {
-        "name": "Basique",
-        "price": "€ 99/mois",
-        "features": ["Gestion des Tables", "Contrôle des Stocks Basique"]
+        "name": "Basic",
+        "price": "99 €/mois",
+        "features": [
+          "Gestion des tables",
+          "Contrôle de stock basique"
+        ]
       },
       {
         "name": "Premium",
-        "price": "€ 199/mois",
-        "features": ["Toutes les fonctionnalités du Basique", "Rapports Avancés", "Support Prioritaire"]
+        "price": "199 €/mois",
+        "features": [
+          "Toutes les fonctionnalités Basic",
+          "Rapports avancés",
+          "Support prioritaire"
+        ]
+      }
+    ]
+  },
+  "platformCarousel": {
+    "title": "Découvrez l'écosystème Boteco Pro en action",
+    "items": [
+      {
+        "title": "Intégrations fluides",
+        "description": "Synchronisez POS, livraison et comptabilité avec suivi en temps réel.",
+        "ctaLabel": "Voir les intégrations",
+        "href": "/integracoes"
+      },
+      {
+        "title": "Menu numérique inclusif",
+        "description": "Médias responsives, descriptions audio et promotions par service pour étonner vos clients.",
+        "ctaLabel": "Explorer le menu",
+        "href": "/menu-digital"
+      },
+      {
+        "title": "Fidélité omnicanale",
+        "description": "Campagnes segmentées, cashback et automatisations pour booster la récurrence.",
+        "ctaLabel": "Créer la fidélité",
+        "href": "/fidelidade"
       }
     ]
   },
@@ -55,26 +122,46 @@
     "title": "Ce que disent nos clients",
     "quotes": [
       {
-        "text": "Boteco Pro a révolutionné la gestion de mon bar. Je le recommande !",
-        "author": "Jean Dupont, Bar de Jean"
+        "text": "Boteco Pro a révolutionné la gestion de mon bar. Je recommande !",
+        "author": "Jean Dupont, Le Bar de Jean"
       }
     ]
   },
   "faq": {
-    "title": "Questions Fréquemment Posées",
+    "title": "Questions fréquentes",
     "items": [
       {
-        "question": "Comment puis-je commencer ?",
-        "answer": "Il suffit de vous inscrire et de suivre les étapes de configuration."
+        "question": "Le menu numérique s'intègre-t-il à mon POS ?",
+        "answer": "Oui. Boteco Pro synchronise menu, commandes et paiements pour mettre à jour stock et rapports automatiquement."
       },
       {
-        "question": "Y a-t-il une période d'essai ?",
-        "answer": "Oui, nous offrons une période d'essai gratuite de 7 jours."
+        "question": "Puis-je gérer fournisseurs et événements ensemble ?",
+        "answer": "Vous pilotez devis, livraisons, agenda et équipes dans des flux collaboratifs au sein de la plateforme."
+      },
+      {
+        "question": "Disposez-vous d'un programme de fidélité prêt à l'emploi ?",
+        "answer": "Oui. Paramétrez points, cashback ou tampons avec notifications automatiques et analytics de rétention."
+      }
+    ]
+  },
+  "ecosystemCta": {
+    "title": "Alliez hospitalité et technologie",
+    "description": "Échangez avec l'équipe Boteco Pro pour créer des parcours digitaux qui enchantent vos clients.",
+    "actions": [
+      {
+        "label": "Parler à un expert",
+        "href": "/contact",
+        "variant": "default"
+      },
+      {
+        "label": "Explorer les intégrations",
+        "href": "/integracoes",
+        "variant": "outline"
       }
     ]
   },
   "finalCta": {
-    "title": "Prêt à transformer votre entreprise ?",
-    "button": "Contactez-nous"
+    "title": "Prêt à transformer votre établissement ?",
+    "button": "Nous contacter"
   }
 }

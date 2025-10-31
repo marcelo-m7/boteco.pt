@@ -9,19 +9,19 @@
       "description": "Novos pedidos nas últimas 24h"
     },
     {
-      "title": "Mesas Abertas",
-      "value": "5",
-      "description": "Mesas atualmente em atendimento"
+      "title": "Menu Digital Online",
+      "value": "24 itens",
+      "description": "Cardápio sincronizado com fotos e traduções ativas"
     },
     {
-      "title": "Estoque Baixo",
-      "value": "3 itens",
-      "description": "Produtos que precisam ser reabastecidos"
+      "title": "Campanhas de Fidelidade",
+      "value": "3 ativas",
+      "description": "Fluxos omnicanal rodando agora"
     },
     {
-      "title": "Vendas Hoje",
-      "value": "R$ 1.250,00",
-      "description": "Total de vendas até agora"
+      "title": "Eventos Programados",
+      "value": "2 eventos",
+      "description": "Checklists concluídos para esta semana"
     }
   ]
 }
