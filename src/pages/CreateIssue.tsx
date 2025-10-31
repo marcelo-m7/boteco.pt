@@ -73,7 +73,7 @@ const CreateIssue: React.FC = () => {
     if (draftIssue && additionalInfo.trim()) {
       const updatedIssue = {
         ...draftIssue,
-        description: `${draftIssue.description}\n\n**Additional Information:**\n${additionalInfo}`,
+        description: `${draftIssue.description}${draftIssue.description.includes('**Additional Information:**') ? '\n\n' : '\n\n**Additional Information:**\n'}${additionalInfo}`,
       };
       setDraftIssue(updatedIssue);
       setAdditionalInfo('');
