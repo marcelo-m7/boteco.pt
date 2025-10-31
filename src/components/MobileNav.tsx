@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu } from 'lucide-react';
 import {
@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
+import { BubbleMenu } from '@reactbits/navigation';
 
 interface MobileNavProps {
   onOpenChange: (open: boolean) => void;
@@ -24,9 +25,76 @@ interface MobileNavProps {
 const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
+  const location = useLocation();
   const currentLocale = locale || 'pt';
 
-  const getLocalizedPath = (path: string) => `/${currentLocale}${path}`;
+  const getLocalizedPath = React.useCallback(
+    (path: string) => `/${currentLocale}${path}`,
+    [currentLocale],
+  );
+
+  const navItems = React.useMemo(
+    () => [
+      {
+        id: 'home',
+        label: t('home:hero.title', { ns: 'home' }).split(':')[0],
+        component: Link,
+        componentProps: {
+          to: getLocalizedPath('/'),
+        },
+      },
+      {
+        id: 'about',
+        label: t('about:title', { ns: 'about' }),
+        component: Link,
+        componentProps: {
+          to: getLocalizedPath('/sobre'),
+        },
+      },
+      {
+        id: 'contact',
+        label: t('contact:title', { ns: 'contact' }),
+        component: Link,
+        componentProps: {
+          to: getLocalizedPath('/contato'),
+        },
+      },
+      {
+        id: 'blog',
+        label: t('blog:title', { ns: 'blog' }),
+        component: Link,
+        componentProps: {
+          to: getLocalizedPath('/blog'),
+        },
+      },
+      {
+        id: 'dashboard',
+        label: t('painel:title', { ns: 'painel' }),
+        component: Link,
+        componentProps: {
+          to: '/painel',
+        },
+      },
+    ],
+    [getLocalizedPath, t],
+  );
+
+  const activeNavId = React.useMemo(() => {
+    const currentPath = location.pathname;
+
+    const found = navItems.find((item) => {
+      const target =
+        typeof item.componentProps?.to === 'string'
+          ? item.componentProps.to
+          : typeof item.componentProps?.to === 'object' && 'pathname' in item.componentProps.to
+            ? (item.componentProps.to as { pathname: string }).pathname
+            : item.componentProps?.href ?? item.href;
+
+      return target === currentPath;
+    });
+
+    return found?.id;
+  }, [location.pathname, navItems]);
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -40,23 +108,21 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl font-bold text-boteco-wine">Boteco Pro</SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col space-y-4 flex-grow">
-          <Link to={getLocalizedPath('/')} className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
-            {t('home:hero.title', { ns: 'home' }).split(':')[0]}
-          </Link>
-          <Link to={getLocalizedPath('/sobre')} className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
-            {t('about:title', { ns: 'about' })}
-          </Link>
-          <Link to={getLocalizedPath('/contato')} className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
-            {t('contact:title', { ns: 'contact' })}
-          </Link>
-          <Link to={getLocalizedPath('/blog')} className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
-            {t('blog:title', { ns: 'blog' })}
-          </Link>
-          <Link to="/painel" className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
-            {t('painel:title', { ns: 'painel' })}
-          </Link>
-        </nav>
+        <BubbleMenu
+          aria-label={t('navigation.mobile', { defaultValue: 'Navegação móvel' })}
+          className="flex-grow"
+          orientation="vertical"
+          items={navItems.map((item) => ({
+            ...item,
+            componentProps: {
+              ...item.componentProps,
+              className: [item.componentProps?.className, 'w-full justify-start'].filter(Boolean).join(' '),
+            },
+          }))}
+          activeId={activeNavId}
+          onSelect={() => onOpenChange(false)}
+          listClassName="justify-start items-stretch"
+        />
         <div className="flex flex-col space-y-4 mt-auto pb-4">
           <LanguageSwitcher />
           <ThemeToggle />

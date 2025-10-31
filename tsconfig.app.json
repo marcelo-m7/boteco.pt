@@ -23,7 +23,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@reactbits/navigation": ["./packages/reactbits-navigation/index"]
     }
   },
   "include": ["src"]

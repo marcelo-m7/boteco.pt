@@ -12,6 +12,10 @@ export default defineConfig(() => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@reactbits/navigation": path.resolve(
+        __dirname,
+        "./packages/reactbits-navigation/index.js",
+      ),
     },
   },
 }));

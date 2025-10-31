@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion, Variants, Easing } from 'framer-motion';
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,16 +21,22 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
   const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
-  const onSelect = React.useCallback((emblaApi: any) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
+  const onSelect = React.useCallback((emblaInstance: EmblaCarouselType) => {
+    setPrevBtnDisabled(!emblaInstance.canScrollPrev());
+    setNextBtnDisabled(!emblaInstance.canScrollNext());
   }, []);
 
   React.useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi) return undefined;
+
     onSelect(emblaApi);
     emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);
+
+    return () => {
+      emblaApi.off('reInit', onSelect);
+      emblaApi.off('select', onSelect);
+    };
   }, [emblaApi, onSelect]);
 
   const itemVariants: Variants = {
