@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
+import Logo from './Logo'; // Import the new Logo component
 
 interface MobileNavProps {
   onOpenChange: (open: boolean) => void;
@@ -38,7 +39,9 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
       </SheetTrigger>
       <SheetContent side="left" className="w-[250px] sm:w-[300px] bg-background flex flex-col">
         <SheetHeader className="mb-6">
-          <SheetTitle className="text-2xl font-bold text-boteco-wine">Boteco Pro</SheetTitle>
+          <SheetTitle asChild> {/* Use asChild to pass props to Logo */}
+            <Logo />
+          </SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col space-y-4 flex-grow">
           <Link to={getLocalizedPath('/')} className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>

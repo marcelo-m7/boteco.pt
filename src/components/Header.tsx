@@ -7,6 +7,7 @@ import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { ThemeToggle } from './ThemeToggle';
 import MobileNav from './MobileNav';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Logo from './Logo'; // Import the new Logo component
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -20,9 +21,7 @@ const Header: React.FC = () => {
   return (
     <header className="bg-boteco-wine text-boteco-wine-foreground p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to={getLocalizedPath('/')} className="text-2xl font-bold">
-          Boteco Pro
-        </Link>
+        <Logo /> {/* Use the Logo component here */}
         
         {isMobile ? (
           <div className="flex items-center space-x-2">
