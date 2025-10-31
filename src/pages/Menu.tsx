@@ -202,6 +202,7 @@ const Menu: React.FC = () => {
   const categories = React.useMemo(() => {
     const data = t('categories', { returnObjects: true }) as unknown;
     return Array.isArray(data) ? (data as MenuCategory[]) : [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.language]);
 
   const badges = React.useMemo(() => {
@@ -209,6 +210,7 @@ const Menu: React.FC = () => {
     return data && typeof data === 'object' && !Array.isArray(data)
       ? (data as Record<string, string>)
       : {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.language]);
   const heroTitle = t('hero.title');
   const heroSubtitle = t('hero.subtitle');
