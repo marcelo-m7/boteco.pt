@@ -5,8 +5,8 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { Button } from '@/components/ui/button';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { ThemeToggle } from './ThemeToggle';
-import MobileNav from './MobileNav'; // Importar MobileNav
-import { useIsMobile } from '@/hooks/use-mobile'; // Importar useIsMobile
+import MobileNav from './MobileNav';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -49,6 +49,11 @@ const Header: React.FC = () => {
             <Link to="/painel" className="hover:underline hover:text-boteco-mustard transition-colors">
               {t('painel:title', { ns: 'painel' })}
             </Link>
+            <a href="https://app.boteco.pt" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 border-boteco-beige">
+                {t('home:hero.demoButton', { ns: 'home' })}
+              </Button>
+            </a>
             <LanguageSwitcher />
             <ThemeToggle />
             <SignedIn>

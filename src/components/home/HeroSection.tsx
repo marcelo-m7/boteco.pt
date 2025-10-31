@@ -38,12 +38,17 @@ const HeroSection: React.FC = () => {
         <motion.p variants={itemVariants} className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
           {t('hero.subtitle')}
         </motion.p>
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="flex justify-center space-x-4">
           <Link to={getLocalizedPath('/contato')}>
             <Button size="lg" className="bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80 hover:text-boteco-brown transition-colors duration-300 active:scale-98">
               {t('hero.cta')} <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
+          <a href="https://app.boteco.pt" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="bg-boteco-wine text-boteco-wine-foreground hover:bg-boteco-wine/90 transition-colors duration-300 active:scale-98 border border-boteco-beige">
+              {t('hero.demoButton')}
+            </Button>
+          </a>
         </motion.div>
       </div>
     </motion.section>

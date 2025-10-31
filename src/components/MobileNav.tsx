@@ -56,6 +56,9 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
           <Link to="/painel" className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
             {t('painel:title', { ns: 'painel' })}
           </Link>
+          <a href="https://app.boteco.pt" target="_blank" rel="noopener noreferrer" className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors" onClick={() => onOpenChange(false)}>
+            {t('home:hero.demoButton', { ns: 'home' })}
+          </a>
         </nav>
         <div className="flex flex-col space-y-4 mt-auto pb-4">
           <LanguageSwitcher />
