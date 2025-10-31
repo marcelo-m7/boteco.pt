@@ -1,11 +1,13 @@
 import { useLocation, Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import Seo from '@/components/Seo'; // Importar o componente Seo
+import { Button } from '@/components/ui/button'; // Importar o componente Button
 
 const NotFound = () => {
   const location = useLocation();
   const { locale } = useParams<{ locale: string }>();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(['notFound', 'home']); // Usar namespace 'home' para o título da home
   const currentLocale = locale || 'pt';
 
   useEffect(() => {
@@ -15,16 +17,37 @@ const NotFound = () => {
     );
   }, [location.pathname]);
 
+  const pageTitle = t('notFound:title', { defaultValue: 'Página Não Encontrada' });
+  const pageDescription = t('notFound:message', { defaultValue: 'A página que você está procurando não existe.' });
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">{t('notFound:message', { defaultValue: 'Oops! Page not found' })}</p>
-        <Link to={`/${currentLocale}`} className="text-blue-500 hover:text-blue-700 underline">
-          {t('notFound:returnHome', { defaultValue: 'Return to Home' })}
-        </Link>
+    <>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        ogTitle={pageTitle}
+        ogDescription={pageDescription}
+        locale={i18n.language}
+      />
+      <div className="min-h-[calc(100vh-150px)] flex flex-col items-center justify-center bg-background text-foreground p-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-6xl md:text-8xl font-extrabold text-monynha-primary mb-4">
+            404
+          </h1>
+          <p className="text-2xl md:text-3xl font-semibold text-monynha-neutral-700 mb-4">
+            {t('notFound:message', { defaultValue: 'Oops! Página não encontrada.' })}
+          </p>
+          <p className="text-lg text-monynha-neutral-500 mb-8">
+            {t('notFound:description', { defaultValue: 'Parece que a página que você tentou acessar não existe ou foi movida.' })}
+          </p>
+          <Link to={`/${currentLocale}`}>
+            <Button className="bg-monynha-secondary text-monynha-primary-foreground hover:bg-monynha-secondary/90 transition-colors duration-300">
+              {t('notFound:returnHome', { defaultValue: 'Voltar para a Página Inicial' })}
+            </Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
