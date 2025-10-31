@@ -92,7 +92,7 @@ const HeroSection: React.FC = () => {
           >
             <div className="space-y-6">
               <div className="inline-flex items-center rounded-full border border-boteco-wine-200/50 bg-boteco-wine-50/60 px-4 py-1 text-sm font-medium text-boteco-wine-700 dark:border-boteco-wine-400/30 dark:bg-boteco-wine-900/40 dark:text-boteco-wine-100">
-                {t("hero.subtitle")}
+                {t("hero.badge")}
               </div>
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-boteco-brown-900 sm:text-5xl dark:text-boteco-beige-50">
                 {t("hero.title")}
