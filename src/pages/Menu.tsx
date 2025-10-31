@@ -202,14 +202,14 @@ const Menu: React.FC = () => {
   const categories = React.useMemo(() => {
     const data = t('categories', { returnObjects: true }) as unknown;
     return Array.isArray(data) ? (data as MenuCategory[]) : [];
-  }, [t]);
+  }, [i18n.language]);
 
   const badges = React.useMemo(() => {
     const data = t('badges', { returnObjects: true }) as unknown;
     return data && typeof data === 'object' && !Array.isArray(data)
       ? (data as Record<string, string>)
       : {};
-  }, [t]);
+  }, [i18n.language]);
   const heroTitle = t('hero.title');
   const heroSubtitle = t('hero.subtitle');
   const navigationLabel = t('navigationLabel');
