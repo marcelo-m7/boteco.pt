@@ -442,7 +442,7 @@ export const ScrollStack = React.forwardRef(
           inline: "nearest",
         });
       }
-    }, [resolvedActiveId, items.length]);
+    }, [resolvedActiveId]);
 
     const baseContainerStyle = React.useMemo(
       () => ({
