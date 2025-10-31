@@ -6,7 +6,8 @@ import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { ThemeToggle } from './ThemeToggle';
 import MobileNav from './MobileNav'; // Importar MobileNav
 import { useIsMobile } from '@/hooks/use-mobile'; // Importar useIsMobile
-import { CardNav } from '@reactbits/navigation';
+import { useActiveNavId } from '@/hooks/use-active-nav-id';
+import { CardNav, cx } from '@reactbits/navigation';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -87,22 +88,7 @@ const Header: React.FC = () => {
     [getLocalizedPath, sanitize, t],
   );
 
-  const activeNavId = React.useMemo(() => {
-    const currentPath = location.pathname;
-
-    const found = navItems.find((item) => {
-      const target =
-        typeof item.componentProps?.to === 'string'
-          ? item.componentProps.to
-          : typeof item.componentProps?.to === 'object' && 'pathname' in item.componentProps.to
-            ? (item.componentProps.to as { pathname: string }).pathname
-            : item.componentProps?.href ?? item.href;
-
-      return target === currentPath;
-    });
-
-    return found?.id;
-  }, [location.pathname, navItems]);
+  const activeNavId = useActiveNavId(navItems, location.pathname);
 
   return (
     <header className="bg-boteco-wine text-boteco-wine-foreground p-4 shadow-surface">
@@ -131,7 +117,7 @@ const Header: React.FC = () => {
                 ...item,
                 componentProps: {
                   ...item.componentProps,
-                  className: [item.componentProps?.className, 'w-full'].filter(Boolean).join(' '),
+                  className: cx(item.componentProps?.className, 'w-full'),
                 },
               }))}
               activeId={activeNavId}

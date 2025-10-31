@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+export const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 const isRenderableItem = (item) => item && typeof item === "object";
 
@@ -302,6 +302,7 @@ export const ScrollStack = React.forwardRef(
       focusOnHover = true,
       ariaLabel,
       style,
+      orientation = "vertical",
       ...props
     },
     forwardedRef,
@@ -391,16 +392,17 @@ export const ScrollStack = React.forwardRef(
           return;
         }
 
-        if (
-          event.key === "ArrowDown" ||
-          event.key === "ArrowRight"
-        ) {
+        const isVertical = orientation === "vertical";
+        const forwardKey = isVertical ? "ArrowDown" : "ArrowRight";
+        const backwardKey = isVertical ? "ArrowUp" : "ArrowLeft";
+
+        if (event.key === forwardKey) {
           event.preventDefault();
           moveSelection(activeIndex + 1, event);
           return;
         }
 
-        if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        if (event.key === backwardKey) {
           event.preventDefault();
           moveSelection(activeIndex - 1, event);
           return;
@@ -423,7 +425,7 @@ export const ScrollStack = React.forwardRef(
           moveSelection(activeIndex, event);
         }
       },
-      [items, activeIndex, moveSelection],
+      [items, activeIndex, moveSelection, orientation],
     );
 
     React.useEffect(() => {
@@ -459,13 +461,13 @@ export const ScrollStack = React.forwardRef(
     const listStyle = React.useMemo(
       () => ({
         display: "flex",
-        flexDirection: "column",
+        flexDirection: orientation === "vertical" ? "column" : "row",
         gap: "2rem",
         listStyle: "none",
         margin: 0,
         padding: 0,
       }),
-      [],
+      [orientation],
     );
 
     return React.createElement(
@@ -512,9 +514,9 @@ export const ScrollStack = React.forwardRef(
           const sharedStyle = {
             transformStyle: "preserve-3d",
             boxShadow: isActive
-              ? "0 40px 80px -42px rgba(72, 36, 16, 0.58), 0 24px 52px -36px rgba(207, 164, 104, 0.4)"
-              : "0 26px 60px -44px rgba(72, 36, 16, 0.42)",
-            borderColor: "rgba(120, 72, 32, 0.18)",
+              ? "var(--shadow-active)"
+              : "var(--shadow-inactive)",
+            borderColor: "var(--border-soft)",
             backgroundImage: "var(--surface-gradient)",
             backdropFilter: "blur(6px)",
             WebkitBackdropFilter: "blur(6px)",

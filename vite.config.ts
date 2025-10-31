@@ -14,7 +14,7 @@ export default defineConfig(() => ({
       "@": path.resolve(__dirname, "./src"),
       "@reactbits/navigation": path.resolve(
         __dirname,
-        "./packages/reactbits-navigation/index.js",
+        "./packages/reactbits-navigation/index",
       ),
     },
   },
