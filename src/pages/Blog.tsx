@@ -3,14 +3,26 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CalendarDays } from 'lucide-react';
 import Seo from '@/components/Seo'; // Importar o componente Seo
+import { Link, useParams } from 'react-router-dom'; // Importar Link e useParams
 
 const Blog: React.FC = () => {
   const { t, i18n } = useTranslation('blog');
+  const { locale } = useParams<{ locale: string }>();
+  const currentLocale = locale || 'pt';
 
   const posts = t('posts', { returnObjects: true }) as { id: string; title: string; excerpt: string; date: string }[];
 
   const pageTitle = t('title');
   const pageDescription = t('description');
+
+  // Função para gerar o slug a partir do título
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '') // Remove caracteres especiais
+      .replace(/\s+/g, '-') // Substitui espaços por hífens
+      .replace(/-+/g, '-'); // Remove hífens duplicados
+  };
 
   return (
     <>
@@ -45,10 +57,9 @@ const Blog: React.FC = () => {
                 <p className="text-boteco-brown/90">
                   {post.excerpt}
                 </p>
-                {/* You can add a Link to a detailed blog post page here */}
-                <a href="#" className="text-boteco-mustard hover:underline mt-4 inline-block">
+                <Link to={`/${currentLocale}/blog/${generateSlug(post.title)}`} className="text-boteco-mustard hover:underline mt-4 inline-block">
                   {t('readMore', { defaultValue: 'Leia Mais' })}
-                </a>
+                </Link>
               </CardContent>
             </Card>
           ))}

@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate as Redirect } from "react-router-dom"; // Renomear Navigate para Redirect
 import LocaleWrapper from "./components/LocaleWrapper";
 import Home from "./pages/Home"; // Renamed from Index
 import NotFound from "./pages/NotFound";
@@ -12,6 +12,7 @@ import Blog from "./pages/Blog";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Painel from "./pages/Painel";
+import BlogPostDetail from "./pages/BlogPostDetail"; // Importar BlogPostDetail
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="sobre" element={<About />} />
             <Route path="contato" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPostDetail />} /> {/* Nova rota para detalhes do blog */}
             <Route path="legal/privacidade" element={<PrivacyPolicy />} />
             <Route path="legal/termos" element={<TermsOfService />} />
           </Route>
@@ -55,11 +57,5 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
-// Helper component for redirection
-const Redirect = ({ to }: { to: string }) => {
-  window.location.replace(to);
-  return null;
-};
 
 export default App;
