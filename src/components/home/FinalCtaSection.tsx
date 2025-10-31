@@ -53,7 +53,7 @@ const FinalCtaSection: React.FC = () => {
                   className="w-full max-w-xs border-boteco-brown-200 bg-boteco-beige-50 text-boteco-brown-800 hover:bg-boteco-beige-100 dark:border-boteco-brown-700 dark:bg-boteco-brown-800/60 dark:text-boteco-beige-100 sm:w-auto"
                 >
                   <Link to={getLocalizedPath("/sobre")}>
-                    {t("hero.demoButton")}
+                    {t("finalCta.aboutButton")}
                   </Link>
                 </Button>
               </div>
