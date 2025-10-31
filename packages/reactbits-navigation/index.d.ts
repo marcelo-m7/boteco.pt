@@ -39,3 +39,47 @@ export const BubbleMenu: React.ForwardRefExoticComponent<
 
 export const createNavItem: (overrides?: Partial<ReactBitsNavItem>) => ReactBitsNavItem;
 
+export interface ScrollStackItem extends ReactBitsNavItem {
+  value?: React.ReactNode;
+  media?: React.ReactNode;
+  meta?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ScrollStackRenderItemContext {
+  item: ScrollStackItem;
+  isActive: boolean;
+  index: number;
+  distance: number;
+}
+
+export interface ScrollStackProps
+  extends Omit<BaseNavProps, "orientation" | "wrap" | "items" | "renderItem"> {
+  items: ScrollStackItem[];
+  defaultActiveId?: string;
+  itemClassName?: string;
+  itemActiveClassName?: string;
+  focusOnHover?: boolean;
+  ariaLabel?: string;
+  renderItem?: (context: ScrollStackRenderItemContext) => React.ReactNode;
+}
+
+export const ScrollStack: React.ForwardRefExoticComponent<
+  ScrollStackProps & React.RefAttributes<HTMLDivElement>
+>;
+
+export const getScrollStackItemId: (item: ScrollStackItem | undefined, index: number) => string;
+
+export const resolveScrollStackActiveState: (
+  items: ScrollStackItem[],
+  candidateId?: string,
+  defaultActiveId?: string,
+) => { resolvedId: string | undefined; index: number };
+
+export const getNextScrollStackIndex: (
+  items: ScrollStackItem[],
+  currentIndex: number,
+  delta: number,
+) => number;
+
