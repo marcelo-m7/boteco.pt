@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion, Variants, Easing } from 'framer-motion';
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,9 +21,9 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
   const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
-  const onSelect = React.useCallback((emblaApi: any) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
+  const onSelect = React.useCallback((emblaInstance: EmblaCarouselType) => {
+    setPrevBtnDisabled(!emblaInstance.canScrollPrev());
+    setNextBtnDisabled(!emblaInstance.canScrollNext());
   }, []);
 
   React.useEffect(() => {
@@ -45,11 +45,11 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
           {testimonials.map((testimonial, index) => (
             <div className="flex-none w-full pl-4" key={index}> {/* Add padding to items */}
               <motion.div variants={itemVariants} custom={index}>
-                <Card className="p-6 shadow-lg bg-boteco-beige/30 border border-boteco-beige h-full flex flex-col justify-between">
-                  <CardContent className="text-lg italic text-boteco-brown/80 mb-4">
+                <Card className="p-6 shadow-lg bg-boteco-beige/30 border border-boteco-beige h-full flex flex-col justify-between dark:border-boteco-brown-700 dark:bg-boteco-brown-800/60">
+                  <CardContent className="text-lg italic text-boteco-brown/80 mb-4 dark:text-boteco-beige-300/80">
                     "{testimonial.text}"
                   </CardContent>
-                  <CardFooter className="text-right font-semibold text-boteco-wine">
+                  <CardFooter className="text-right font-semibold text-boteco-wine dark:text-boteco-mustard-300">
                     - {testimonial.author}
                   </CardFooter>
                 </Card>
@@ -62,7 +62,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
         variant="ghost"
         onClick={scrollPrev}
         disabled={prevBtnDisabled}
-        className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10"
+        className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10 dark:bg-boteco-wine-700/40 dark:hover:bg-boteco-wine-600/40 dark:text-boteco-beige-200"
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
@@ -70,7 +70,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
         variant="ghost"
         onClick={scrollNext}
         disabled={nextBtnDisabled}
-        className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10"
+        className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-boteco-mustard/20 hover:bg-boteco-mustard/40 text-boteco-brown rounded-full p-2 z-10 dark:bg-boteco-wine-700/40 dark:hover:bg-boteco-wine-600/40 dark:text-boteco-beige-200"
       >
         <ArrowRight className="h-6 w-6" />
       </Button>

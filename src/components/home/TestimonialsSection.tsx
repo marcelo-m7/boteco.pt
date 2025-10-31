@@ -26,10 +26,13 @@ const TestimonialsSection: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
-      className="w-full py-16 bg-white"
+      className="w-full py-16 bg-boteco-beige-50 dark:bg-boteco-brown-900"
     >
       <div className="container mx-auto px-4 text-center">
-        <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown">
+        <motion.h2
+          variants={itemVariants}
+          className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown dark:text-boteco-beige-200"
+        >
           {t('testimonials.title')}
         </motion.h2>
         <TestimonialsCarousel testimonials={testimonials} /> {/* Usar o componente de carrossel */}

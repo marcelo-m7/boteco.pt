@@ -28,14 +28,14 @@ const BlogPostDetail: React.FC = () => {
     // Handle case where post is not found
     return (
       <div className="container mx-auto px-4 py-12 text-center">
-        <h1 className="text-4xl font-bold text-boteco-wine mb-4">
+        <h1 className="text-4xl font-bold text-boteco-wine mb-4 dark:text-boteco-mustard-300">
           {t('notFoundTitle', { defaultValue: 'Post não encontrado' })}
         </h1>
-        <p className="text-lg text-boteco-brown/80 mb-8">
+        <p className="text-lg text-boteco-brown/80 mb-8 dark:text-boteco-beige-300/80">
           {t('notFoundMessage', { defaultValue: 'O post que você está procurando não existe.' })}
         </p>
         <Link to={`/${locale}/blog`}>
-          <Button className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100">
+          <Button className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
             <ArrowLeft className="mr-2 h-4 w-4" />
             {t('backToBlog', { defaultValue: 'Voltar para o Blog' })}
           </Button>
@@ -58,15 +58,15 @@ const BlogPostDetail: React.FC = () => {
         locale={i18n.language}
       />
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        <Link to={`/${locale}/blog`} className="inline-flex items-center text-boteco-mustard hover:underline mb-8">
+        <Link to={`/${locale}/blog`} className="inline-flex items-center text-boteco-mustard hover:underline mb-8 dark:text-boteco-mustard-300">
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('backToBlog', { defaultValue: 'Voltar para o Blog' })}
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold text-boteco-wine mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-boteco-wine mb-6 dark:text-boteco-mustard-300">
           {post.title}
         </h1>
-        <p className="text-sm text-boteco-brown/80 mb-2">
+        <p className="text-sm text-boteco-brown/80 mb-2 dark:text-boteco-beige-300/80">
           {t('publishedBy', { defaultValue: 'Publicado por' })} {post.author} em {post.date}
         </p>
         {post.image && (
@@ -77,14 +77,14 @@ const BlogPostDetail: React.FC = () => {
           />
         )}
 
-        <div className="prose prose-lg max-w-none text-boteco-brown">
+        <div className="prose prose-lg max-w-none text-boteco-brown dark:text-boteco-beige-200">
           {post.content.map((block, index) => (
             block.type === 'paragraph' ? (
-              <p key={index} className="mb-4 leading-relaxed">
+              <p key={index} className="mb-4 leading-relaxed dark:text-boteco-beige-300">
                 {block.text}
               </p>
             ) : (
-              <h2 key={index} className="text-2xl font-semibold mt-8 mb-4 text-boteco-brown">
+              <h2 key={index} className="text-2xl font-semibold mt-8 mb-4 text-boteco-brown dark:text-boteco-beige-100">
                 {block.text}
               </h2>
             )

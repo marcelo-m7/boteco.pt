@@ -30,7 +30,7 @@ const LanguageSwitcher: React.FC = () => {
 
   return (
     <Select value={currentLocale} onValueChange={handleLanguageChange}>
-      <SelectTrigger className="w-[120px] bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80">
+      <SelectTrigger className="w-[120px] bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80 dark:bg-boteco-brown-700 dark:text-boteco-beige-200 dark:hover:bg-boteco-brown-600">
         <SelectValue placeholder="Idioma" />
       </SelectTrigger>
       <SelectContent>
