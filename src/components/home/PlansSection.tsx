@@ -70,7 +70,7 @@ const PlansSection: React.FC = () => {
                       <div className="space-y-4">
                         <span className="inline-flex items-center gap-2 rounded-full bg-boteco-wine-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-boteco-wine-700 dark:text-boteco-mustard-300">
                           <Crown className="h-4 w-4" aria-hidden />
-                          {t("plans.title")}
+                          {t("plans.popular")}
                         </span>
                         <h3 className="text-3xl font-semibold text-boteco-brown-900 dark:text-boteco-beige-50">{plan.name}</h3>
                         <p className="text-2xl font-semibold text-boteco-wine-600 dark:text-boteco-mustard-300">{plan.price}</p>
