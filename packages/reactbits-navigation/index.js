@@ -226,11 +226,15 @@ const BaseNav = React.forwardRef(
                   badgeNode,
                 );
 
+          const isLinkComponent =
+            ItemComponent === "a" ||
+            ItemComponent?.displayName === "Link" ||
+            ItemComponent?.name === "Link";
           const finalProps = {
             ...componentProps,
             className: finalClassName,
             href: ItemComponent === "a" ? href : componentProps.href,
-            role: "link",
+            ...(isLinkComponent ? { role: "link" } : {}),
             tabIndex: disabled ? -1 : 0,
             "aria-label": ariaLabel,
             "aria-current": isCurrent ? "page" : undefined,
