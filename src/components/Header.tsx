@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const getLocalizedPath = (path: string) => `/${currentLocale}${path}`;
 
   return (
-    <header className="bg-boteco-wine text-boteco-wine-foreground p-4 shadow-md">
+    <header className="sticky top-0 z-50 bg-boteco-wine text-boteco-wine-foreground p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Logo /> {/* Use the Logo component here */}
         
