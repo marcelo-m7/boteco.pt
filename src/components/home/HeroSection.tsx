@@ -137,7 +137,6 @@ const HeroSection: React.FC = () => {
           <motion.ul
             style={{ y: parallax }}
             className="grid w-full max-w-xl grid-cols-1 gap-5 sm:grid-cols-2"
-            aria-hidden
           >
             {heroHighlights.map((highlight, index) => {
               const tone = toneConfig[highlight.tone];
