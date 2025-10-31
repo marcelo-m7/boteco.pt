@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
+import Menu from "./pages/Menu";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Painel from "./pages/Painel";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="sobre" element={<About />} />
             <Route path="contato" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
+            <Route path="menu" element={<Menu />} />
             <Route path="blog/:slug" element={<BlogPostDetail />} />
             <Route path="legal/privacidade" element={<PrivacyPolicy />} />
             <Route path="legal/termos" element={<TermsOfService />} />

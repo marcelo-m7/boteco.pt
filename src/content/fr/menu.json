@@ -1,0 +1,105 @@
+{
+  "title": "Menu",
+  "hero": {
+    "title": "Saveurs du Boteco",
+    "subtitle": "Recettes signatures, ingrédients frais et accords pensés pour ravir chaque convive."
+  },
+  "navigationLabel": "Catégories du menu",
+  "tabsLabel": "Parcourez les catégories du menu",
+  "badges": {
+    "signature": "Spécialité de la Maison",
+    "spicy": "Épicé",
+    "vegan": "Végane",
+    "vegetarian": "Végétarien",
+    "glutenFree": "Sans Gluten",
+    "new": "Nouveau",
+    "popular": "Coup de Cœur"
+  },
+  "categories": [
+    {
+      "id": "petiscos",
+      "name": "À Partager",
+      "description": "Classiques conviviaux pour ouvrir l'appétit.",
+      "items": [
+        {
+          "id": "coxinha-gourmet",
+          "name": "Coxinha Gourmet au Poulet Fermier",
+          "description": "Pâte légère farcie de poulet effiloché, catupiry artisanal et herbes fraîches.",
+          "price": "6,50 €",
+          "badges": ["signature", "popular"]
+        },
+        {
+          "id": "bolinho-bacalhau",
+          "name": "Beignet de Morue de l'Atlantique",
+          "description": "Recette portugaise traditionnelle avec morue émiettée, pomme de terre et huile d'olive extra vierge.",
+          "price": "7,20 €",
+          "badges": ["glutenFree"]
+        },
+        {
+          "id": "pastel-queijo",
+          "name": "Pastel au Fromage de la Serra",
+          "description": "Pâte croustillante garnie d'un mélange de fromages affinés et de confiture de piment doux.",
+          "price": "5,80 €",
+          "badges": ["vegetarian", "spicy"]
+        }
+      ]
+    },
+    {
+      "id": "principais",
+      "name": "Plats Signature",
+      "description": "Des plats généreux qui apportent la chaleur brésilienne à table.",
+      "items": [
+        {
+          "id": "feijoada-completa",
+          "name": "Feijoada Boteco Pro",
+          "description": "Haricots noirs mijotés, morceaux de porc sélectionnés, farofa aux agrumes et chou croustillant.",
+          "price": "14,90 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "moqueca-camarao",
+          "name": "Moqueca de Crevettes au Dendê",
+          "description": "Crevettes saisies dans un bouillon coco-dendê avec poivrons grillés et aromates.",
+          "price": "16,40 €",
+          "badges": ["new", "spicy"]
+        },
+        {
+          "id": "picanha-chapa",
+          "name": "Picanha Saisie & Manioc",
+          "description": "Picanha maturée grillée à la minute, manioc doré et vinaigrette aux agrumes.",
+          "price": "18,70 €",
+          "badges": ["popular", "glutenFree"]
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Boissons & Cocktails",
+      "description": "Créations signatures et rafraîchissements préparés sur commande.",
+      "items": [
+        {
+          "id": "caipirinha-classica",
+          "name": "Caipirinha Classique",
+          "description": "Cachaça premium, citron vert pilé et glace taillée à la main.",
+          "price": "6,00 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "chopp-artesanal",
+          "name": "Bière Artisanale Maison",
+          "description": "Assemblage exclusif de malts locaux aux notes d'agrumes et finale sèche.",
+          "price": "4,90 €",
+          "badges": ["new"]
+        },
+        {
+          "id": "limonada-casa",
+          "name": "Citronnade Maison",
+          "description": "Citron sicilien, menthe fraîche et sirop de canne complétés d'eau pétillante.",
+          "price": "3,80 €",
+          "badges": ["vegan"]
+        }
+      ]
+    }
+  ],
+  "notice": "Signalez-nous toute restriction ou allergie afin que nous personnalisions votre expérience."
+}

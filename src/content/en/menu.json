@@ -1,0 +1,105 @@
+{
+  "title": "Menu",
+  "hero": {
+    "title": "Flavors of the Boteco",
+    "subtitle": "Authorial recipes, fresh ingredients, and pairings crafted to delight every guest."
+  },
+  "navigationLabel": "Menu categories",
+  "tabsLabel": "Browse menu categories",
+  "badges": {
+    "signature": "House Special",
+    "spicy": "Spicy",
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarian",
+    "glutenFree": "Gluten-Free",
+    "new": "New",
+    "popular": "Guest Favorite"
+  },
+  "categories": [
+    {
+      "id": "petiscos",
+      "name": "Small Plates",
+      "description": "Shareable classics to start the night right.",
+      "items": [
+        {
+          "id": "coxinha-gourmet",
+          "name": "Gourmet Free-Range Chicken Coxinha",
+          "description": "Delicate dough filled with pulled chicken, artisanal catupiry, and fresh herb finish.",
+          "price": "€6.50",
+          "badges": ["signature", "popular"]
+        },
+        {
+          "id": "bolinho-bacalhau",
+          "name": "Atlantic Cod Croquette",
+          "description": "Portuguese-style fritter with flaked cod, potato, and extra-virgin olive oil.",
+          "price": "€7.20",
+          "badges": ["glutenFree"]
+        },
+        {
+          "id": "pastel-queijo",
+          "name": "Serra Cheese Pastel",
+          "description": "Crispy pastry filled with cured cheese blend and sweet chili jam.",
+          "price": "€5.80",
+          "badges": ["vegetarian", "spicy"]
+        }
+      ]
+    },
+    {
+      "id": "principais",
+      "name": "Signature Dishes",
+      "description": "Comforting mains that bring Brazilian warmth to the table.",
+      "items": [
+        {
+          "id": "feijoada-completa",
+          "name": "Boteco Pro Feijoada",
+          "description": "Slow-cooked black beans, select pork cuts, citrus farofa, and crisped collard greens.",
+          "price": "€14.90",
+          "badges": ["signature"]
+        },
+        {
+          "id": "moqueca-camarao",
+          "name": "Dendê Shrimp Moqueca",
+          "description": "Seared shrimp in coconut broth with dendê oil, grilled peppers, and aromatic broth.",
+          "price": "€16.40",
+          "badges": ["new", "spicy"]
+        },
+        {
+          "id": "picanha-chapa",
+          "name": "Iron-Seared Picanha & Cassava",
+          "description": "Aged picanha cooked to order with golden cassava and citrus vinaigrette.",
+          "price": "€18.70",
+          "badges": ["popular", "glutenFree"]
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Drinks & Cocktails",
+      "description": "Signature pours and refreshing sips mixed to order.",
+      "items": [
+        {
+          "id": "caipirinha-classica",
+          "name": "Classic Caipirinha",
+          "description": "Premium cachaça, muddled key lime, and hand-cut crystal ice.",
+          "price": "€6.00",
+          "badges": ["signature"]
+        },
+        {
+          "id": "chopp-artesanal",
+          "name": "House Craft Beer",
+          "description": "Exclusive malt blend with citrus aroma and dry finish.",
+          "price": "€4.90",
+          "badges": ["new"]
+        },
+        {
+          "id": "limonada-casa",
+          "name": "House Lemonade",
+          "description": "Sicilian lemon, fresh mint, and sugarcane syrup topped with sparkling water.",
+          "price": "€3.80",
+          "badges": ["vegan"]
+        }
+      ]
+    }
+  ],
+  "notice": "Please let our team know about dietary restrictions or allergies so we can tailor your experience."
+}

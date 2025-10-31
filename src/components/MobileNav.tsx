@@ -56,6 +56,13 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
             {t('home:hero.title', { ns: 'home' }).split(':')[0]}
           </Link>
           <Link
+            to={getLocalizedPath('/menu')}
+            className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors dark:hover:text-boteco-mustard-300"
+            onClick={() => onOpenChange(false)}
+          >
+            {t('menu:title', { ns: 'menu' })}
+          </Link>
+          <Link
             to={getLocalizedPath('/sobre')}
             className="text-lg font-medium text-foreground hover:text-boteco-wine transition-colors dark:hover:text-boteco-mustard-300"
             onClick={() => onOpenChange(false)}

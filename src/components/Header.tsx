@@ -36,6 +36,9 @@ const Header: React.FC = () => {
             <Link to={getLocalizedPath('/')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('home:hero.title', { ns: 'home' }).split(':')[0]}
             </Link>
+            <Link to={getLocalizedPath('/menu')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
+              {t('menu:title', { ns: 'menu' })}
+            </Link>
             <Link to={getLocalizedPath('/sobre')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('about:title', { ns: 'about' })}
             </Link>

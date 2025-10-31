@@ -1,0 +1,105 @@
+{
+  "title": "Cardápio",
+  "hero": {
+    "title": "Sabores do Boteco",
+    "subtitle": "Receitas autorais, ingredientes frescos e combinações pensadas para encantar seus clientes."
+  },
+  "navigationLabel": "Categorias do cardápio",
+  "tabsLabel": "Navegue pelas categorias do cardápio",
+  "badges": {
+    "signature": "Especial da Casa",
+    "spicy": "Apimentado",
+    "vegan": "Vegano",
+    "vegetarian": "Vegetariano",
+    "glutenFree": "Sem Glúten",
+    "new": "Novo",
+    "popular": "Favorito"
+  },
+  "categories": [
+    {
+      "id": "petiscos",
+      "name": "Petiscos",
+      "description": "Clássicos perfeitos para compartilhar e abrir o apetite.",
+      "items": [
+        {
+          "id": "coxinha-gourmet",
+          "name": "Coxinha Gourmet de Frango Caipira",
+          "description": "Massa leve recheada com frango desfiado, catupiry artesanal e toque de ervas frescas.",
+          "price": "6,50 €",
+          "badges": ["signature", "popular"]
+        },
+        {
+          "id": "bolinho-bacalhau",
+          "name": "Bolinho de Bacalhau do Atlântico",
+          "description": "Tradicional receita portuguesa com bacalhau lascado, batata e azeite extra virgem.",
+          "price": "7,20 €",
+          "badges": ["glutenFree"]
+        },
+        {
+          "id": "pastel-queijo",
+          "name": "Pastel de Queijo da Serra",
+          "description": "Pastel crocante recheado com mistura de queijos curados e geleia de pimenta doce.",
+          "price": "5,80 €",
+          "badges": ["vegetarian", "spicy"]
+        }
+      ]
+    },
+    {
+      "id": "principais",
+      "name": "Pratos Principais",
+      "description": "Opções completas que trazem o calor e o sabor da cozinha brasileira.",
+      "items": [
+        {
+          "id": "feijoada-completa",
+          "name": "Feijoada Completa Boteco Pro",
+          "description": "Feijão preto selecionado, carnes suínas especiais, farofa de laranja e couve crocante.",
+          "price": "14,90 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "moqueca-camarao",
+          "name": "Moqueca de Camarão com Dendê",
+          "description": "Camarões salteados em molho cremoso de coco, azeite de dendê e pimentões grelhados.",
+          "price": "16,40 €",
+          "badges": ["new", "spicy"]
+        },
+        {
+          "id": "picanha-chapa",
+          "name": "Picanha na Chapa com Mandioca",
+          "description": "Picanha maturada grelhada ao ponto, acompanhada de mandioca dourada e vinagrete cítrico.",
+          "price": "18,70 €",
+          "badges": ["popular", "glutenFree"]
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas & Coquetéis",
+      "description": "Drinques autorais e refrescos preparados na hora.",
+      "items": [
+        {
+          "id": "caipirinha-classica",
+          "name": "Caipirinha Clássica",
+          "description": "Cachaça premium, lima galega macerada e gelo cristalino em preparo artesanal.",
+          "price": "6,00 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "chopp-artesanal",
+          "name": "Chopp Artesanal da Casa",
+          "description": "Blend exclusivo de maltes nacionais com notas cítricas e final seco.",
+          "price": "4,90 €",
+          "badges": ["new"]
+        },
+        {
+          "id": "limonada-casa",
+          "name": "Limonada da Casa",
+          "description": "Limão siciliano, hortelã fresca e melado de cana, finalizado com água com gás.",
+          "price": "3,80 €",
+          "badges": ["vegan"]
+        }
+      ]
+    }
+  ],
+  "notice": "Informe nossa equipe sobre restrições alimentares ou alergias para personalizarmos sua experiência."
+}

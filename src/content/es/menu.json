@@ -1,0 +1,105 @@
+{
+  "title": "Menú",
+  "hero": {
+    "title": "Sabores del Boteco",
+    "subtitle": "Recetas de autor, ingredientes frescos y combinaciones pensadas para sorprender a cada invitado."
+  },
+  "navigationLabel": "Categorías del menú",
+  "tabsLabel": "Explora las categorías del menú",
+  "badges": {
+    "signature": "Especial de la Casa",
+    "spicy": "Picante",
+    "vegan": "Vegano",
+    "vegetarian": "Vegetariano",
+    "glutenFree": "Sin Gluten",
+    "new": "Nuevo",
+    "popular": "Favorito"
+  },
+  "categories": [
+    {
+      "id": "petiscos",
+      "name": "Para Compartir",
+      "description": "Clásicos ideales para abrir el apetito.",
+      "items": [
+        {
+          "id": "coxinha-gourmet",
+          "name": "Coxinha Gourmet de Pollo de Granja",
+          "description": "Masa ligera rellena de pollo desmechado, catupiry artesanal y hierbas frescas.",
+          "price": "6,50 €",
+          "badges": ["signature", "popular"]
+        },
+        {
+          "id": "bolinho-bacalhau",
+          "name": "Buñuelo de Bacalao Atlántico",
+          "description": "Receta portuguesa tradicional con bacalao en lascas, patata y aceite de oliva virgen extra.",
+          "price": "7,20 €",
+          "badges": ["glutenFree"]
+        },
+        {
+          "id": "pastel-queijo",
+          "name": "Pastel de Queso de la Serra",
+          "description": "Masa crujiente rellena con mezcla de quesos curados y mermelada de ají dulce.",
+          "price": "5,80 €",
+          "badges": ["vegetarian", "spicy"]
+        }
+      ]
+    },
+    {
+      "id": "principais",
+      "name": "Platos Estrella",
+      "description": "Propuestas completas que llevan el calor de Brasil a la mesa.",
+      "items": [
+        {
+          "id": "feijoada-completa",
+          "name": "Feijoada Completa Boteco Pro",
+          "description": "Frijoles negros cocidos a fuego lento, cortes selectos de cerdo, farofa cítrica y col rizada crocante.",
+          "price": "14,90 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "moqueca-camarao",
+          "name": "Moqueca de Camarón con Dendê",
+          "description": "Camarones salteados en caldo cremoso de coco, aceite de dendê y pimientos a la parrilla.",
+          "price": "16,40 €",
+          "badges": ["new", "spicy"]
+        },
+        {
+          "id": "picanha-chapa",
+          "name": "Picanha a la Plancha con Yuca",
+          "description": "Picanha madurada a la parrilla acompañada de yuca dorada y vinagreta cítrica.",
+          "price": "18,70 €",
+          "badges": ["popular", "glutenFree"]
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas y Cocteles",
+      "description": "Tragos de autor y refrescos preparados al momento.",
+      "items": [
+        {
+          "id": "caipirinha-classica",
+          "name": "Caipiriña Clásica",
+          "description": "Cachaça premium, lima macerada y hielo tallado a mano.",
+          "price": "6,00 €",
+          "badges": ["signature"]
+        },
+        {
+          "id": "chopp-artesanal",
+          "name": "Chopp Artesanal de la Casa",
+          "description": "Mezcla exclusiva de maltas nacionales con notas cítricas y final seco.",
+          "price": "4,90 €",
+          "badges": ["new"]
+        },
+        {
+          "id": "limonada-casa",
+          "name": "Limonada de la Casa",
+          "description": "Limón siciliano, menta fresca y melaza de caña con un toque de agua con gas.",
+          "price": "3,80 €",
+          "badges": ["vegan"]
+        }
+      ]
+    }
+  ],
+  "notice": "Cuéntanos cualquier restricción alimentaria o alergia para adaptar tu experiencia."
+}
