@@ -6,17 +6,54 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
-import Seo from '@/components/Seo'; // Importar o componente Seo
+import Seo from '@/components/Seo';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Define o esquema de validação com Zod
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "O nome deve ter pelo menos 2 caracteres.",
+  }).max(50, {
+    message: "O nome não pode ter mais de 50 caracteres.",
+  }),
+  email: z.string().email({
+    message: "Por favor, insira um endereço de e-mail válido.",
+  }),
+  phone: z.string().optional(), // Telefone é opcional
+  message: z.string().min(10, {
+    message: "A mensagem deve ter pelo menos 10 caracteres.",
+  }).max(500, {
+    message: "A mensagem não pode ter mais de 500 caracteres.",
+  }),
+});
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation('contact');
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // For now, just log to console and show a toast
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+  // Inicializa o formulário com react-hook-form e zodResolver
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  // Função de submissão do formulário
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log('Formulário de Contato Enviado:', data);
 
     toast({
@@ -25,8 +62,7 @@ const Contact: React.FC = () => {
       variant: "default",
     });
 
-    // Optionally clear the form
-    (e.target as HTMLFormElement).reset();
+    form.reset(); // Limpa o formulário após o envio
   };
 
   const pageTitle = t('title');
@@ -52,61 +88,65 @@ const Contact: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Label htmlFor="name" className="text-monynha-neutral-700">
-                  {t('form.nameLabel')}
-                </Label>
-                <Input
-                  id="name"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
                   name="name"
-                  placeholder={t('form.namePlaceholder')}
-                  required
-                  className="mt-1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-monynha-neutral-700">{t('form.nameLabel')}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={t('form.namePlaceholder')} {...field} className="mt-1" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-monynha-neutral-700">
-                  {t('form.emailLabel')}
-                </Label>
-                <Input
-                  id="email"
+                <FormField
+                  control={form.control}
                   name="email"
-                  type="email"
-                  placeholder={t('form.emailPlaceholder')}
-                  required
-                  className="mt-1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-monynha-neutral-700">{t('form.emailLabel')}</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder={t('form.emailPlaceholder')} {...field} className="mt-1" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="phone" className="text-monynha-neutral-700">
-                  {t('form.phoneLabel')}
-                </Label>
-                <Input
-                  id="phone"
+                <FormField
+                  control={form.control}
                   name="phone"
-                  type="tel"
-                  placeholder={t('form.phonePlaceholder')}
-                  className="mt-1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-monynha-neutral-700">{t('form.phoneLabel')}</FormLabel>
+                      <FormControl>
+                        <Input type="tel" placeholder={t('form.phonePlaceholder')} {...field} className="mt-1" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="message" className="text-monynha-neutral-700">
-                  {t('form.messageLabel')}
-                </Label>
-                <Textarea
-                  id="message"
+                <FormField
+                  control={form.control}
                   name="message"
-                  placeholder={t('form.messagePlaceholder')}
-                  rows={5}
-                  required
-                  className="mt-1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-monynha-neutral-700">{t('form.messageLabel')}</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder={t('form.messagePlaceholder')} rows={5} {...field} className="mt-1" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <Button type="submit" className="w-full bg-monynha-primary text-monynha-primary-foreground hover:bg-monynha-primary/90">
-                {t('form.submitButton')}
-              </Button>
-            </form>
+                <Button type="submit" className="w-full bg-monynha-primary text-monynha-primary-foreground hover:bg-monynha-primary/90">
+                  {t('form.submitButton')}
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
