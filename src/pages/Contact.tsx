@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
         locale={i18n.language}
       />
       <div className="container mx-auto px-4 py-12 max-w-3xl">
-        <Card className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
+        <Card className="shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-boteco-wine mb-2">
               {t('title')}
