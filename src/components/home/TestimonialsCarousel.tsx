@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DepthSpotlight } from '@/components/design';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion, Variants, Easing } from 'framer-motion';
 import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
@@ -45,14 +46,22 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
           {testimonials.map((testimonial, index) => (
             <div className="flex-none w-full pl-4" key={index}> {/* Add padding to items */}
               <motion.div variants={itemVariants} custom={index}>
-                <Card className="p-6 shadow-lg bg-boteco-beige/30 border border-boteco-beige h-full flex flex-col justify-between dark:border-boteco-brown-700 dark:bg-boteco-brown-800/60">
-                  <CardContent className="text-lg italic text-boteco-brown/80 mb-4 dark:text-boteco-beige-300/80">
-                    "{testimonial.text}"
-                  </CardContent>
-                  <CardFooter className="text-right font-semibold text-boteco-wine dark:text-boteco-mustard-300">
-                    - {testimonial.author}
-                  </CardFooter>
-                </Card>
+                <DepthSpotlight
+                  asChild
+                  depth={200}
+                  spotlightRadius="320px"
+                  spotlightOpacity={0.26}
+                  className="h-full hover:depth-300"
+                >
+                  <Card className="p-6 h-full flex flex-col justify-between">
+                    <CardContent className="text-lg italic text-boteco-brown/80 mb-4 dark:text-boteco-beige-300/80">
+                      "{testimonial.text}"
+                    </CardContent>
+                    <CardFooter className="text-right font-semibold text-boteco-wine dark:text-boteco-mustard-300">
+                      - {testimonial.author}
+                    </CardFooter>
+                  </Card>
+                </DepthSpotlight>
               </motion.div>
             </div>
           ))}
