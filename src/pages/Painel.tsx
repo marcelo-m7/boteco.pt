@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useUser } from '@clerk/clerk-react';
-import { Package, Utensils, DollarSign, AlertTriangle } from 'lucide-react';
+import { Package, TabletSmartphone, Sparkles, CalendarCheck } from 'lucide-react';
 import Seo from '@/components/Seo'; // Importar o componente Seo
 
 const Painel: React.FC = () => {
@@ -16,12 +16,12 @@ const Painel: React.FC = () => {
     switch (title) {
       case t('cards.0.title'): // Pedidos Recentes
         return <Package className="h-8 w-8 text-boteco-secondary" />;
-      case t('cards.1.title'): // Mesas Abertas
-        return <Utensils className="h-8 w-8 text-boteco-secondary" />;
-      case t('cards.2.title'): // Estoque Baixo
-        return <AlertTriangle className="h-8 w-8 text-boteco-secondary" />;
-      case t('cards.3.title'): // Vendas Hoje
-        return <DollarSign className="h-8 w-8 text-boteco-secondary" />;
+      case t('cards.1.title'): // Menu Digital Online
+        return <TabletSmartphone className="h-8 w-8 text-boteco-secondary" />;
+      case t('cards.2.title'): // Campanhas de Fidelidade
+        return <Sparkles className="h-8 w-8 text-boteco-secondary" />;
+      case t('cards.3.title'): // Eventos Programados
+        return <CalendarCheck className="h-8 w-8 text-boteco-secondary" />;
       default:
         return null;
     }

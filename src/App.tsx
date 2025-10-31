@@ -13,6 +13,11 @@ import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Painel from "./pages/Painel";
 import BlogPostDetail from "./pages/BlogPostDetail"; // Importar BlogPostDetail
+import MenuDigital from "./pages/MenuDigital";
+import Fornecedores from "./pages/Fornecedores";
+import Fidelidade from "./pages/Fidelidade";
+import Eventos from "./pages/Eventos";
+import Integracoes from "./pages/Integracoes";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 
@@ -34,6 +39,11 @@ const App = () => (
             <Route path="contato" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogPostDetail />} /> {/* Nova rota para detalhes do blog */}
+            <Route path="menu-digital" element={<MenuDigital />} />
+            <Route path="fornecedores" element={<Fornecedores />} />
+            <Route path="fidelidade" element={<Fidelidade />} />
+            <Route path="eventos" element={<Eventos />} />
+            <Route path="integracoes" element={<Integracoes />} />
             <Route path="legal/privacidade" element={<PrivacyPolicy />} />
             <Route path="legal/termos" element={<TermsOfService />} />
           </Route>

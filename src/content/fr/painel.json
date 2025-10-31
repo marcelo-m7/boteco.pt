@@ -1,27 +1,27 @@
 {
-  "greeting": "Bonjour, {{userName}} !",
-  "title": "Tableau de Bord",
-  "demoNotice": "(Données d'exemple pour démonstration – future intégration avec API interne)",
+  "greeting": "Bonjour, {{userName}}!",
+  "title": "Tableau de bord",
+  "demoNotice": "(Données d'exemple pour démonstration – future intégration avec l'API interne)",
   "cards": [
     {
-      "title": "Commandes Récentes",
+      "title": "Commandes récentes",
       "value": "12",
-      "description": "Nouvelles commandes au cours des dernières 24h"
+      "description": "Nouvelles commandes sur les 24 h"
     },
     {
-      "title": "Tables Ouvertes",
-      "value": "5",
-      "description": "Tables actuellement en service"
+      "title": "Menu numérique en ligne",
+      "value": "24 articles",
+      "description": "Carte synchronisée avec médias et traductions actives"
     },
     {
-      "title": "Stock Faible",
-      "value": "3 articles",
-      "description": "Produits à réapprovisionner"
+      "title": "Campagnes de fidélité",
+      "value": "3 actives",
+      "description": "Parcours omnicanaux en cours"
     },
     {
-      "title": "Ventes Aujourd'hui",
-      "value": "€ 1 250,00",
-      "description": "Total des ventes jusqu'à présent"
+      "title": "Événements programmés",
+      "value": "2 événements",
+      "description": "Check-lists finalisées pour cette semaine"
     }
   ]
 }

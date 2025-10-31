@@ -1,53 +1,120 @@
 {
   "hero": {
-    "title": "Boteco Pro: La Solución Completa para Bares y Restaurantes",
+    "title": "Boteco Pro: La solución completa para bares y restaurantes",
     "subtitle": "Gestiona tu negocio con practicidad y eficiencia.",
-    "cta": "Prueba Gratis"
+    "cta": "Prueba gratis"
   },
   "features": [
     {
-      "title": "Gestión de Mesas",
-      "description": "Controla tus mesas y pedidos de forma intuitiva."
+      "title": "Menú digital omnicanal",
+      "description": "Actualiza la carta en tiempo real y ofrece experiencias inclusivas en QR."
     },
     {
-      "title": "Control de Inventario",
-      "description": "Mantén tu inventario siempre actualizado y evita pérdidas."
+      "title": "Compras inteligentes",
+      "description": "Centraliza proveedores, contratos y entregas con alertas automáticas."
     },
     {
-      "title": "Informes Detallados",
-      "description": "Obtén información valiosa para optimizar tus ventas."
+      "title": "Fidelización e insights",
+      "description": "Lanza campañas personalizadas y monitorea resultados con paneles completos."
     }
   ],
+  "solutions": {
+    "title": "Soluciones conectadas para tu operación",
+    "subtitle": "Integra menú digital, proveedores, fidelidad, eventos e integraciones en un solo ecosistema.",
+    "items": [
+      {
+        "title": "Menú digital",
+        "description": "Códigos QR con medios responsivos, traducciones y sugerencias inteligentes de upsell.",
+        "href": "/menu-digital",
+        "ctaLabel": "Ver menú digital",
+        "badge": "QR"
+      },
+      {
+        "title": "Gestión de proveedores",
+        "description": "Cotizaciones, contratos y entregas con trazabilidad y alertas preventivas.",
+        "href": "/fornecedores",
+        "ctaLabel": "Optimizar compras"
+      },
+      {
+        "title": "Programa de fidelidad",
+        "description": "Billetera digital, campañas segmentadas y métricas de retención en tiempo real.",
+        "href": "/fidelidade",
+        "ctaLabel": "Enganchar clientes"
+      },
+      {
+        "title": "Eventos y experiencias",
+        "description": "Checklists colaborativos, reservas integradas y reportes post-evento.",
+        "href": "/eventos",
+        "ctaLabel": "Planificar agenda"
+      },
+      {
+        "title": "Integraciones nativas",
+        "description": "Conectores para POS, delivery, contabilidad y BI sin fricción.",
+        "href": "/integracoes",
+        "ctaLabel": "Explorar integraciones"
+      }
+    ]
+  },
   "howItWorks": {
-    "title": "Cómo Funciona",
+    "title": "Cómo funciona",
     "steps": [
       {
-        "title": "Registra tu Negocio",
-        "description": "Empieza en pocos minutos, es simple y rápido."
+        "title": "Registra tu negocio",
+        "description": "Empieza en minutos, es simple y rápido."
       },
       {
-        "title": "Configura tu Menú",
-        "description": "Añade tus productos y precios fácilmente."
+        "title": "Configura tu carta",
+        "description": "Agrega productos y precios fácilmente."
       },
       {
-        "title": "Empieza a Vender",
+        "title": "Comienza a vender",
         "description": "Atiende a tus clientes con agilidad y eficiencia."
       }
     ]
   },
   "plans": {
-    "title": "Nuestros Planes",
+    "title": "Nuestros planes",
     "description": "Elige el plan ideal para tu negocio.",
     "options": [
       {
         "name": "Básico",
         "price": "$ 99/mes",
-        "features": ["Gestión de Mesas", "Control de Inventario Básico"]
+        "features": [
+          "Gestión de mesas",
+          "Control de inventario básico"
+        ]
       },
       {
         "name": "Premium",
         "price": "$ 199/mes",
-        "features": ["Todas las funcionalidades del Básico", "Informes Avanzados", "Soporte Prioritario"]
+        "features": [
+          "Todas las funciones del Básico",
+          "Reportes avanzados",
+          "Soporte prioritario"
+        ]
+      }
+    ]
+  },
+  "platformCarousel": {
+    "title": "Descubre el ecosistema Boteco Pro en acción",
+    "items": [
+      {
+        "title": "Integraciones sin fricción",
+        "description": "Sincroniza POS, delivery y contabilidad con monitoreo en tiempo real.",
+        "ctaLabel": "Ver integraciones",
+        "href": "/integracoes"
+      },
+      {
+        "title": "Menú digital inclusivo",
+        "description": "Medios responsivos, audiodescripciones y promociones por turno para sorprender.",
+        "ctaLabel": "Explorar menú",
+        "href": "/menu-digital"
+      },
+      {
+        "title": "Fidelidad omnicanal",
+        "description": "Campañas segmentadas, cashback y automatizaciones para aumentar la recurrencia.",
+        "ctaLabel": "Crear fidelidad",
+        "href": "/fidelidade"
       }
     ]
   },
@@ -61,15 +128,35 @@
     ]
   },
   "faq": {
-    "title": "Preguntas Frecuentes",
+    "title": "Preguntas frecuentes",
     "items": [
       {
-        "question": "¿Cómo empiezo?",
-        "answer": "Solo regístrate y sigue los pasos de configuración."
+        "question": "¿El menú digital se integra con mi POS?",
+        "answer": "Sí. Boteco Pro sincroniza carta, pedidos y pagos para actualizar inventario y reportes automáticamente."
       },
       {
-        "question": "¿Hay un período de prueba?",
-        "answer": "Sí, ofrecemos un período de prueba gratuito de 7 días."
+        "question": "¿Puedo gestionar proveedores y eventos juntos?",
+        "answer": "Controlas cotizaciones, entregas, agenda de eventos y equipo en flujos colaborativos dentro de la plataforma."
+      },
+      {
+        "question": "¿Hay un programa de fidelidad listo para usar?",
+        "answer": "Sí. Configura puntos, cashback o sellos con notificaciones automáticas y métricas de retención."
+      }
+    ]
+  },
+  "ecosystemCta": {
+    "title": "Conecta hospitalidad y tecnología",
+    "description": "Habla con el equipo de Boteco Pro para crear jornadas digitales que enamoren a tus clientes.",
+    "actions": [
+      {
+        "label": "Hablar con especialistas",
+        "href": "/contacto",
+        "variant": "default"
+      },
+      {
+        "label": "Explorar integraciones",
+        "href": "/integracoes",
+        "variant": "outline"
       }
     ]
   },

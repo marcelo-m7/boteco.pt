@@ -6,18 +6,55 @@
   },
   "features": [
     {
-      "title": "Table Management",
-      "description": "Control your tables and orders intuitively."
+      "title": "Omnichannel Digital Menu",
+      "description": "Update the menu in real time and deliver inclusive QR experiences."
     },
     {
-      "title": "Inventory Control",
-      "description": "Keep your inventory always updated and avoid losses."
+      "title": "Smart Purchasing",
+      "description": "Centralize suppliers, contracts, and deliveries with automated alerts."
     },
     {
-      "title": "Detailed Reports",
-      "description": "Gain valuable insights to optimize your sales."
+      "title": "Loyalty and Insights",
+      "description": "Launch personalized campaigns and track results with rich dashboards."
     }
   ],
+  "solutions": {
+    "title": "Connected solutions for your operation",
+    "subtitle": "Bring digital menu, suppliers, loyalty, events, and integrations together in one ecosystem.",
+    "items": [
+      {
+        "title": "Digital Menu",
+        "description": "QR codes with responsive media, translations, and smart upsell suggestions.",
+        "href": "/menu-digital",
+        "ctaLabel": "Discover the menu",
+        "badge": "QR"
+      },
+      {
+        "title": "Supplier Management",
+        "description": "Quotes, contracts, and deliveries with full audit trails and proactive alerts.",
+        "href": "/fornecedores",
+        "ctaLabel": "Streamline purchasing"
+      },
+      {
+        "title": "Loyalty Program",
+        "description": "Digital wallet, segmented campaigns, and real-time retention metrics.",
+        "href": "/fidelidade",
+        "ctaLabel": "Engage guests"
+      },
+      {
+        "title": "Events and Experiences",
+        "description": "Collaborative checklists, integrated reservations, and post-event reports.",
+        "href": "/eventos",
+        "ctaLabel": "Plan the calendar"
+      },
+      {
+        "title": "Native Integrations",
+        "description": "Connect POS, delivery, accounting, and BI without friction.",
+        "href": "/integracoes",
+        "ctaLabel": "Explore integrations"
+      }
+    ]
+  },
   "howItWorks": {
     "title": "How it Works",
     "steps": [
@@ -42,12 +79,42 @@
       {
         "name": "Basic",
         "price": "$ 99/month",
-        "features": ["Table Management", "Basic Inventory Control"]
+        "features": [
+          "Table Management",
+          "Basic Inventory Control"
+        ]
       },
       {
         "name": "Premium",
         "price": "$ 199/month",
-        "features": ["All Basic features", "Advanced Reports", "Priority Support"]
+        "features": [
+          "All Basic features",
+          "Advanced Reports",
+          "Priority Support"
+        ]
+      }
+    ]
+  },
+  "platformCarousel": {
+    "title": "See the Boteco Pro ecosystem in action",
+    "items": [
+      {
+        "title": "Seamless integrations",
+        "description": "Sync POS, delivery, and accounting with real-time monitoring.",
+        "ctaLabel": "View integrations",
+        "href": "/integracoes"
+      },
+      {
+        "title": "Inclusive digital menu",
+        "description": "Responsive media, audio descriptions, and shift promotions to wow guests.",
+        "ctaLabel": "Explore the menu",
+        "href": "/menu-digital"
+      },
+      {
+        "title": "Omnichannel loyalty",
+        "description": "Segmented campaigns, cashback, and automations to boost recurrence.",
+        "ctaLabel": "Build loyalty",
+        "href": "/fidelidade"
       }
     ]
   },
@@ -64,12 +131,32 @@
     "title": "Frequently Asked Questions",
     "items": [
       {
-        "question": "How do I get started?",
-        "answer": "Just sign up and follow the setup steps."
+        "question": "Does the digital menu connect to my POS?",
+        "answer": "Yes. Boteco Pro syncs menu, orders, and payments to update inventory and reports automatically."
       },
       {
-        "question": "Is there a trial period?",
-        "answer": "Yes, we offer a 7-day free trial."
+        "question": "Can I manage suppliers and events together?",
+        "answer": "You control quotes, deliveries, event agendas, and teams in collaborative workflows across the platform."
+      },
+      {
+        "question": "Is there a ready-to-use loyalty program?",
+        "answer": "Absolutely. Configure points, cashback, or stamp rules with automated notifications and retention analytics."
+      }
+    ]
+  },
+  "ecosystemCta": {
+    "title": "Connect hospitality with technology",
+    "description": "Talk to the Boteco Pro team to craft digital journeys that delight guests from booking to re-engagement.",
+    "actions": [
+      {
+        "label": "Talk to experts",
+        "href": "/contact",
+        "variant": "default"
+      },
+      {
+        "label": "Explore integrations",
+        "href": "/integracoes",
+        "variant": "outline"
       }
     ]
   },
