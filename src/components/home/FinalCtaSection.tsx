@@ -30,7 +30,7 @@ const FinalCtaSection: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
-      className="w-full py-20 bg-boteco-wine text-boteco-wine-foreground text-center"
+      className="w-full py-20 bg-boteco-wine text-boteco-wine-foreground text-center dark:bg-boteco-wine-800"
     >
       <div className="container mx-auto px-4">
         <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-6">
@@ -38,7 +38,7 @@ const FinalCtaSection: React.FC = () => {
         </motion.h2>
         <motion.div variants={itemVariants}>
           <Link to={getLocalizedPath('/contato')}>
-            <Button size="lg" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300 active:scale-98">
+            <Button size="lg" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300 active:scale-98 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
               {t('finalCta.button')} <Lightbulb className="ml-2 h-5 w-5" />
             </Button>
           </Link>

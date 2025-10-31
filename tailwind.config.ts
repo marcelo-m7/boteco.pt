@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -62,23 +63,76 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Novas cores personalizadas Boteco Pro
         boteco: {
           wine: {
-            DEFAULT: "#8B1E3F", // Deep Red/Wine
-            foreground: "hsl(0 0% 100%)", // White text
+            50: "hsl(var(--boteco-wine-50))",
+            100: "hsl(var(--boteco-wine-100))",
+            200: "hsl(var(--boteco-wine-200))",
+            300: "hsl(var(--boteco-wine-300))",
+            400: "hsl(var(--boteco-wine-400))",
+            500: "hsl(var(--boteco-wine-500))",
+            600: "hsl(var(--boteco-wine-600))",
+            700: "hsl(var(--boteco-wine-700))",
+            800: "hsl(var(--boteco-wine-800))",
+            900: "hsl(var(--boteco-wine-900))",
+            DEFAULT: "hsl(var(--boteco-wine-500))",
+            foreground: "hsl(var(--boteco-wine-foreground))",
           },
           mustard: {
-            DEFAULT: "#B3701A", // Mustard Yellow/Orange
-            foreground: "hsl(0 0% 100%)", // White text
+            50: "hsl(var(--boteco-mustard-50))",
+            100: "hsl(var(--boteco-mustard-100))",
+            200: "hsl(var(--boteco-mustard-200))",
+            300: "hsl(var(--boteco-mustard-300))",
+            400: "hsl(var(--boteco-mustard-400))",
+            500: "hsl(var(--boteco-mustard-500))",
+            600: "hsl(var(--boteco-mustard-600))",
+            700: "hsl(var(--boteco-mustard-700))",
+            800: "hsl(var(--boteco-mustard-800))",
+            900: "hsl(var(--boteco-mustard-900))",
+            DEFAULT: "hsl(var(--boteco-mustard-500))",
+            foreground: "hsl(var(--boteco-mustard-foreground))",
           },
           beige: {
-            DEFAULT: "#F1DDAD", // Light Beige
-            foreground: "hsl(222.2 47.4% 11.2%)", // Dark text
+            50: "hsl(var(--boteco-beige-50))",
+            100: "hsl(var(--boteco-beige-100))",
+            200: "hsl(var(--boteco-beige-200))",
+            300: "hsl(var(--boteco-beige-300))",
+            400: "hsl(var(--boteco-beige-400))",
+            500: "hsl(var(--boteco-beige-500))",
+            600: "hsl(var(--boteco-beige-600))",
+            700: "hsl(var(--boteco-beige-700))",
+            800: "hsl(var(--boteco-beige-800))",
+            900: "hsl(var(--boteco-beige-900))",
+            DEFAULT: "hsl(var(--boteco-beige-400))",
+            foreground: "hsl(var(--boteco-beige-foreground))",
           },
           brown: {
-            DEFAULT: "#4F3222", // Dark Brown
-            foreground: "hsl(0 0% 100%)", // White text
+            50: "hsl(var(--boteco-brown-50))",
+            100: "hsl(var(--boteco-brown-100))",
+            200: "hsl(var(--boteco-brown-200))",
+            300: "hsl(var(--boteco-brown-300))",
+            400: "hsl(var(--boteco-brown-400))",
+            500: "hsl(var(--boteco-brown-500))",
+            600: "hsl(var(--boteco-brown-600))",
+            700: "hsl(var(--boteco-brown-700))",
+            800: "hsl(var(--boteco-brown-800))",
+            900: "hsl(var(--boteco-brown-900))",
+            DEFAULT: "hsl(var(--boteco-brown-500))",
+            foreground: "hsl(var(--boteco-brown-foreground))",
+          },
+          neutral: {
+            50: "hsl(var(--boteco-neutral-50))",
+            100: "hsl(var(--boteco-neutral-100))",
+            200: "hsl(var(--boteco-neutral-200))",
+            300: "hsl(var(--boteco-neutral-300))",
+            400: "hsl(var(--boteco-neutral-400))",
+            500: "hsl(var(--boteco-neutral-500))",
+            600: "hsl(var(--boteco-neutral-600))",
+            700: "hsl(var(--boteco-neutral-700))",
+            800: "hsl(var(--boteco-neutral-800))",
+            900: "hsl(var(--boteco-neutral-900))",
+            DEFAULT: "hsl(var(--boteco-neutral-500))",
+            foreground: "hsl(var(--boteco-neutral-foreground))",
           },
         },
       },
@@ -111,5 +165,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

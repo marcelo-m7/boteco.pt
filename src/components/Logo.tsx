@@ -15,7 +15,7 @@ const Logo = React.forwardRef<HTMLAnchorElement, React.ComponentPropsWithoutRef<
       <Link
         ref={ref} // Forward the ref
         to={getLocalizedPath('/')}
-        className="text-2xl font-bold text-boteco-wine-foreground hover:text-boteco-mustard transition-colors"
+        className="text-2xl font-bold text-boteco-wine-foreground hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300"
         {...props} // Spread additional props
       >
         Boteco Pro

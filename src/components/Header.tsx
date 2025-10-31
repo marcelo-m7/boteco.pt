@@ -33,23 +33,23 @@ const Header: React.FC = () => {
           </div>
         ) : (
           <nav className="flex items-center space-x-4">
-            <Link to={getLocalizedPath('/')} className="hover:underline hover:text-boteco-mustard transition-colors">
+            <Link to={getLocalizedPath('/')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('home:hero.title', { ns: 'home' }).split(':')[0]}
             </Link>
-            <Link to={getLocalizedPath('/sobre')} className="hover:underline hover:text-boteco-mustard transition-colors">
+            <Link to={getLocalizedPath('/sobre')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('about:title', { ns: 'about' })}
             </Link>
-            <Link to={getLocalizedPath('/contato')} className="hover:underline hover:text-boteco-mustard transition-colors">
+            <Link to={getLocalizedPath('/contato')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('contact:title', { ns: 'contact' })}
             </Link>
-            <Link to={getLocalizedPath('/blog')} className="hover:underline hover:text-boteco-mustard transition-colors">
+            <Link to={getLocalizedPath('/blog')} className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('blog:title', { ns: 'blog' })}
             </Link>
-            <Link to="/painel" className="hover:underline hover:text-boteco-mustard transition-colors">
+            <Link to="/painel" className="hover:underline hover:text-boteco-mustard transition-colors dark:hover:text-boteco-mustard-300">
               {t('painel:title', { ns: 'painel' })}
             </Link>
             <a href="https://app.boteco.pt" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 border-boteco-beige">
+              <Button variant="outline" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 border-boteco-beige dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300 dark:border-boteco-wine-400">
                 {t('home:hero.demoButton', { ns: 'home' })}
               </Button>
             </a>
