@@ -1,54 +1,63 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { motion, Variants, Easing } from 'framer-motion';
+import * as React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+
+import { DepthSpotlight } from "@/components/design";
+
+type Step = { title: string; description: string };
 
 const HowItWorksSection: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation("home");
+  const shouldReduceMotion = useReducedMotion();
 
-  const howItWorksSteps = t('howItWorks.steps', { returnObjects: true }) as { title: string; description: string }[];
-
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" as Easing } },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const steps = (t("howItWorks.steps", { returnObjects: true }) as Step[] | undefined) ?? [];
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-      className="w-full py-16 bg-boteco-beige-50 dark:bg-boteco-brown-900"
-    >
-      <div className="container mx-auto px-4 text-center">
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown dark:text-boteco-beige-200"
-        >
-          {t('howItWorks.title')}
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {howItWorksSteps.map((step, index) => (
-            <motion.div key={index} variants={itemVariants} custom={index}>
-              <div className="flex flex-col items-center text-center p-6">
-                <div className="bg-boteco-mustard text-boteco-mustard-foreground rounded-full h-12 w-12 flex items-center justify-center text-xl font-bold mb-4 dark:bg-boteco-mustard-400">
-                  {index + 1}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-boteco-brown dark:text-boteco-beige-100">{step.title}</h3>
-                <p className="text-boteco-brown/80 dark:text-boteco-beige-300/80">{step.description}</p>
-              </div>
-            </motion.div>
-          ))}
+    <section className="relative w-full overflow-hidden bg-boteco-beige-100/80 py-20 dark:bg-boteco-brown-900/80">
+      <div className="container relative mx-auto flex flex-col gap-12 px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-3xl font-semibold tracking-tight text-boteco-brown-900 md:text-4xl dark:text-boteco-beige-50"
+          >
+            {t("howItWorks.title")}
+          </motion.h2>
         </div>
+
+        <ol className="grid gap-6 md:grid-cols-3" aria-label={t("howItWorks.title")}>
+          {steps.map((step, index) => (
+            <motion.li
+              key={`${step.title}-${index}`}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
+              className="h-full"
+            >
+              <DepthSpotlight
+                depth={200}
+                spotlightRadius="420px"
+                spotlightOpacity={0.24}
+                className="h-full rounded-3xl bg-boteco-beige-50/90 p-6 text-left dark:bg-boteco-brown-900/70"
+              >
+                <div className="flex h-full flex-col gap-4">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-boteco-mustard-400 text-base font-semibold text-boteco-brown-900 shadow-sm dark:bg-boteco-mustard-400/90">
+                    {index + 1}
+                  </span>
+                  <h3 className="text-xl font-semibold text-boteco-brown-900 dark:text-boteco-beige-50">{step.title}</h3>
+                  <p className="text-sm leading-relaxed text-boteco-brown-700 dark:text-boteco-beige-200/80">{step.description}</p>
+                </div>
+              </DepthSpotlight>
+            </motion.li>
+          ))}
+        </ol>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
