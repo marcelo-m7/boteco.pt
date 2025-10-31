@@ -1,5 +1,42 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 import tailwindcssAnimate from "tailwindcss-animate";
+
+const depthPlugin = plugin(({ addUtilities }) => {
+  const depthLevels = ["100", "200", "300"] as const;
+
+  const depthUtilities = Object.fromEntries(
+    depthLevels.map((level) => [
+      `.depth-${level}`,
+      {
+        "--boteco-depth-surface": `var(--depth-${level}-surface)`,
+        "--boteco-depth-border": `var(--depth-${level}-border)`,
+        "--boteco-depth-shadow": `var(--depth-${level}-shadow)`,
+        "background-color": "var(--boteco-depth-surface)",
+        "border-color": "var(--boteco-depth-border)",
+        "box-shadow": "var(--boteco-depth-shadow)",
+      },
+    ]),
+  );
+
+  addUtilities(depthUtilities, {
+    variants: ["responsive", "hover", "focus", "active"],
+  });
+
+  addUtilities({
+    ".depth-transition": {
+      "transition-property": "transform, box-shadow, background-color, border-color",
+      "transition-duration": "200ms",
+      "transition-timing-function": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    },
+    "@media (prefers-reduced-motion: reduce)": {
+      ".depth-transition": {
+        "transition-duration": "1ms",
+        "transition-timing-function": "linear",
+      },
+    },
+  });
+});
 
 export default {
   darkMode: ["class"],
@@ -165,5 +202,6 @@ export default {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [tailwindcssAnimate, depthPlugin],
 } satisfies Config;
+

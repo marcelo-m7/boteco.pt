@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DepthStack } from '@/components/design';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
@@ -43,25 +44,34 @@ const PlansSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-8 text-left shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige dark:border-boteco-brown-700 dark:bg-boteco-brown-800/60">
-                <CardHeader>
-                  <CardTitle className="text-3xl font-bold text-boteco-wine mb-2 dark:text-boteco-mustard-300">{plan.name}</CardTitle>
-                  <CardDescription className="text-2xl font-semibold text-boteco-brown/90 dark:text-boteco-beige-100">{plan.price}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-boteco-brown/80 dark:text-boteco-beige-300/80">
-                    {plan.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-center">
-                        <CheckCircle className="mr-2 h-4 w-4 text-boteco-mustard dark:text-boteco-mustard-300" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="mt-6 w-full bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
-                    {t('plans.choosePlan', { defaultValue: 'Escolher Plano' })}
-                  </Button>
-                </CardContent>
-              </Card>
+              <DepthStack
+                asChild
+                depth={200}
+                layerDepth={100}
+                layers={3}
+                layerOffset={5}
+                className="p-8 text-left hover:depth-300 hover:-translate-y-1 focus-visible:-translate-y-1 active:-translate-y-0.5"
+              >
+                <Card className="p-8 text-left h-full flex flex-col">
+                  <CardHeader>
+                    <CardTitle className="text-3xl font-bold text-boteco-wine mb-2 dark:text-boteco-mustard-300">{plan.name}</CardTitle>
+                    <CardDescription className="text-2xl font-semibold text-boteco-brown/90 dark:text-boteco-beige-100">{plan.price}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-boteco-brown/80 dark:text-boteco-beige-300/80">
+                      {plan.features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-center">
+                          <CheckCircle className="mr-2 h-4 w-4 text-boteco-mustard dark:text-boteco-mustard-300" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button className="mt-6 w-full bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
+                      {t('plans.choosePlan', { defaultValue: 'Escolher Plano' })}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </DepthStack>
             </motion.div>
           ))}
         </div>

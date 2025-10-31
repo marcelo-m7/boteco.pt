@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DepthSurface } from '@/components/design';
 import Seo from '@/components/Seo'; // Importar o componente Seo
 
 const PrivacyPolicy: React.FC = () => {
@@ -27,16 +28,23 @@ const PrivacyPolicy: React.FC = () => {
           {t('lastUpdatedLabel', { defaultValue: 'Última atualização' })}: {t('lastUpdated')}
         </p>
 
-        <div className="space-y-8 text-boteco-brown dark:text-boteco-beige-200">
+        <div className="space-y-6 text-boteco-brown dark:text-boteco-beige-200">
           {contentSections.map((section, index) => (
-            <section key={index}>
-              <h2 className="text-2xl font-semibold mb-4 text-boteco-brown dark:text-boteco-beige-100">
-                {section.heading}
-              </h2>
-              <p className="text-lg leading-relaxed dark:text-boteco-beige-300">
-                {section.text}
-              </p>
-            </section>
+            <DepthSurface
+              asChild
+              key={index}
+              depth={100}
+              className="p-6 text-left"
+            >
+              <section>
+                <h2 className="text-2xl font-semibold mb-4 text-boteco-brown dark:text-boteco-beige-100">
+                  {section.heading}
+                </h2>
+                <p className="text-lg leading-relaxed dark:text-boteco-beige-300">
+                  {section.text}
+                </p>
+              </section>
+            </DepthSurface>
           ))}
         </div>
       </div>

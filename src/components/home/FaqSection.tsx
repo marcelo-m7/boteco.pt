@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DepthSurface } from '@/components/design';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, Variants, Easing } from 'framer-motion';
 
@@ -38,14 +39,22 @@ const FaqSection: React.FC = () => {
         <motion.div variants={itemVariants}>
           <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto text-left">
             {faqItems.map((item, index) => (
-              <AccordionItem value={`item-${index}`} key={index}>
-                <AccordionTrigger className="text-lg font-semibold text-boteco-wine hover:no-underline dark:text-boteco-mustard-300">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-boteco-brown/80 dark:text-boteco-beige-300/80">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <DepthSurface
+                asChild
+                key={index}
+                depth={100}
+                interactive
+                className="mb-4"
+              >
+                <AccordionItem value={`item-${index}`} className="border-0">
+                  <AccordionTrigger className="text-lg font-semibold text-boteco-wine hover:no-underline dark:text-boteco-mustard-300">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-boteco-brown/80 dark:text-boteco-beige-300/80">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </DepthSurface>
             ))}
           </Accordion>
         </motion.div>
