@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion, Variants, Easing } from 'framer-motion';
+import TestimonialsCarousel from './TestimonialsCarousel'; // Importar o novo componente
 
 const TestimonialsSection: React.FC = () => {
   const { t } = useTranslation('home');
@@ -32,20 +32,7 @@ const TestimonialsSection: React.FC = () => {
         <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown">
           {t('testimonials.title')}
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-2xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-6 shadow-lg bg-boteco-beige/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
-                <CardContent className="text-lg italic text-boteco-brown/80 mb-4">
-                  "{testimonial.text}"
-                </CardContent>
-                <CardFooter className="text-right font-semibold text-boteco-wine">
-                  - {testimonial.author}
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        <TestimonialsCarousel testimonials={testimonials} /> {/* Usar o componente de carrossel */}
       </div>
     </motion.section>
   );
