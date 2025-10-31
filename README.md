@@ -42,8 +42,8 @@ A React application built with TypeScript, Vite, and Tailwind CSS.
 ## Available Scripts
 
 - `npm run dev` - Start the development server
-- `npm run build` - Build for production
-- `npm run build:dev` - Build for development
+- `npm run build` - Build for production (optimized and minified)
+- `npm run build:dev` - Build for development (with development mode configuration)
 - `npm run lint` - Run ESLint
 - `npm run preview` - Preview the production build
 - `npm run test` - Run tests

@@ -36,6 +36,7 @@ This project uses:
 - **Tailwind CSS** for styling
 - **shadcn/ui** component library
 - **React Router** for navigation
+- **Clerk** for authentication
 
 ## Development Setup
 
