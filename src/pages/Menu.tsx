@@ -112,7 +112,7 @@ const StickyCategoryList: React.FC<StickyCategoryListProps> = ({
                     ? 'border-boteco-mustard bg-boteco-mustard/10 text-boteco-mustard dark:border-boteco-mustard-300 dark:text-boteco-mustard-300'
                     : 'border-transparent bg-background/70 text-boteco-brown hover:border-boteco-mustard/60 hover:text-boteco-mustard dark:bg-boteco-brown-900/80 dark:text-boteco-beige-200 dark:hover:border-boteco-mustard-300 dark:hover:text-boteco-mustard-300',
                 )}
-                aria-current={isActive ? 'true' : undefined}
+                aria-current={isActive ? 'page' : undefined}
               >
                 {category.name}
               </button>
