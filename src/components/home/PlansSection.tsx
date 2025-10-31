@@ -1,82 +1,70 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { DepthStack } from '@/components/design';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
-import { motion, Variants, Easing } from 'framer-motion';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { Check } from "lucide-react";
+
+import { SpotlightCard } from "@/components/reactbits";
 
 const PlansSection: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation("home");
+  const { locale } = useParams<{ locale: string }>();
+  const currentLocale = locale || "pt";
 
-  const plans = t('plans.options', { returnObjects: true }) as { name: string; price: string; features: string[] }[];
+  const plans = t("plans.options", { returnObjects: true }) as Array<{
+    name: string;
+    price: string;
+    features: string[];
+  }>;
 
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" as Easing } },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const planCards = React.useMemo(
+    () =>
+      plans.map((plan, index) => ({
+        id: `plan-${plan.name}-${index}`,
+        name: plan.name,
+        price: plan.price,
+        features: plan.features,
+        accent: (index % 2 === 0 ? "mustard" : "wine") as const,
+      })),
+    [plans],
+  );
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-      className="w-full py-16 bg-boteco-beige/30 dark:bg-boteco-brown-900"
-    >
-      <div className="container mx-auto px-4 text-center">
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold mb-4 text-boteco-brown dark:text-boteco-beige-200"
-        >
-          {t('plans.title')}
-        </motion.h2>
-        <motion.p variants={itemVariants} className="text-lg text-boteco-brown/80 mb-12 dark:text-boteco-beige-300/80">
-          {t('plans.description')}
-        </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {plans.map((plan, index) => (
-            <motion.div key={index} variants={itemVariants} custom={index}>
-              <DepthStack
-                asChild
-                depth={200}
-                layerDepth={100}
-                layers={3}
-                layerOffset={5}
-                className="p-8 text-left hover:depth-300 hover:-translate-y-1 focus-visible:-translate-y-1 active:-translate-y-0.5"
-              >
-                <Card className="p-8 text-left h-full flex flex-col">
-                  <CardHeader>
-                    <CardTitle className="text-3xl font-bold text-boteco-wine mb-2 dark:text-boteco-mustard-300">{plan.name}</CardTitle>
-                    <CardDescription className="text-2xl font-semibold text-boteco-brown/90 dark:text-boteco-beige-100">{plan.price}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-boteco-brown/80 dark:text-boteco-beige-300/80">
-                      {plan.features.map((feature, fIndex) => (
-                        <li key={fIndex} className="flex items-center">
-                          <CheckCircle className="mr-2 h-4 w-4 text-boteco-mustard dark:text-boteco-mustard-300" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button className="mt-6 w-full bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 active:scale-98 transition-transform duration-100 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
-                      {t('plans.choosePlan', { defaultValue: 'Escolher Plano' })}
-                    </Button>
-                  </CardContent>
-                </Card>
-              </DepthStack>
-            </motion.div>
+    <section className="w-full bg-boteco-beige-100 py-20 dark:bg-boteco-brown-900">
+      <div className="container mx-auto flex max-w-5xl flex-col gap-12 px-4">
+        <div className="space-y-4 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-boteco-brown-900 sm:text-4xl dark:text-boteco-beige-50">
+            {t("plans.title")}
+          </h2>
+          <p className="mx-auto max-w-3xl text-base text-boteco-brown-700 sm:text-lg dark:text-boteco-beige-200/80">
+            {t("plans.description")}
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          {planCards.map((plan) => (
+            <SpotlightCard
+              key={plan.id}
+              title={plan.name}
+              description={plan.price}
+              accent={plan.accent}
+              cta={{ label: t("plans.cta"), href: `/${currentLocale}/contato` }}
+            >
+              <ul className="space-y-3 text-left text-sm text-boteco-brown-700 dark:text-boteco-beige-200/80">
+                {plan.features.map((feature) => (
+                  <li key={`${plan.id}-${feature}`} className="flex items-start gap-3">
+                    <span className="mt-0.5 rounded-full bg-boteco-wine-500/10 p-1 text-boteco-wine-600 dark:bg-boteco-wine-500/20 dark:text-boteco-mustard-200">
+                      <Check className="h-4 w-4" aria-hidden />
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </SpotlightCard>
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

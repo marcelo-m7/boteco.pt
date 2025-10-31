@@ -1,57 +1,55 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { motion, Variants, Easing } from 'framer-motion';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
+import { HeroParallax, HeroParallaxCard } from "@/components/reactbits";
+
+const accentSequence: HeroParallaxCard["accent"][] = ["wine", "mustard", "beige"];
 
 const HeroSection: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation("home");
   const { locale } = useParams<{ locale: string }>();
-  const currentLocale = locale || 'pt';
+  const currentLocale = locale || "pt";
 
-  const getLocalizedPath = (path: string) => `/${currentLocale}${path}`;
+  const features = t("features", { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+  }>;
 
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" as Easing } },
-  };
+  const steps = t("howItWorks.steps", { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+  }>;
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const parallaxCards = React.useMemo<HeroParallaxCard[]>(() => {
+    const combined = [...features, ...steps];
+    return combined.map((item, index) => ({
+      id: `${index}-${item.title}`,
+      title: item.title,
+      description: item.description,
+      accent: accentSequence[index % accentSequence.length],
+      depth: (index % 3 === 0 ? 300 : index % 3 === 1 ? 200 : 100) as HeroParallaxCard["depth"],
+    }));
+  }, [features, steps]);
 
   return (
-    <motion.section
-      initial="hidden"
-      animate="visible"
-      variants={sectionVariants}
-      className="w-full py-20 md:py-32 lg:py-48 bg-gradient-to-r from-boteco-wine to-boteco-mustard text-boteco-wine-foreground text-center"
-    >
-      <div className="container mx-auto px-4">
-        <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-          {t('hero.title')}
-        </motion.h1>
-        <motion.p variants={itemVariants} className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-          {t('hero.subtitle')}
-        </motion.p>
-        <motion.div variants={itemVariants} className="flex justify-center space-x-4">
-          <Link to={getLocalizedPath('/contato')}>
-            <Button size="lg" className="bg-boteco-beige text-boteco-brown hover:bg-boteco-beige/80 hover:text-boteco-brown transition-colors duration-300 active:scale-98">
-              {t('hero.cta')} <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-          <a href="https://app.boteco.pt" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="bg-boteco-wine text-boteco-wine-foreground hover:bg-boteco-wine/90 transition-colors duration-300 active:scale-98 border border-boteco-beige">
-              {t('hero.demoButton')}
-            </Button>
-          </a>
-        </motion.div>
-      </div>
-    </motion.section>
+    <HeroParallax
+      title={t("hero.title")}
+      subtitle={t("hero.subtitle")}
+      primaryCta={{
+        label: t("hero.cta"),
+        href: `/${currentLocale}/contato`,
+      }}
+      secondaryCta={{
+        label: t("hero.demoButton"),
+        href: "https://app.boteco.pt",
+        external: true,
+      }}
+      cards={parallaxCards}
+      badge={t("hero.badge", { defaultValue: "Boteco Pro" })}
+    />
   );
 };
 

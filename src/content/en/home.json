@@ -1,9 +1,26 @@
 {
   "hero": {
+    "badge": "Boteco Pro",
     "title": "Boteco Pro: The Complete Solution for Bars and Restaurants",
     "subtitle": "Manage your business with practicality and efficiency.",
     "cta": "Try for Free",
     "demoButton": "View Demo"
+  },
+  "sections": {
+    "features": {
+      "title": "Features that simplify operations",
+      "subtitle": "Tools designed for hospitality teams that need speed without losing control."
+    },
+    "howItWorks": {
+      "subtitle": "See how Boteco Pro gets your floor running smoothly in minutes.",
+      "step": "Step {{step}}"
+    },
+    "testimonials": {
+      "subtitle": "Real stories from venues that transformed service with Boteco Pro."
+    },
+    "faq": {
+      "subtitle": "Clear answers about onboarding, support, and billing in one place."
+    }
   },
   "features": [
     {
@@ -39,6 +56,7 @@
   "plans": {
     "title": "Our Plans",
     "description": "Choose the ideal plan for your business.",
+    "cta": "Talk to sales",
     "options": [
       {
         "name": "Basic",
@@ -76,6 +94,7 @@
   },
   "finalCta": {
     "title": "Ready to transform your business?",
+    "subtitle": "Our team is ready to show how Boteco Pro adapts to your workflow.",
     "button": "Contact Us"
   }
 }

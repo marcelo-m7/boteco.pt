@@ -1,63 +1,53 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle } from 'lucide-react';
-import { motion, Variants, Easing } from 'framer-motion';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { BarChart3, LayoutGrid, ShoppingBasket } from "lucide-react";
 
-const FeaturesSection: React.FC = () => {
-  const { t } = useTranslation('home');
+import { BentoGrid } from "@/components/reactbits";
 
-  const features = t('features', { returnObjects: true }) as { title: string; description: string }[];
+const featureIcons = [
+  <LayoutGrid key="layout" className="h-8 w-8" aria-hidden />,
+  <ShoppingBasket key="inventory" className="h-8 w-8" aria-hidden />,
+  <BarChart3 key="reports" className="h-8 w-8" aria-hidden />,
+];
 
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" as Easing } },
-  };
+const FeatureSection: React.FC = () => {
+  const { t } = useTranslation("home");
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const features = t("features", { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+  }>;
+
+  const items = React.useMemo(
+    () =>
+      features.map((feature, index) => ({
+        id: `feature-${feature.title}-${index}`,
+        title: feature.title,
+        description: feature.description,
+        icon: featureIcons[index % featureIcons.length],
+        accent: (index % 3 === 0 ? "wine" : index % 3 === 1 ? "mustard" : "neutral") as const,
+        depth: (index % 2 === 0 ? 200 : 300) as const,
+      })),
+    [features],
+  );
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-      className="w-full py-16 bg-boteco-beige/30 dark:bg-boteco-brown-900"
-    >
-      <div className="container mx-auto px-4 text-center">
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown dark:text-boteco-beige-200"
-        >
-          {t('featuresTitle', { defaultValue: 'Nossas Funcionalidades' })}
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-6 text-left depth-200 hover:depth-300 hover:-translate-y-1 focus-visible:-translate-y-1 active:-translate-y-0.5 transition-transform duration-300">
-                <CardHeader>
-                  <CardTitle className="text-boteco-wine flex items-center dark:text-boteco-mustard-300">
-                    <CheckCircle className="mr-3 h-6 w-6 text-boteco-mustard dark:text-boteco-mustard-300" />
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-boteco-brown/80 dark:text-boteco-beige-300/80">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+    <section className="w-full bg-boteco-beige-50 py-20 dark:bg-boteco-brown-900/80">
+      <div className="container mx-auto flex max-w-5xl flex-col gap-10 px-4 text-center">
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold tracking-tight text-boteco-brown-900 sm:text-4xl dark:text-boteco-beige-50">
+            {t("sections.features.title")}
+          </h2>
+          <p className="mx-auto max-w-3xl text-base text-boteco-brown-700 sm:text-lg dark:text-boteco-beige-200/80">
+            {t("sections.features.subtitle")}
+          </p>
         </div>
+        <BentoGrid items={items} columns={{ base: 1, md: 2, lg: 3 }} />
       </div>
-    </motion.section>
+    </section>
   );
 };
 
-export default FeaturesSection;
+export default FeatureSection;

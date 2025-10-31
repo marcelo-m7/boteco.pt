@@ -1,9 +1,26 @@
 {
   "hero": {
+    "badge": "Boteco Pro",
     "title": "Boteco Pro: A Solução Completa para Bares e Restaurantes",
     "subtitle": "Gerencie seu negócio com praticidade e eficiência.",
     "cta": "Experimente Grátis",
     "demoButton": "Ver Demonstração"
+  },
+  "sections": {
+    "features": {
+      "title": "Funcionalidades que simplificam a operação",
+      "subtitle": "Recursos pensados para bares e restaurantes que precisam de agilidade com controle total."
+    },
+    "howItWorks": {
+      "subtitle": "Veja como é fácil ativar o Boteco Pro e começar a servir melhor em minutos.",
+      "step": "Etapa {{step}}"
+    },
+    "testimonials": {
+      "subtitle": "Histórias reais de quem transformou a gestão do salão com o Boteco Pro."
+    },
+    "faq": {
+      "subtitle": "As principais dúvidas sobre implantação, suporte e cobrança respondidas em um só lugar."
+    }
   },
   "features": [
     {
@@ -39,6 +56,7 @@
   "plans": {
     "title": "Nossos Planos",
     "description": "Escolha o plano ideal para o seu negócio.",
+    "cta": "Falar com vendas",
     "options": [
       {
         "name": "Básico",
@@ -76,6 +94,7 @@
   },
   "finalCta": {
     "title": "Pronto para transformar seu negócio?",
+    "subtitle": "Nossa equipe está pronta para mostrar como o Boteco Pro se adapta ao seu fluxo de trabalho.",
     "button": "Fale Conosco"
   }
 }

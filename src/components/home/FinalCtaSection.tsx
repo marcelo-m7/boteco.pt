@@ -1,50 +1,27 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Lightbulb } from 'lucide-react';
-import { motion, Variants, Easing } from 'framer-motion';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
+import { SpotlightCard } from "@/components/reactbits";
 
 const FinalCtaSection: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation("home");
   const { locale } = useParams<{ locale: string }>();
-  const currentLocale = locale || 'pt';
-
-  const getLocalizedPath = (path: string) => `/${currentLocale}${path}`;
-
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" as Easing } },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" as Easing } },
-  };
+  const currentLocale = locale || "pt";
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-      className="w-full py-20 bg-boteco-wine text-boteco-wine-foreground text-center dark:bg-boteco-wine-800"
-    >
-      <div className="container mx-auto px-4">
-        <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-6">
-          {t('finalCta.title')}
-        </motion.h2>
-        <motion.div variants={itemVariants}>
-          <Link to={getLocalizedPath('/contato')}>
-            <Button size="lg" className="bg-boteco-mustard text-boteco-mustard-foreground hover:bg-boteco-mustard/90 transition-colors duration-300 active:scale-98 dark:bg-boteco-mustard-400 dark:text-boteco-brown-900 dark:hover:bg-boteco-mustard-300">
-              {t('finalCta.button')} <Lightbulb className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </motion.div>
+    <section className="w-full bg-gradient-to-b from-boteco-beige-200 via-boteco-beige-100 to-boteco-beige-50 py-24 dark:from-boteco-brown-800 dark:via-boteco-brown-900 dark:to-boteco-brown-900/90">
+      <div className="container mx-auto max-w-4xl px-4">
+        <SpotlightCard
+          title={t("finalCta.title")}
+          description={t("finalCta.subtitle")}
+          accent="wine"
+          cta={{ label: t("finalCta.button"), href: `/${currentLocale}/contato` }}
+        />
       </div>
-    </motion.section>
+    </section>
   );
 };
 
