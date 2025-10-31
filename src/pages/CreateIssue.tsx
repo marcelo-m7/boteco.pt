@@ -25,6 +25,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { FileText, AlertCircle } from 'lucide-react';
 import Seo from '@/components/Seo';
 
+const ISSUE_CATEGORIES = ['bug', 'feature', 'improvement', 'question'] as const;
+const ISSUE_PRIORITIES = ['low', 'medium', 'high', 'critical'] as const;
+
 const issueFormSchema = z.object({
   title: z.string().min(5, {
     message: 'Title must be at least 5 characters.',
@@ -32,10 +35,10 @@ const issueFormSchema = z.object({
   description: z.string().min(10, {
     message: 'Description must be at least 10 characters.',
   }),
-  category: z.enum(['bug', 'feature', 'improvement', 'question'], {
+  category: z.enum(ISSUE_CATEGORIES, {
     required_error: 'Please select a category.',
   }),
-  priority: z.enum(['low', 'medium', 'high', 'critical'], {
+  priority: z.enum(ISSUE_PRIORITIES, {
     required_error: 'Please select a priority.',
   }),
 });
@@ -55,8 +58,6 @@ const CreateIssue: React.FC = () => {
     defaultValues: {
       title: '',
       description: '',
-      category: undefined,
-      priority: undefined,
     },
   });
 
@@ -292,7 +293,7 @@ const CreateIssue: React.FC = () => {
                   </label>
                   <Textarea
                     id="additional-info"
-                    placeholder="Add any additional information, steps to reproduce, screenshots info, etc..."
+                    placeholder="Add any additional information, steps to reproduce, screenshot information, etc..."
                     className="min-h-[120px]"
                     value={additionalInfo}
                     onChange={(e) => setAdditionalInfo(e.target.value)}
