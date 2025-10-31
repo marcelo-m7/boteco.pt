@@ -66,20 +66,20 @@ export default {
         // Novas cores personalizadas Boteco Pro
         boteco: {
           wine: {
-            DEFAULT: "#8B1E3F", // Deep Red/Wine
-            foreground: "hsl(0 0% 100%)", // White text
+            DEFAULT: "hsl(var(--boteco-wine))",
+            foreground: "hsl(var(--boteco-wine-foreground))",
           },
           mustard: {
-            DEFAULT: "#B3701A", // Mustard Yellow/Orange
-            foreground: "hsl(0 0% 100%)", // White text
+            DEFAULT: "hsl(var(--boteco-mustard))",
+            foreground: "hsl(var(--boteco-mustard-foreground))",
           },
           beige: {
-            DEFAULT: "#F1DDAD", // Light Beige
-            foreground: "hsl(222.2 47.4% 11.2%)", // Dark text
+            DEFAULT: "hsl(var(--boteco-beige))",
+            foreground: "hsl(var(--boteco-beige-foreground))",
           },
           brown: {
-            DEFAULT: "#4F3222", // Dark Brown
-            foreground: "hsl(0 0% 100%)", // White text
+            DEFAULT: "hsl(var(--boteco-brown))",
+            foreground: "hsl(var(--boteco-brown-foreground))",
           },
         },
       },

@@ -4,89 +4,117 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --boteco-wine: 341.8 64.5% 33.1%;
+    --boteco-wine-foreground: 42.4 70% 96%;
+    --boteco-mustard: 33.7 74.6% 40.2%;
+    --boteco-mustard-foreground: 42.4 70% 96%;
+    --boteco-beige: 42.4 70.8% 81.2%;
+    --boteco-beige-foreground: 21.3 39.8% 22.2%;
+    --boteco-brown: 21.3 39.8% 22.2%;
+    --boteco-brown-foreground: 42.4 70% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --background: 42.4 70.8% 96%;
+    --foreground: 21.3 39.8% 22.2%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --card: 42.4 70.8% 93%;
+    --card-foreground: 21.3 39.8% 22.2%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --popover: 42.4 70.8% 98%;
+    --popover-foreground: 21.3 39.8% 22.2%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primary: var(--boteco-wine);
+    --primary-foreground: var(--boteco-wine-foreground);
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --secondary: 33.7 62% 88%;
+    --secondary-foreground: 21.3 39.8% 22.2%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 42.4 40% 88%;
+    --muted-foreground: 21.3 25% 38%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: var(--boteco-mustard);
+    --accent-foreground: var(--boteco-mustard-foreground);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 341.8 64.5% 28%;
+    --destructive-foreground: var(--boteco-wine-foreground);
+
+    --border: 42.4 45% 82%;
+    --input: 42.4 45% 82%;
+    --ring: var(--boteco-wine);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 42.4 70.8% 96%;
+    --sidebar-foreground: 21.3 39.8% 22.2%;
+    --sidebar-primary: var(--boteco-wine);
+    --sidebar-primary-foreground: var(--boteco-wine-foreground);
+    --sidebar-accent: 33.7 62% 88%;
+    --sidebar-accent-foreground: 21.3 39.8% 22.2%;
+    --sidebar-border: 42.4 45% 82%;
+    --sidebar-ring: var(--boteco-wine);
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --surface-gradient: linear-gradient(
+      145deg,
+      hsl(var(--boteco-beige) / 0.85) 0%,
+      hsl(var(--boteco-mustard) / 0.35) 100%
+    );
+    --surface-gradient-strong: linear-gradient(
+      145deg,
+      hsl(var(--boteco-beige) / 0.9) 0%,
+      hsl(var(--boteco-wine) / 0.35) 100%
+    );
+    --shadow-soft: 0 18px 36px -20px hsl(var(--boteco-brown) / 0.28);
+    --shadow-strong: 0 28px 64px -28px hsl(var(--boteco-brown) / 0.38);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 21.3 39.8% 12%;
+    --foreground: 42.4 70.8% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 21.3 39.8% 16%;
+    --card-foreground: 42.4 70.8% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 21.3 39.8% 12%;
+    --popover-foreground: 42.4 70.8% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: var(--boteco-mustard);
+    --primary-foreground: var(--boteco-mustard-foreground);
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 341.8 64.5% 28%;
+    --secondary-foreground: var(--boteco-wine-foreground);
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 21.3 27% 26%;
+    --muted-foreground: 42.4 45% 80%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: var(--boteco-wine);
+    --accent-foreground: var(--boteco-wine-foreground);
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 42%;
+    --destructive-foreground: var(--boteco-wine-foreground);
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 21.3 27% 26%;
+    --input: 21.3 27% 26%;
+    --ring: var(--boteco-mustard);
+    --sidebar-background: 21.3 39.8% 12%;
+    --sidebar-foreground: 42.4 70.8% 92%;
+    --sidebar-primary: var(--boteco-mustard);
+    --sidebar-primary-foreground: var(--boteco-mustard-foreground);
+    --sidebar-accent: 341.8 64.5% 24%;
+    --sidebar-accent-foreground: var(--boteco-wine-foreground);
+    --sidebar-border: 21.3 27% 26%;
+    --sidebar-ring: var(--boteco-mustard);
+
+    --surface-gradient: linear-gradient(
+      160deg,
+      hsl(var(--boteco-brown) / 0.75) 0%,
+      hsl(var(--boteco-wine) / 0.6) 100%
+    );
+    --surface-gradient-strong: linear-gradient(
+      160deg,
+      hsl(var(--boteco-brown) / 0.6) 0%,
+      hsl(var(--boteco-mustard) / 0.55) 100%
+    );
+    --shadow-soft: 0 22px 46px -26px hsl(var(--boteco-wine) / 0.4);
+    --shadow-strong: 0 32px 72px -30px hsl(var(--boteco-wine) / 0.5);
   }
 }
 
@@ -97,5 +125,23 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-surface-gradient {
+    background-image: var(--surface-gradient);
+  }
+
+  .bg-surface-gradient-strong {
+    background-image: var(--surface-gradient-strong);
+  }
+
+  .shadow-surface {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-surface-strong {
+    box-shadow: var(--shadow-strong);
   }
 }

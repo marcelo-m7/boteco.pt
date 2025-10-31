@@ -51,7 +51,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
           {testimonials.map((testimonial, index) => (
             <div className="flex-none w-full pl-4" key={index}> {/* Add padding to items */}
               <motion.div variants={itemVariants} custom={index}>
-                <Card className="p-6 shadow-lg bg-boteco-beige/30 border border-boteco-beige h-full flex flex-col justify-between">
+                <Card className="p-6 shadow-surface hover:shadow-surface-strong transition-shadow bg-surface-gradient border border-boteco-beige/60 h-full flex flex-col justify-between">
                   <CardContent className="text-lg italic text-boteco-brown/80 mb-4">
                     "{testimonial.text}"
                   </CardContent>

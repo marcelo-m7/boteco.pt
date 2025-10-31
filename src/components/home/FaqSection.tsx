@@ -26,7 +26,7 @@ const FaqSection: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
-      className="w-full py-16 bg-boteco-beige/30"
+      className="w-full py-16 bg-surface-gradient bg-cover bg-center"
     >
       <div className="container mx-auto px-4 text-center">
         <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-12 text-boteco-brown">

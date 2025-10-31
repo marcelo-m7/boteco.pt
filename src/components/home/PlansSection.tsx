@@ -28,7 +28,7 @@ const PlansSection: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
-      className="w-full py-16 bg-boteco-beige/30"
+      className="w-full py-16 bg-surface-gradient bg-cover bg-center"
     >
       <div className="container mx-auto px-4 text-center">
         <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold mb-4 text-boteco-brown">
@@ -40,7 +40,7 @@ const PlansSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div key={index} variants={itemVariants} custom={index}>
-              <Card className="p-8 text-left shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-boteco-beige">
+              <Card className="p-8 text-left shadow-surface hover:shadow-surface-strong transition-all duration-300 hover:-translate-y-1 border border-boteco-beige/60 bg-surface-gradient">
                 <CardHeader>
                   <CardTitle className="text-3xl font-bold text-boteco-wine mb-2">{plan.name}</CardTitle>
                   <CardDescription className="text-2xl font-semibold text-boteco-brown/90">{plan.price}</CardDescription>
