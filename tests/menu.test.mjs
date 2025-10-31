@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { describe, it } from 'node:test';
+import { after, describe, it } from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Route, Routes } from 'react-router-dom';
@@ -86,6 +86,8 @@ const useTranslationStub = () => {
 };
 
 const reactI18nextPath = require.resolve('react-i18next');
+const originalCacheEntry = require.cache[reactI18nextPath];
+
 require.cache[reactI18nextPath] = {
   id: reactI18nextPath,
   filename: reactI18nextPath,
@@ -94,6 +96,14 @@ require.cache[reactI18nextPath] = {
 };
 
 const Menu = loadTsModule('src/pages/Menu.tsx').default;
+
+after(() => {
+  if (originalCacheEntry) {
+    require.cache[reactI18nextPath] = originalCacheEntry;
+  } else {
+    delete require.cache[reactI18nextPath];
+  }
+});
 
 const renderMenu = async (locale) => {
   currentLocale = locale;
