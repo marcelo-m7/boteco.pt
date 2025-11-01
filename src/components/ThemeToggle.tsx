@@ -24,6 +24,8 @@ export function ThemeToggle() {
     setIsMounted(true);
   }, []);
 
+  // It's safe to compute menuValue before mounting because it is only used when isMounted is true (see line 48).
+  // The fallback chain ensures a valid value is always present.
   const menuValue = theme ?? resolvedTheme ?? "system";
   const systemLabel = resolvedTheme
     ? `${t('systemTheme', { defaultValue: 'Sistema' })} (${resolvedTheme === 'dark'
