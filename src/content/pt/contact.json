@@ -12,6 +12,22 @@
     "messagePlaceholder": "Sua mensagem...",
     "submitButton": "Enviar Mensagem",
     "successMessage": "Obrigado! Sua mensagem foi enviada com sucesso.",
-    "errorMessage": "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente."
+    "successDescription": "Sua mensagem foi recebida e entraremos em contato em breve.",
+    "errorMessage": "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.",
+    "errorDescription": "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.",
+    "submitting": "Enviando...",
+    "validation": {
+      "name": {
+        "min": "O nome deve ter pelo menos 2 caracteres.",
+        "max": "O nome não pode ter mais de 50 caracteres."
+      },
+      "email": {
+        "invalid": "Por favor, insira um endereço de e-mail válido."
+      },
+      "message": {
+        "min": "A mensagem deve ter pelo menos 10 caracteres.",
+        "max": "A mensagem não pode ter mais de 500 caracteres."
+      }
+    }
   }
 }
