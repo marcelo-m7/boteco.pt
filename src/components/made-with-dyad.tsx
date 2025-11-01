@@ -15,7 +15,7 @@ export const MadeWithDyad = () => {
   return (
     <div className="p-4 text-center">
       <a
-        href="https://monynha.com/about"
+        href="https://monynha.com"
         target="_blank"
         rel="noopener noreferrer"
         className={linkClassName}
@@ -26,3 +26,4 @@ export const MadeWithDyad = () => {
     </div>
   );
 };
+
