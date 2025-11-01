@@ -74,4 +74,4 @@ All pull requests and pushes trigger automated checks:
 
 ## Documentation
 
-See [AI_RULES.md](./AI_RULES.md) for detailed coding conventions and architecture patterns.
+See [AGENTS.md](./AGENTS.md) for detailed coding conventions and architecture patterns.

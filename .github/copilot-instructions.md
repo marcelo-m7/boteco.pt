@@ -2,86 +2,93 @@
 
 ## Architecture Overview
 
-**Boteco Pro** is a multilingual (pt/en/es/fr) React SPA for restaurant management built with:
-- **Vite + React 18 + TypeScript** with SWC compilation
-- **React Router v6** with locale-aware routing pattern: `/:locale/path`
-- **i18next** for internationalization with JSON content files per locale
-- **shadcn/ui** (Radix + Tailwind) + **React Bits** registry for UI components
-- **next-themes** for persistent dark/light theme support
-- **Optional Clerk authentication** (feature-flagged via `VITE_CLERK_PUBLISHABLE_KEY`)
-- **TanStack Query** for data fetching with localStorage fallback layer
+**Boteco.pt** is a multilingual (pt/en/es/fr) React SPA for restaurant management built with:
+- **Vite + React 18 + TypeScript** with SWC compilation (port 8080)
+- **React Router v6** with locale-aware routing: `/:locale/path` wraps all public pages
+- **i18next** for internationalization - namespace = filename in `src/content/{locale}/`
+- **shadcn/ui** (Radix + Tailwind) + **React Bits** for pre-built marketing components
+- **next-themes** for dark/light mode with custom Boteco brand HSL colors
+- **Optional Clerk auth** (feature-flagged via `VITE_CLERK_PUBLISHABLE_KEY` env var)
+- **TanStack Query** with localStorage fallback for data persistence
+- **Node.js native test runner** (not Jest) + Playwright visual regression tests
 
 ## Critical Patterns
 
-### 1. Routing Architecture (src/App.tsx)
-Routes MUST follow the locale-aware pattern. All new routes go under `/:locale`:
+### 1. Routing Architecture (`src/App.tsx`)
+**Rule**: All new pages MUST go under `/:locale` wrapper except `/painel` (auth-protected).
 
 ```tsx
 <Route path="/:locale" element={<LocaleWrapper />}>
-  <Route path="nova-funcionalidade" element={<NovaFuncionalidade />} />
+  <Route path="nova-pagina" element={<NovaPagina />} />
 </Route>
 ```
 
-**Never** add routes outside this structure except for protected routes like `/painel`. Root `/` redirects to `/pt`.
+**LocaleWrapper** (`src/components/LocaleWrapper.tsx`) syncs URL locale with i18n and wraps with `<Layout>`.  
+Root `/` auto-redirects to `/pt`. URLs like `/about` will 404 - must be `/pt/sobre`.
 
-### 2. Content Structure (src/content/)
-All user-facing text lives in JSON files organized by:
-- `src/content/{locale}/{page}.json` - Page-specific translations
-- `src/content/common/navigation.json` - Shared navigation with multi-locale labels
+### 2. i18n Content Structure (`src/content/` + `src/i18n.ts`)
+**Zero hardcoded strings.** All text lives in JSON organized by locale and page:
+- `src/content/{pt,en,es,fr}/{page}.json` - Page translations (namespace = filename)
+- `src/content/common/navigation.json` - Multi-locale nav labels with nested mega menu support
 
-**Pattern**: Create new pages? Add corresponding JSON files in all 4 locales (pt/en/es/fr).
+**Adding a new page checklist**:
+1. Create `src/content/pt/nova-pagina.json` (+ en/es/fr copies)
+2. Import in `src/i18n.ts` resources object: `import ptNovaPagina from './content/pt/nova-pagina.json'`
+3. Add namespace to `ns` array and `resources.pt['nova-pagina']` mapping
+4. In component: `const { t } = useTranslation('nova-pagina');` then `t('hero.title')`
 
-```typescript
-// In component:
-const { t } = useTranslation('page-name'); // Namespace matches filename
-const text = t('section.key');
-```
+**Navigation entries** in `navigation.json` support `type: 'link' | 'mega'` (dropdown with descriptions).
 
-### 3. Theme System (Boteco Custom Colors)
-Uses **dual theming strategy**:
-- Boteco brand colors: `boteco-primary`, `boteco-secondary`, `boteco-tertiary`, `boteco-neutral` (see `src/globals.css`)
-- shadcn semantic tokens: `background`, `foreground`, `primary`, `card`, etc.
-
-**Dark mode** toggles HSL values in `:root` vs `.dark` classes. All colors use CSS variables. Never hardcode hex/rgb values.
+### 3. Theme System (Boteco Custom Brand Colors)
+Uses **dual theming** with CSS variables in `src/globals.css`:
+- **Boteco brand colors**: `boteco-primary`, `boteco-secondary`, `boteco-tertiary`, `boteco-neutral` (+ `-foreground` pairs)
+- **shadcn semantic tokens**: `background`, `foreground`, `primary`, `card`, etc. (mapped to Boteco colors)
+- **Dark mode**: `:root` vs `.dark` classes swap HSL values. All colors are CSS vars - **never hardcode hex/rgb**.
 
 ```tsx
-// ✅ Correct
+// ✅ Correct - uses theme variables
 <div className="bg-boteco-primary text-boteco-primary-foreground">
 
-// ❌ Wrong
-<div className="bg-[#9b1d5a]">
+// ❌ Wrong - hardcoded color breaks dark mode
+<div style={{ backgroundColor: '#9b1d5a' }}>
 ```
 
-### 4. Component Imports (shadcn/ui + React Bits)
-- **shadcn/ui**: Pre-installed in `src/components/ui/`. Do NOT reinstall. Import as `@/components/ui/button`
-- **React Bits**: Custom registry components in `src/components/reactbits/`. Use for marketing sections (Hero, FeatureGrid, Stepper, etc.)
+**ThemeProvider** uses `disableTransitionOnChange={true}` to prevent flash - don't override.
 
+### 4. Component Architecture & Imports
+**Pre-installed - DO NOT reinstall**:
+- **shadcn/ui**: `src/components/ui/` - Import as `@/components/ui/button`. Never edit these files.
+- **React Bits**: `src/components/reactbits/` - Marketing sections (Hero, FeatureGrid, Stepper, etc.)
+
+**Marketing page pattern** (`src/pages/MenuDigital.tsx` example):
 ```tsx
-// Marketing pages pattern (see src/pages/MenuDigital.tsx)
-import Hero from '@/components/reactbits/Hero';
-import FeatureGrid from '@/components/reactbits/FeatureGrid';
+import MarketingPageTemplate from '@/components/templates/MarketingPageTemplate';
+
+const MenuDigital = () => <MarketingPageTemplate translationNamespace="menu-digital" />;
 ```
 
-### 5. Layout & Navigation
-- `src/components/Layout.tsx`: Wraps all pages with Header + Footer
-- `src/components/Header.tsx`: Dynamically renders nav from `src/content/common/navigation.json`
-- Navigation supports `type: 'link' | 'mega'` for dropdown menus
-- `resolveHref()` handles locale-aware URL building
+**MarketingPageTemplate** auto-renders Hero → Benefits → Workflow → Highlights → CTA from i18n JSON structure.
 
-### 6. Optional Features via Environment
-**Clerk Auth**: Conditionally rendered based on `hasClerkAuth` from `src/utils/clerk.ts`:
-```tsx
-import { hasClerkAuth } from '@/utils/clerk';
-
-{hasClerkAuth && <SignedIn><UserButton /></SignedIn>}
-```
-
-### 7. Data Persistence Strategy (src/lib/storage/)
-Hybrid approach for development:
+### 5. Data Persistence Strategy (`src/lib/storage/`)
+Hybrid approach for dev/prod environments:
 - **Dev mode**: Writes to localStorage (immediate persistence)
 - **Production**: Reads from `/public/data/*.json` (static hosting)
 
-See `src/lib/storage/contactRequests.ts` for the dual-storage pattern with localStorage caching.
+**Example** (`src/lib/storage/contactRequests.ts`):
+```typescript
+// Tries remote fetch, falls back to localStorage cache
+export const getContactRequests = async (): Promise<ContactRequest[]> => {
+  try {
+    const remote = await fetchRemoteRequests();
+    writeToLocalStorage(remote);
+    return remote;
+  } catch (error) {
+    return readFromLocalStorage();
+  }
+};
+```
+
+**Pattern**: Functions named `get*`, `create*`, `calculate*Metrics` with full TypeScript interfaces.
 
 ## Development Workflows
 
