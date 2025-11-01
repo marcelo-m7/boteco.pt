@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
         <p className="text-center md:text-right mb-2 md:mb-0">
           &copy; {new Date().getFullYear()} BotecoPro &middot; {t('common:footer.developedWith', 'Desenvolvido com tecnologia')}{' '}
           <a
-            href="https://monynha.com/about"
+            href="https://monynha.com"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-boteco-secondary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-boteco-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-boteco-primary"
