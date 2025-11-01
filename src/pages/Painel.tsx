@@ -14,6 +14,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
+import { hasClerkAuth } from '@/utils/clerk';
 
 const cardIcons: Record<string, React.ReactNode> = {
   totalLeads: <Users className="h-8 w-8 text-boteco-secondary" />,
@@ -22,9 +23,8 @@ const cardIcons: Record<string, React.ReactNode> = {
   responseRate24h: <Timer className="h-8 w-8 text-boteco-secondary" />,
 };
 
-const Painel: React.FC = () => {
+const PainelContent: React.FC<{ user: any }> = ({ user }) => {
   const { t, i18n } = useTranslation('painel');
-  const { user } = useUser();
 
   const query = useQuery({
     queryKey: CONTACT_REQUESTS_QUERY_KEY,
@@ -301,5 +301,19 @@ const Painel: React.FC = () => {
     </>
   );
 };
+
+// Wrapper component that uses Clerk authentication
+const PainelWithAuth: React.FC = () => {
+  const { user } = useUser();
+  return <PainelContent user={user} />;
+};
+
+// Wrapper component without Clerk authentication
+const PainelWithoutAuth: React.FC = () => {
+  return <PainelContent user={null} />;
+};
+
+// Export the appropriate component based on whether Clerk auth is available
+const Painel = hasClerkAuth ? PainelWithAuth : PainelWithoutAuth;
 
 export default Painel;
