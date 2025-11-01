@@ -15,7 +15,8 @@ import { Button } from '@/components/ui/button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
-import { BubbleMenu } from '@reactbits/navigation';
+import { BubbleMenu, cx } from '@reactbits/navigation';
+import { useActiveNavId } from '@/hooks/use-active-nav-id';
 
 interface MobileNavProps {
   onOpenChange: (open: boolean) => void;
@@ -79,22 +80,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
     [getLocalizedPath, t],
   );
 
-  const activeNavId = React.useMemo(() => {
-    const currentPath = location.pathname;
-
-    const found = navItems.find((item) => {
-      const target =
-        typeof item.componentProps?.to === 'string'
-          ? item.componentProps.to
-          : typeof item.componentProps?.to === 'object' && 'pathname' in item.componentProps.to
-            ? (item.componentProps.to as { pathname: string }).pathname
-            : item.componentProps?.href ?? item.href;
-
-      return target === currentPath;
-    });
-
-    return found?.id;
-  }, [location.pathname, navItems]);
+  const activeNavId = useActiveNavId(navItems, location.pathname);
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -116,7 +102,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen }) => {
             ...item,
             componentProps: {
               ...item.componentProps,
-              className: [item.componentProps?.className, 'w-full justify-start'].filter(Boolean).join(' '),
+              className: cx(item.componentProps?.className, 'w-full justify-start'),
             },
           }))}
           activeId={activeNavId}
