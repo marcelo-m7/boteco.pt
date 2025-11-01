@@ -68,7 +68,10 @@ tests/                # Test files (*.test.mjs)
 - Tests use Node.js native test runner (`node:test`)
 - Test files are located in `tests/` directory
 - Use `.test.mjs` extension for test files
-- Run tests with: `npm test` (use pattern: `node --test tests/*.test.mjs`)
+- Run tests with: `npm test`
+  - Package.json defines: `node --test tests/**/*.test.mjs`
+  - If the glob pattern doesn't expand properly, use: `node --test tests/*.test.mjs`
+  - Currently all tests are in the root of the `tests/` directory
 
 ### Code Quality
 
