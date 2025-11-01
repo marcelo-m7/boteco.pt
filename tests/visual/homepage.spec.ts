@@ -30,9 +30,11 @@ test.describe('Home Page Visual Regression', () => {
         sections[1].scrollIntoView({ behavior: 'instant', block: 'center' });
       }
     });
-    await page.waitForTimeout(500); // Wait for scroll animation
-
+    
+    // Wait for scroll position to stabilize
     const featuresSection = page.locator('section').nth(1);
+    await featuresSection.waitFor({ state: 'visible' });
+
     await expect(featuresSection).toHaveScreenshot('features-grid.png');
   });
 
@@ -44,9 +46,11 @@ test.describe('Home Page Visual Regression', () => {
         sections[2].scrollIntoView({ behavior: 'instant', block: 'center' });
       }
     });
-    await page.waitForTimeout(500);
 
+    // Wait for scroll position to stabilize
     const solutionsSection = page.locator('section').nth(2);
+    await solutionsSection.waitFor({ state: 'visible' });
+
     await expect(solutionsSection).toHaveScreenshot('solutions-grid.png');
   });
 });
@@ -72,7 +76,9 @@ test.describe('Grid Alignment at Multiple Breakpoints', () => {
           sections[1].scrollIntoView({ behavior: 'instant', block: 'center' });
         }
       });
-      await page.waitForTimeout(300);
+      
+      // Wait for the section to be visible and stable
+      await page.locator('section').nth(1).waitFor({ state: 'visible' });
 
       await expect(page).toHaveScreenshot(`home-${bp.name}.png`, {
         fullPage: true,
@@ -103,9 +109,11 @@ test.describe('About Page Grid Consistency', () => {
         grids[0].scrollIntoView({ behavior: 'instant', block: 'center' });
       }
     });
-    await page.waitForTimeout(300);
 
+    // Wait for the grid to be visible and stable
     const valuesGrid = page.locator('.grid').first();
+    await valuesGrid.waitFor({ state: 'visible' });
+
     await expect(valuesGrid).toHaveScreenshot('about-values-grid.png');
   });
 });

@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 // Constants for accessibility testing
 const MAX_TAB_COUNT = 50; // Maximum tabs to prevent infinite loops
-const MIN_TOUCH_TARGET_SIZE_WCAG = 44; // WCAG 2.5.5 minimum (44x44px)
-const MIN_TOUCH_TARGET_SIZE_PRACTICAL = 40; // Practical minimum for most elements
 
 /**
  * Accessibility Tests

@@ -28,21 +28,61 @@ test.describe('Sidebar Toggle Animation', () => {
       return;
     }
 
+    const sidebar = page.locator('[data-sidebar="sidebar"]');
+
     // Capture before toggle
     await expect(page).toHaveScreenshot('sidebar-before-toggle.png');
 
     // Toggle sidebar
     await trigger.click();
     
-    // Wait for animation to complete (200ms transition + buffer)
-    await page.waitForTimeout(300);
+    // Wait for transition to complete by checking when the element becomes stable
+    await page.evaluate(() => 
+      new Promise<void>((resolve) => {
+        const sidebarEl = document.querySelector('[data-sidebar="sidebar"]');
+        if (!sidebarEl) {
+          resolve();
+          return;
+        }
+        const handler = () => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        };
+        sidebarEl.addEventListener('transitionend', handler);
+        // Fallback timeout in case transitionend doesn't fire
+        setTimeout(() => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        }, 500);
+      })
+    );
 
     // Capture after toggle
     await expect(page).toHaveScreenshot('sidebar-after-toggle.png');
 
     // Toggle back
     await trigger.click();
-    await page.waitForTimeout(300);
+    
+    // Wait for transition to complete
+    await page.evaluate(() => 
+      new Promise<void>((resolve) => {
+        const sidebarEl = document.querySelector('[data-sidebar="sidebar"]');
+        if (!sidebarEl) {
+          resolve();
+          return;
+        }
+        const handler = () => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        };
+        sidebarEl.addEventListener('transitionend', handler);
+        // Fallback timeout
+        setTimeout(() => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        }, 500);
+      })
+    );
 
     // Should match the original state
     await expect(page).toHaveScreenshot('sidebar-toggled-back.png');
@@ -59,11 +99,35 @@ test.describe('Sidebar Toggle Animation', () => {
     // Perform rapid toggles
     for (let i = 0; i < 5; i++) {
       await trigger.click();
+      // Wait briefly between clicks to ensure click is registered
       await page.waitForTimeout(50);
     }
 
-    // Wait for animations to settle
-    await page.waitForTimeout(500);
+    // Wait for all animations to settle by checking when sidebar transitions complete
+    await page.evaluate(() => 
+      new Promise<void>((resolve) => {
+        const sidebarEl = document.querySelector('[data-sidebar="sidebar"]');
+        if (!sidebarEl) {
+          resolve();
+          return;
+        }
+        let timeoutId: number;
+        const handler = () => {
+          // Clear existing timeout and set a new one to ensure all transitions are done
+          clearTimeout(timeoutId);
+          timeoutId = window.setTimeout(() => {
+            sidebarEl.removeEventListener('transitionend', handler);
+            resolve();
+          }, 100);
+        };
+        sidebarEl.addEventListener('transitionend', handler);
+        // Initial timeout to start the check
+        timeoutId = window.setTimeout(() => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        }, 1000);
+      })
+    );
 
     // Check final state is stable
     await expect(page).toHaveScreenshot('sidebar-after-rapid-toggles.png');
@@ -110,7 +174,27 @@ test.describe('Sidebar Performance', () => {
 
     // Trigger sidebar toggle
     await trigger.click();
-    await page.waitForTimeout(300);
+    
+    // Wait for transition to complete before checking layout shifts
+    await page.evaluate(() => 
+      new Promise<void>((resolve) => {
+        const sidebarEl = document.querySelector('[data-sidebar="sidebar"]');
+        if (!sidebarEl) {
+          resolve();
+          return;
+        }
+        const handler = () => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        };
+        sidebarEl.addEventListener('transitionend', handler);
+        // Fallback timeout
+        setTimeout(() => {
+          sidebarEl.removeEventListener('transitionend', handler);
+          resolve();
+        }, 500);
+      })
+    );
 
     // Layout shift score should be 0 or very close to 0
     // Good: < 0.1, Needs improvement: 0.1-0.25, Poor: > 0.25
