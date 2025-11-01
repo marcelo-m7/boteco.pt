@@ -8,8 +8,8 @@
         "http://localhost:8080/pt/contacto"
       ],
       "numberOfRuns": 3,
-      "startServerCommand": "pnpm run dev",
-      "startServerReadyPattern": "Local:.+http://localhost:8080",
+      "startServerCommand": "pnpm run preview --port 8080 --host",
+      "startServerReadyPattern": "Local:.+http",
       "startServerReadyTimeout": 60000
     },
     "assert": {

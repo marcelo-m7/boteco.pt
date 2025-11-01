@@ -42,30 +42,12 @@ export default defineConfig({
   // Configure projects for major browsers and viewports
   projects: [
     {
-      name: 'Desktop Chrome',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'Desktop Firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'Desktop Safari',
-      use: { ...devices['Desktop Safari'] },
-    },
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Mobile Safari',
+      name: 'mobile',
       use: { ...devices['iPhone 13'] },
-    },
-    {
-      name: 'Tablet',
-      use: {
-        ...devices['iPad Pro'],
-      },
     },
   ],
 

@@ -47,10 +47,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
 
       - name: Run Playwright visual tests
         run: pnpm exec playwright test
+        env:
+          CI: true
         continue-on-error: true
 
       - name: Upload test results
