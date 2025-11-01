@@ -24,3 +24,11 @@ package-lock.json
 *.sln
 *.sw?
 *.env
+
+# Playwright
+playwright-report/
+test-results/
+playwright/.cache/
+
+# Lighthouse CI
+.lighthouseci/
