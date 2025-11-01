@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate as Redirect } from "react-router-dom"; // Renomear Navigate para Redirect
 import LocaleWrapper from "./components/LocaleWrapper";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home"; // Renamed from Index
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
@@ -30,6 +31,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* Redirect root to default locale (pt) */}
           <Route path="/" element={<Redirect to="/pt" />} />
