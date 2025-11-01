@@ -16,7 +16,7 @@ This is a React-based web application built with modern web technologies, servin
 - **Icons**: lucide-react
 - **Internationalization**: i18next with React bindings
 - **Testing**: Node.js native test runner
-- **Package Manager**: npm (though pnpm-lock.yaml exists)
+- **Package Manager**: npm (note: both package-lock.json and pnpm-lock.yaml are present)
 
 ## Project Structure
 
@@ -85,8 +85,9 @@ tests/                # Test files (*.test.mjs)
 
 ### Internationalization
 
-- The app supports multiple locales (pt, en)
+- The app supports multiple locales (pt, en, es, fr)
 - Content is stored in `src/content/{locale}/` directories
+- Common content shared across locales is in `src/content/common/`
 - Use i18next for translations
 
 ### Content Management
