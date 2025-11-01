@@ -43,13 +43,21 @@ const Home = () => {
         <HeroSection />
         <FeaturesSection />
         
-        {/* Below-the-fold content lazy loads as user scrolls */}
+        {/* Group 1: Core product information - loads first */}
         <Suspense fallback={<SectionSkeleton />}>
           <SolutionsSection />
           <HowItWorksSection />
           <PlansSection />
+        </Suspense>
+        
+        {/* Group 2: Social proof and engagement - loads second */}
+        <Suspense fallback={<SectionSkeleton />}>
           <PlatformCarouselSection />
           <TestimonialsSection />
+        </Suspense>
+        
+        {/* Group 3: FAQ and CTAs - loads last */}
+        <Suspense fallback={<SectionSkeleton />}>
           <FaqSection />
           <EcosystemCtaSection />
           <FinalCtaSection />

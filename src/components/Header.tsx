@@ -53,7 +53,8 @@ const Header: React.FC = () => {
     [currentLocale],
   );
 
-  const navItems = React.useMemo(() => (navigation.items as NavItem[]) ?? [], []);
+  // Navigation items are static from JSON import, no need for useMemo
+  const navItems = (navigation.items as NavItem[]) ?? [];
 
   return (
     <header className="bg-boteco-primary text-boteco-primary-foreground p-4 shadow-md transition-colors duration-300">
