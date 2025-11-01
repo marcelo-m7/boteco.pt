@@ -6,6 +6,11 @@ on:
   push:
     branches: [main, dev]
 
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write  # For commenting on PRs
+
 jobs:
   lighthouse:
     name: Run Lighthouse Audits
