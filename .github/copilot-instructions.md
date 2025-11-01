@@ -26,6 +26,8 @@
 **LocaleWrapper** (`src/components/LocaleWrapper.tsx`) syncs URL locale with i18n and wraps with `<Layout>`.  
 Root `/` auto-redirects to `/pt`. URLs like `/about` will 404 - must be `/pt/sobre`.
 
+**ScrollToTop** (`src/components/ScrollToTop.tsx`) automatically scrolls to top on route changes for better UX.
+
 ### 2. i18n Content Structure (`src/content/` + `src/i18n.ts`)
 **Zero hardcoded strings.** All text lives in JSON organized by locale and page:
 - `src/content/{pt,en,es,fr}/{page}.json` - Page translations (namespace = filename)
