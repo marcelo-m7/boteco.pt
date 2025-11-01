@@ -14,6 +14,12 @@ const HeroSection = () => {
       title={t('hero.title')}
       subtitle={t('hero.subtitle')}
       action={{ label: t('hero.cta'), href: getLocalizedPath('/contato') }}
+      secondaryAction={{
+        label: t('hero.demoCta'),
+        href: 'https://app.boteco.pt',
+        external: true,
+        'aria-label': t('hero.demoCtaAria'),
+      }}
       depth="overlay"
     />
   );
