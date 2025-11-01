@@ -41,6 +41,64 @@ const fallbackValidationMessages = {
 
 type FormValidationMessages = typeof fallbackValidationMessages;
 
+/**
+ * Validates translation structure and logs warnings for missing keys
+ */
+const validateTranslationMessages = (
+  messages: unknown,
+  path: string = 'form.validation'
+): Partial<FormValidationMessages> => {
+  if (!messages || typeof messages !== 'object') {
+    console.warn(`[Contact] Missing or invalid translation structure at "${path}"`);
+    return {};
+  }
+
+  const validated: Partial<FormValidationMessages> = {};
+  const msg = messages as Record<string, unknown>;
+
+  // Validate name messages
+  if (msg.name && typeof msg.name === 'object') {
+    const name = msg.name as Record<string, unknown>;
+    validated.name = {
+      min: typeof name.min === 'string' ? name.min : undefined,
+      max: typeof name.max === 'string' ? name.max : undefined,
+    } as FormValidationMessages['name'];
+    
+    if (!name.min) console.warn(`[Contact] Missing translation: ${path}.name.min`);
+    if (!name.max) console.warn(`[Contact] Missing translation: ${path}.name.max`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.name`);
+  }
+
+  // Validate email messages
+  if (msg.email && typeof msg.email === 'object') {
+    const email = msg.email as Record<string, unknown>;
+    validated.email = {
+      invalid: typeof email.invalid === 'string' ? email.invalid : undefined,
+    } as FormValidationMessages['email'];
+    
+    if (!email.invalid) console.warn(`[Contact] Missing translation: ${path}.email.invalid`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.email`);
+  }
+
+  // Validate message messages
+  if (msg.message && typeof msg.message === 'object') {
+    const message = msg.message as Record<string, unknown>;
+    validated.message = {
+      min: typeof message.min === 'string' ? message.min : undefined,
+      max: typeof message.max === 'string' ? message.max : undefined,
+    } as FormValidationMessages['message'];
+    
+    if (!message.min) console.warn(`[Contact] Missing translation: ${path}.message.min`);
+    if (!message.max) console.warn(`[Contact] Missing translation: ${path}.message.max`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.message`);
+  }
+
+  return validated;
+};
+
 const createFormSchema = (messages?: Partial<FormValidationMessages>) => {
   const finalMessages: FormValidationMessages = {
     name: {
@@ -97,9 +155,11 @@ const Contact: React.FC = () => {
 
   const validationMessages = React.useMemo(
     () =>
-      (t('form.validation', {
-        returnObjects: true,
-      }) as Partial<FormValidationMessages>) ?? {},
+      validateTranslationMessages(
+        t('form.validation', {
+          returnObjects: true,
+        })
+      ),
     [t],
   );
 
