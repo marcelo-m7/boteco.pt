@@ -1,5 +1,10 @@
 import { test, expect } from '@playwright/test';
 
+// Constants for accessibility testing
+const MAX_TAB_COUNT = 50; // Maximum tabs to prevent infinite loops
+const MIN_TOUCH_TARGET_SIZE_WCAG = 44; // WCAG 2.5.5 minimum (44x44px)
+const MIN_TOUCH_TARGET_SIZE_PRACTICAL = 40; // Practical minimum for most elements
+
 /**
  * Accessibility Tests
  * Validates WCAG compliance and accessibility features
@@ -12,7 +17,7 @@ test.describe('Accessibility - Keyboard Navigation', () => {
     // Tab through all interactive elements
     let tabCount = 0;
 
-    while (tabCount < 50) { // Limit to prevent infinite loop
+    while (tabCount < MAX_TAB_COUNT) { // Limit to prevent infinite loop
       await page.keyboard.press('Tab');
       tabCount++;
 
@@ -207,7 +212,8 @@ test.describe('Accessibility - Touch Targets', () => {
       }).filter(size => size.width > 0 && size.height > 0);
     });
 
-    // At least 80% of interactive elements should meet 40x40 minimum
+    // At least 80% of interactive elements should meet practical minimum (40x40)
+    // Note: WCAG 2.5.5 recommends 44x44, but 40x40 is acceptable for most elements
     const passing = buttons.filter(b => b.meets40x40).length;
     const total = buttons.length;
     const percentage = (passing / total) * 100;

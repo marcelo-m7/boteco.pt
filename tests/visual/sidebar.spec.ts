@@ -4,6 +4,13 @@ import { test, expect } from '@playwright/test';
  * Visual Regression Tests for Sidebar
  * Validates no layout shifts during toggle
  */
+
+// Type definition for Layout Shift Performance Entry
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 test.describe('Sidebar Toggle Animation', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to a page with sidebar (assuming /pt/painel or similar)
@@ -82,10 +89,13 @@ test.describe('Sidebar Performance', () => {
         let cumulativeShift = 0;
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              cumulativeShift += (entry as any).value;
+            if (entry.entryType === 'layout-shift') {
+              // Check for user input using the PerformanceEntry properties
+              const hasRecentInput = 'hadRecentInput' in entry ? (entry as Record<string, unknown>).hadRecentInput : false;
+              if (!hasRecentInput) {
+                const value = 'value' in entry ? (entry as Record<string, unknown>).value as number : 0;
+                cumulativeShift += value;
+              }
             }
           }
         });
