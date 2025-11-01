@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useUser } from '@clerk/clerk-react';
+import { useUser, type UserResource } from '@clerk/clerk-react';
 import { Users, Sparkles, BadgeCheck, Timer } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { useQuery } from '@tanstack/react-query';
@@ -23,7 +23,7 @@ const cardIcons: Record<string, React.ReactNode> = {
   responseRate24h: <Timer className="h-8 w-8 text-boteco-secondary" />,
 };
 
-const PainelContent: React.FC<{ user: any }> = ({ user }) => {
+const PainelContent: React.FC<{ user: UserResource | null }> = ({ user }) => {
   const { t, i18n } = useTranslation('painel');
 
   const query = useQuery({
