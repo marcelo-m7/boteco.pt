@@ -1,0 +1,261 @@
+# BotecoPro Visual Asset Redesign TODO
+
+## Overview
+This document tracks the progress of redesigning all visual assets (images, icons, placeholders, SVGs) to align with the BotecoPro brand identity.
+
+## Project Goals
+1. Consistent visual identity across all assets
+2. Proper color palette implementation (light/dark theme support)
+3. Optimized SVG files for web performance
+4. Accessibility compliance (contrast, readability)
+5. Responsive and scalable assets
+
+---
+
+## BotecoPro Color Palette
+
+### Light Theme Colors
+- **Primary (Deep Rose)**: `hsl(341.8, 64.5%, 33.1%)` → `#9b1d5a`
+- **Secondary (Burnt Orange)**: `hsl(33.7, 74.6%, 40.2%)` → `#b35f1a`
+- **Tertiary (Warm Cream)**: `hsl(42.4, 70.8%, 81.2%)` → `#f5e7c8`
+- **Neutral (Dark Brown)**: `hsl(21.3, 39.8%, 22.2%)` → `#4e3829`
+- **Neutral Soft**: `hsl(22.3, 40.2%, 34.1%)` → `#7a5842`
+
+### Dark Theme Colors
+- **Primary (Lighter Rose)**: `hsl(341.8, 64.5%, 56%)` → `#d9467e`
+- **Secondary (Lighter Orange)**: `hsl(33.7, 74.6%, 52%)` → `#e07d2d`
+- **Tertiary (Dark Warm Gray)**: `hsl(26, 28%, 18%)` → `#382f28`
+- **Neutral (Light Cream)**: `hsl(42.4, 70.8%, 92%)` → `#faf3e8`
+- **Neutral Soft**: `hsl(26, 28%, 26%)` → `#534437`
+
+### Support Colors
+- **Success/Accent**: Use Secondary (Orange tones)
+- **Destructive**: `hsl(4, 84%, 58%)` for errors
+- **Border**: `hsl(22, 28%, 74%)` (light) / `hsl(26, 26%, 28%)` (dark)
+
+---
+
+## Asset Inventory & Status
+
+### 1. Core Placeholder Assets
+
+#### `/public/placeholder.svg`
+- **Current**: Generic gray placeholder with image icon
+- **Status**: ⏳ Pending redesign
+- **Requirements**:
+  - Use BotecoPro primary and secondary colors
+  - Maintain 1200x1200 dimensions
+  - Add subtle pattern or texture
+  - Ensure readability in both themes
+  - Keep file size under 10KB
+
+---
+
+### 2. Blog Post Cover Images
+
+#### `/public/images/blog/service-tips.svg`
+- **Current**: Dark blue theme with generic icons
+- **Status**: ⏳ Pending redesign
+- **Content**: Service/customer experience illustration
+- **Requirements**:
+  - Dimensions: 640x360 (16:9 aspect ratio)
+  - Primary color: Deep Rose/Lighter Rose
+  - Secondary color: Burnt/Light Orange
+  - Include service-related iconography (e.g., waiter, table, customer)
+  - Modern, friendly illustration style
+  - File size under 15KB
+
+#### `/public/images/blog/inventory-management.svg`
+- **Current**: Dark theme with chart/analytics imagery
+- **Status**: ⏳ Pending redesign
+- **Content**: Inventory/stock management illustration
+- **Requirements**:
+  - Dimensions: 640x360 (16:9 aspect ratio)
+  - Use tertiary background with primary accents
+  - Include inventory icons (boxes, clipboard, chart)
+  - Clean, professional look
+  - File size under 15KB
+
+#### `/public/images/blog/product-updates.svg`
+- **Current**: Dark purple/pink theme with update imagery
+- **Status**: ⏳ Pending redesign
+- **Content**: Product updates/features illustration
+- **Requirements**:
+  - Dimensions: 640x360 (16:9 aspect ratio)
+  - Secondary color as primary element
+  - Include tech/update icons (checkmarks, arrows, screens)
+  - Modern, energetic feel
+  - File size under 15KB
+
+---
+
+### 3. Brand Identity Assets
+
+#### `/public/og-image.jpg`
+- **Current**: Exists but may need update
+- **Status**: ⏳ Pending review/redesign
+- **Requirements**:
+  - Dimensions: 1200x630 (Open Graph standard)
+  - BotecoPro logo/branding
+  - Primary colors prominently featured
+  - Text: "Boteco Pro - Gestão para Bares e Restaurantes"
+  - High quality JPEG (80-90% quality)
+  - File size under 500KB
+
+#### `/public/favicon.ico`
+- **Current**: Exists but needs BotecoPro branding
+- **Status**: ⏳ Pending redesign
+- **Requirements**:
+  - Multi-size ICO file (16x16, 32x32, 48x48)
+  - Simple, recognizable icon
+  - Works well at small sizes
+  - Uses BotecoPro primary color
+  - Consider adding corresponding favicon.svg for modern browsers
+
+---
+
+## Icon Library (Lucide React)
+
+### Currently Used Icons (No Changes Needed)
+The project uses **lucide-react** library for UI icons. These are already integrated and work well with the theme:
+
+- `Moon`, `Sun` - Theme toggle
+- `CheckCircle2` - Feature checkmarks
+- `Check` - Pricing table checks
+- `ArrowRight`, `MoveRight` - Navigation arrows
+- `CalendarDays` - Date indicators
+
+**Note**: No changes needed to icon library. Lucide icons adapt to theme colors automatically via CSS.
+
+---
+
+## Design Guidelines
+
+### Visual Style
+- **Illustration Style**: Modern, geometric, friendly
+- **Line Weight**: Consistent 2-3px strokes
+- **Corner Radius**: 16-24px for major elements, 8-12px for details
+- **Spacing**: Generous whitespace, clear visual hierarchy
+- **Shadows**: Subtle, following depth system
+
+### Color Application Rules
+1. **Backgrounds**: Use Tertiary colors for base
+2. **Primary Elements**: Use Primary color for key focal points (max 30% of composition)
+3. **Secondary Elements**: Use Secondary color for accents and highlights (20-30%)
+4. **Text/Details**: Use Neutral colors for readable elements
+5. **Gradients**: Subtle blends between Primary and Secondary when needed
+
+### Accessibility Requirements
+- **Contrast Ratio**: Minimum 4.5:1 for text, 3:1 for UI components
+- **Color Independence**: Don't rely solely on color to convey information
+- **Alt Text**: All images must have meaningful descriptions in components
+- **Reduced Motion**: Avoid complex animations in SVGs
+
+### SVG Optimization
+- Remove unnecessary metadata and comments
+- Minimize decimal precision (2-3 decimal places)
+- Use viewBox for scalability
+- Compress paths where possible
+- Remove invisible elements
+- Consider using SVGO CLI tool:
+  ```bash
+  npx svgo --multipass --config '{"plugins": [{"name": "preset-default"}]}' input.svg -o output.svg
+  ```
+
+---
+
+## Implementation Checklist
+
+### Phase 1: Asset Creation ⏳ In Progress
+- [ ] Design placeholder.svg with BotecoPro colors
+- [ ] Create service-tips.svg blog cover
+- [ ] Create inventory-management.svg blog cover
+- [ ] Create product-updates.svg blog cover
+- [ ] Update/create og-image.jpg
+- [ ] Update/create favicon.ico (+ favicon.svg)
+
+### Phase 2: Integration & Testing
+- [ ] Replace old assets with new designs
+- [ ] Test rendering in light theme
+- [ ] Test rendering in dark theme
+- [ ] Verify responsive behavior (mobile, tablet, desktop)
+- [ ] Check accessibility (alt text, contrast)
+- [ ] Run Lighthouse audit for performance
+- [ ] Verify file sizes meet targets
+
+### Phase 3: Build & Validation
+- [ ] Run `npm run build` successfully
+- [ ] Test in preview mode (`npm run preview`)
+- [ ] Visual regression test with Playwright
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+
+### Phase 4: Documentation & Handoff
+- [ ] Document design decisions
+- [ ] Create asset source files repository (if using design tool)
+- [ ] Update this TODO with lessons learned
+- [ ] Add future asset creation guidelines to README
+
+---
+
+## Tools & Resources
+
+### Recommended Tools
+- **Vector Editing**: Figma, Adobe Illustrator, or Inkscape
+- **SVG Optimization**: SVGO, SVGOMG (web interface)
+- **Color Conversion**: [HSL to HEX converter](https://www.rapidtables.com/convert/color/hsl-to-hex.html)
+- **Contrast Checker**: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- **Image Optimization**: ImageOptim, TinyPNG
+
+### Color Palette Quick Reference
+```css
+/* Light Theme */
+--boteco-primary: #9b1d5a;      /* Deep Rose */
+--boteco-secondary: #b35f1a;    /* Burnt Orange */
+--boteco-tertiary: #f5e7c8;     /* Warm Cream */
+--boteco-neutral: #4e3829;      /* Dark Brown */
+
+/* Dark Theme */
+--boteco-primary: #d9467e;      /* Lighter Rose */
+--boteco-secondary: #e07d2d;    /* Lighter Orange */
+--boteco-tertiary: #382f28;     /* Dark Warm Gray */
+--boteco-neutral: #faf3e8;      /* Light Cream */
+```
+
+---
+
+## Future Enhancements
+- [ ] Create additional blog post placeholder variations
+- [ ] Design custom icon set for restaurant/bar specific features
+- [ ] Create illustration library for marketing pages
+- [ ] Develop animation guidelines for motion design
+- [ ] Build component library with visual examples
+
+---
+
+## Notes & Learnings
+*(To be filled in during implementation)*
+
+### Challenges Encountered
+- 
+
+### Solutions Implemented
+- 
+
+### Best Practices Discovered
+- 
+
+---
+
+## Completion Criteria
+✅ All assets match BotecoPro color palette  
+✅ All SVGs optimized and under size targets  
+✅ Both light and dark themes render correctly  
+✅ Accessibility requirements met  
+✅ Build process completes without errors  
+✅ Visual regression tests pass  
+✅ Documentation complete  
+
+---
+
+*Last Updated: 2025-11-01*
+*Maintained by: Boteco.pt Development Team*
