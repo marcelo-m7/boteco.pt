@@ -53,17 +53,17 @@ const Blog: React.FC = () => {
           {t('description')}
         </p>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {posts.map((post) => (
             <Link
               key={post.id}
               to={`/${currentLocale}/blog/${post.slug}`}
-              className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-boteco-secondary focus-visible:ring-offset-2"
+              className="group flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-boteco-secondary focus-visible:ring-offset-2"
               aria-label={`${post.title} – ${readMoreLabel}`}
             >
               <Card
                 depth="overlay"
-                className="flex h-full flex-col overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl"
+                className="flex flex-col flex-1 overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl mb-1"
               >
                 <CardHeader className="space-y-4 pb-0">
                   <div className="relative">

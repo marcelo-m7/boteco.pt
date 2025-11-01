@@ -36,16 +36,16 @@ const PricingTable = ({
       <AnimatedItem as="p" className="mx-auto max-w-2xl text-lg text-boteco-neutral/80">
         {description}
       </AnimatedItem>
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 auto-rows-fr">
         {options.map((option) => (
-          <AnimatedItem key={option.name} className="h-full">
+          <AnimatedItem key={option.name} className="flex">
             <Card
               depth={option.highlight ? 'elevated' : 'overlay'}
               className={cn(
-                'flex h-full flex-col border-none p-6 text-left shadow-lg transition-all duration-300',
+                'flex flex-col flex-1 border-none p-6 text-left shadow-lg transition-all duration-300',
                 option.highlight
                   ? 'bg-depth-elevated text-boteco-neutral-soft-foreground ring-2 ring-boteco-secondary'
-                  : 'bg-depth-overlay/80 hover:-translate-y-1 hover:shadow-xl',
+                  : 'bg-depth-overlay/80 hover:-translate-y-1 hover:shadow-xl mb-1',
               )}
             >
               <CardHeader>

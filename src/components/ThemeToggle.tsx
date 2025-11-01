@@ -2,20 +2,34 @@
 
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme, resolvedTheme } = useTheme();
   const { t } = useTranslation(); // Para traduzir os textos do toggle
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const menuValue = theme ?? resolvedTheme ?? "system";
+  const systemLabel = resolvedTheme
+    ? `${t('systemTheme', { defaultValue: 'Sistema' })} (${resolvedTheme === 'dark'
+        ? t('darkTheme', { defaultValue: 'Escuro' })
+        : t('lightTheme', { defaultValue: 'Claro' })})`
+    : t('systemTheme', { defaultValue: 'Sistema' });
 
   return (
     <DropdownMenu>
@@ -24,24 +38,28 @@ export function ThemeToggle() {
           variant="ghost"
           size="icon"
           depth="overlay"
-          className="text-boteco-primary-foreground hover:bg-boteco-primary/80"
+          className="text-boteco-primary-foreground transition-colors hover:bg-boteco-primary/80"
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">{t('toggleTheme', { defaultValue: 'Alternar tema' })}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          {t('lightTheme', { defaultValue: 'Claro' })}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          {t('darkTheme', { defaultValue: 'Escuro' })}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          {t('systemTheme', { defaultValue: 'Sistema' })}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
+      {isMounted && (
+        <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuRadioGroup value={menuValue} onValueChange={setTheme}>
+            <DropdownMenuRadioItem value="light">
+              {t('lightTheme', { defaultValue: 'Claro' })}
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="dark">
+              {t('darkTheme', { defaultValue: 'Escuro' })}
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="system">
+              {systemLabel}
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      )}
     </DropdownMenu>
   );
 }

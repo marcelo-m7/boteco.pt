@@ -59,12 +59,12 @@ const SolutionsSection: React.FC = () => {
           </AnimatedItem>
         )}
       </div>
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
         {solutions.items.map((item) => (
-          <AnimatedItem key={item.title} className="h-full">
+          <AnimatedItem key={item.title} className="flex">
             <Card
               depth="overlay"
-              className="flex h-full flex-col justify-between border-none bg-depth-overlay/90 p-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="flex flex-col flex-1 justify-between border-none bg-depth-overlay/90 p-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl mb-1"
             >
               <CardHeader className="space-y-3">
                 <div className="flex items-center gap-3">

@@ -19,6 +19,7 @@ import Fidelidade from "./pages/Fidelidade";
 import Eventos from "./pages/Eventos";
 import Integracoes from "./pages/Integracoes";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
+import { hasClerkAuth } from "./utils/clerk";
 
 
 const queryClient = new QueryClient();
@@ -49,16 +50,23 @@ const App = () => (
           </Route>
 
           {/* Protected Painel route */}
-          <Route path="/painel" element={
-            <>
-              <SignedIn>
+          <Route
+            path="/painel"
+            element={
+              hasClerkAuth ? (
+                <>
+                  <SignedIn>
+                    <Painel />
+                  </SignedIn>
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                </>
+              ) : (
                 <Painel />
-              </SignedIn>
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-            </>
-          } />
+              )
+            }
+          />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

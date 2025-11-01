@@ -29,12 +29,12 @@ const FeatureGrid = ({ title, features, depth = 'surface', columns = 3, classNam
       <AnimatedItem as="h2" className="text-3xl font-bold text-boteco-neutral md:text-4xl">
         {title}
       </AnimatedItem>
-      <div className={cn('grid gap-8 text-left', columnClasses[columns])}>
+      <div className={cn('grid gap-6 text-left auto-rows-fr', columnClasses[columns])}>
         {features.map((feature) => (
-          <AnimatedItem key={feature.title} className="h-full">
+          <AnimatedItem key={feature.title} className="flex">
             <Card
               depth="overlay"
-              className="flex h-full flex-col gap-4 border-none bg-depth-overlay/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="flex flex-col flex-1 gap-4 border-none bg-depth-overlay/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl mb-1"
             >
               <CardHeader className="flex flex-row items-start gap-4 space-y-0">
                 <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-full bg-boteco-secondary text-boteco-secondary-foreground">
