@@ -17,6 +17,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import type { BaseNavItem, NavItem } from '@/types/navigation';
+import { hasClerkAuth } from '@/utils/clerk';
 
 interface MobileNavProps {
   onOpenChange: (open: boolean) => void;
@@ -71,7 +72,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen, currentLoca
           <span className="sr-only">{t('openMenu', { defaultValue: 'Abrir menu' })}</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[250px] sm:w-[300px] bg-background flex flex-col">
+      <SheetContent side="left" className="w-[250px] sm:w-[300px] bg-background flex flex-col transition-colors duration-300">
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl font-bold text-boteco-primary">Boteco Pro</SheetTitle>
         </SheetHeader>
@@ -80,7 +81,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen, currentLoca
             {items.map((item) =>
               item.type === 'mega' && item.items?.length ? (
                 <AccordionItem key={item.id} value={item.id} className="border-b border-border/40">
-                  <AccordionTrigger className="text-left text-lg font-medium text-foreground hover:text-boteco-primary">
+                  <AccordionTrigger className="text-left text-lg font-medium text-foreground transition-colors hover:text-boteco-primary">
                     {getLabel(item)}
                   </AccordionTrigger>
                   <AccordionContent className="space-y-2 pb-3">
@@ -115,12 +116,14 @@ const MobileNav: React.FC<MobileNavProps> = ({ onOpenChange, isOpen, currentLoca
         <div className="flex flex-col space-y-4 mt-auto pb-4">
           <LanguageSwitcher />
           <ThemeToggle />
-          <SignedIn>
-            <div className="flex items-center justify-start">
-              <UserButton afterSignOutUrl="/" />
-              <span className="ml-2 text-foreground">{t('profile', { defaultValue: 'Perfil' })}</span>
-            </div>
-          </SignedIn>
+          {hasClerkAuth && (
+            <SignedIn>
+              <div className="flex items-center justify-start">
+                <UserButton afterSignOutUrl="/" />
+                <span className="ml-2 text-foreground">{t('profile', { defaultValue: 'Perfil' })}</span>
+              </div>
+            </SignedIn>
+          )}
         </div>
       </SheetContent>
     </Sheet>

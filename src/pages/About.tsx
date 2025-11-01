@@ -71,11 +71,11 @@ const About: React.FC = () => {
           <motion.h2 variants={itemVariants} className="text-3xl font-bold text-center mb-8 text-boteco-neutral">
             {t('valuesTitle', { defaultValue: 'Nossos Valores' })}
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <motion.div variants={itemVariants}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto auto-rows-fr">
+            <motion.div variants={itemVariants} className="flex">
               <Card
                 depth="overlay"
-                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl mb-1 flex flex-col flex-1"
               >
                 <CardHeader>
                   <Lightbulb className="h-12 w-12 text-boteco-secondary mx-auto mb-4" />
@@ -86,10 +86,10 @@ const About: React.FC = () => {
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="flex">
               <Card
                 depth="overlay"
-                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl mb-1 flex flex-col flex-1"
               >
                 <CardHeader>
                   <ShieldCheck className="h-12 w-12 text-boteco-secondary mx-auto mb-4" />
@@ -100,10 +100,10 @@ const About: React.FC = () => {
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="flex">
               <Card
                 depth="overlay"
-                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl mb-1 flex flex-col flex-1"
               >
                 <CardHeader>
                   <Users className="h-12 w-12 text-boteco-secondary mx-auto mb-4" />

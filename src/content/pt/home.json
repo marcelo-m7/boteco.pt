@@ -2,7 +2,9 @@
   "hero": {
     "title": "Boteco Pro: A Solução Completa para Bares e Restaurantes",
     "subtitle": "Gerencie seu negócio com praticidade e eficiência.",
-    "cta": "Experimente Grátis"
+    "cta": "Experimente Grátis",
+    "demoCta": "Experimentar demo",
+    "demoCtaAria": "Experimentar demo do Boteco Pro (abre em nova aba)"
   },
   "features": [
     {

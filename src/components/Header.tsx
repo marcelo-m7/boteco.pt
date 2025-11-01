@@ -19,6 +19,7 @@ import {
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import type { BaseNavItem, NavItem } from '@/types/navigation';
+import { hasClerkAuth } from '@/utils/clerk';
 
 const Header: React.FC = () => {
   const { locale } = useParams<{ locale: string }>();
@@ -55,18 +56,23 @@ const Header: React.FC = () => {
   const navItems = (navigation.items as NavItem[]) ?? [];
 
   return (
-    <header className="bg-boteco-primary text-boteco-primary-foreground p-4 shadow-md">
+    <header className="bg-boteco-primary text-boteco-primary-foreground p-4 shadow-md transition-colors duration-300">
       <div className="container mx-auto flex justify-between items-center gap-4">
-        <Link to={`/${currentLocale}`} className="text-2xl font-bold">
+        <Link
+          to={`/${currentLocale}`}
+          className="text-2xl font-bold transition-colors hover:text-boteco-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-boteco-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-boteco-primary"
+        >
           Boteco Pro
         </Link>
 
         {isMobile ? (
           <div className="flex items-center space-x-2">
             <ThemeToggle />
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            {hasClerkAuth && (
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+            )}
             <MobileNav
               isOpen={isMobileNavOpen}
               onOpenChange={setIsMobileNavOpen}
@@ -82,7 +88,10 @@ const Header: React.FC = () => {
                   <NavigationMenuItem key={item.id}>
                     {item.type === 'mega' && item.items?.length ? (
                       <>
-                        <NavigationMenuTrigger className={cn(navigationMenuTriggerStyle(), 'bg-transparent text-boteco-primary-foreground hover:text-boteco-secondary focus-visible:ring-boteco-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-boteco-primary')}>
+                        <NavigationMenuTrigger className={cn(
+                          navigationMenuTriggerStyle(),
+                          'bg-transparent text-boteco-primary-foreground transition-colors hover:text-boteco-secondary focus-visible:ring-boteco-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-boteco-primary',
+                        )}>
                           {getLabel(item)}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent className="p-4">
@@ -128,9 +137,11 @@ const Header: React.FC = () => {
             </NavigationMenu>
             <LanguageSwitcher />
             <ThemeToggle />
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            {hasClerkAuth && (
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+            )}
           </div>
         )}
       </div>

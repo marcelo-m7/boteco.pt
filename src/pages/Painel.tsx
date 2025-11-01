@@ -14,6 +14,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
+import { hasClerkAuth } from '@/utils/clerk';
 
 const cardIcons: Record<string, React.ReactNode> = {
   totalLeads: <Users className="h-8 w-8 text-boteco-secondary" />,
@@ -22,9 +23,24 @@ const cardIcons: Record<string, React.ReactNode> = {
   responseRate24h: <Timer className="h-8 w-8 text-boteco-secondary" />,
 };
 
-const Painel: React.FC = () => {
-  const { t, i18n } = useTranslation('painel');
+// Internal component that uses Clerk hooks
+const PainelWithAuth: React.FC = () => {
   const { user } = useUser();
+  return <PainelContent user={user} />;
+};
+
+// Internal component without auth
+const PainelWithoutAuth: React.FC = () => {
+  return <PainelContent user={null} />;
+};
+
+// Main content component
+interface PainelContentProps {
+  user: { firstName?: string | null } | null;
+}
+
+const PainelContent: React.FC<PainelContentProps> = ({ user }) => {
+  const { t, i18n } = useTranslation('painel');
 
   const query = useQuery({
     queryKey: CONTACT_REQUESTS_QUERY_KEY,
@@ -300,6 +316,11 @@ const Painel: React.FC = () => {
       </div>
     </>
   );
+};
+
+// Main exported component that conditionally renders based on auth
+const Painel: React.FC = () => {
+  return hasClerkAuth ? <PainelWithAuth /> : <PainelWithoutAuth />;
 };
 
 export default Painel;

@@ -29,7 +29,7 @@ const Home = () => {
         ogDescription={pageDescription}
         locale={i18n.language}
       />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-stretch">
         <HeroSection />
         <FeaturesSection />
         <SolutionsSection />

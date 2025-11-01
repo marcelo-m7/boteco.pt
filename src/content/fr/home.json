@@ -2,7 +2,9 @@
   "hero": {
     "title": "Boteco Pro : la solution complète pour bars et restaurants",
     "subtitle": "Gérez votre établissement avec praticité et efficacité.",
-    "cta": "Essai gratuit"
+    "cta": "Essai gratuit",
+    "demoCta": "Essayer la démo",
+    "demoCtaAria": "Essayer la démo Boteco Pro (s'ouvre dans un nouvel onglet)"
   },
   "features": [
     {

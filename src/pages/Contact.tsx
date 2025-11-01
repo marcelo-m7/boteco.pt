@@ -25,23 +25,121 @@ import {
   ContactRequestInput,
 } from '@/lib/storage/contactRequests';
 
-// Define o esquema de validação com Zod
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "O nome deve ter pelo menos 2 caracteres.",
-  }).max(50, {
-    message: "O nome não pode ter mais de 50 caracteres.",
-  }),
-  email: z.string().email({
-    message: "Por favor, insira um endereço de e-mail válido.",
-  }),
-  phone: z.string().optional(), // Telefone é opcional
-  message: z.string().min(10, {
-    message: "A mensagem deve ter pelo menos 10 caracteres.",
-  }).max(500, {
-    message: "A mensagem não pode ter mais de 500 caracteres.",
-  }),
-});
+const fallbackValidationMessages = {
+  name: {
+    min: 'O nome deve ter pelo menos 2 caracteres.',
+    max: 'O nome não pode ter mais de 50 caracteres.',
+  },
+  email: {
+    invalid: 'Por favor, insira um endereço de e-mail válido.',
+  },
+  message: {
+    min: 'A mensagem deve ter pelo menos 10 caracteres.',
+    max: 'A mensagem não pode ter mais de 500 caracteres.',
+  },
+};
+
+type FormValidationMessages = typeof fallbackValidationMessages;
+
+/**
+ * Validates translation structure and logs warnings for missing keys
+ */
+const validateTranslationMessages = (
+  messages: unknown,
+  path: string = 'form.validation'
+): Partial<FormValidationMessages> => {
+  if (!messages || typeof messages !== 'object') {
+    console.warn(`[Contact] Missing or invalid translation structure at "${path}"`);
+    return {};
+  }
+
+  const validated: Partial<FormValidationMessages> = {};
+  const msg = messages as Record<string, unknown>;
+
+  // Validate name messages
+  if (msg.name && typeof msg.name === 'object') {
+    const name = msg.name as Record<string, unknown>;
+    validated.name = {
+      min: typeof name.min === 'string' ? name.min : undefined,
+      max: typeof name.max === 'string' ? name.max : undefined,
+    } as FormValidationMessages['name'];
+    
+    if (!name.min) console.warn(`[Contact] Missing translation: ${path}.name.min`);
+    if (!name.max) console.warn(`[Contact] Missing translation: ${path}.name.max`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.name`);
+  }
+
+  // Validate email messages
+  if (msg.email && typeof msg.email === 'object') {
+    const email = msg.email as Record<string, unknown>;
+    validated.email = {
+      invalid: typeof email.invalid === 'string' ? email.invalid : undefined,
+    } as FormValidationMessages['email'];
+    
+    if (!email.invalid) console.warn(`[Contact] Missing translation: ${path}.email.invalid`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.email`);
+  }
+
+  // Validate message messages
+  if (msg.message && typeof msg.message === 'object') {
+    const message = msg.message as Record<string, unknown>;
+    validated.message = {
+      min: typeof message.min === 'string' ? message.min : undefined,
+      max: typeof message.max === 'string' ? message.max : undefined,
+    } as FormValidationMessages['message'];
+    
+    if (!message.min) console.warn(`[Contact] Missing translation: ${path}.message.min`);
+    if (!message.max) console.warn(`[Contact] Missing translation: ${path}.message.max`);
+  } else {
+    console.warn(`[Contact] Missing translation: ${path}.message`);
+  }
+
+  return validated;
+};
+
+const createFormSchema = (messages?: Partial<FormValidationMessages>) => {
+  const finalMessages: FormValidationMessages = {
+    name: {
+      min: messages?.name?.min ?? fallbackValidationMessages.name.min,
+      max: messages?.name?.max ?? fallbackValidationMessages.name.max,
+    },
+    email: {
+      invalid: messages?.email?.invalid ?? fallbackValidationMessages.email.invalid,
+    },
+    message: {
+      min: messages?.message?.min ?? fallbackValidationMessages.message.min,
+      max: messages?.message?.max ?? fallbackValidationMessages.message.max,
+    },
+  };
+
+  return z.object({
+    name: z
+      .string()
+      .min(2, {
+        message: finalMessages.name.min,
+      })
+      .max(50, {
+        message: finalMessages.name.max,
+      }),
+    email: z.string().email({
+      message: finalMessages.email.invalid,
+    }),
+    phone: z.string().optional(),
+    message: z
+      .string()
+      .min(10, {
+        message: finalMessages.message.min,
+      })
+      .max(500, {
+        message: finalMessages.message.max,
+      }),
+  });
+};
+
+type ContactFormSchema = ReturnType<typeof createFormSchema>;
+type ContactFormValues = z.infer<ContactFormSchema>;
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation('contact');
@@ -55,9 +153,26 @@ const Contact: React.FC = () => {
   });
   const isSubmitting = contactMutation.isPending;
 
+  const validationMessages = React.useMemo(
+    () =>
+      validateTranslationMessages(
+        t('form.validation', {
+          returnObjects: true,
+        })
+      ),
+    [t],
+  );
+
+  const formSchema = React.useMemo(
+    () => createFormSchema(validationMessages),
+    [validationMessages],
+  );
+
+  const formResolver = React.useMemo(() => zodResolver(formSchema), [formSchema]);
+
   // Inicializa o formulário com react-hook-form e zodResolver
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ContactFormValues>({
+    resolver: formResolver,
     defaultValues: {
       name: "",
       email: "",
@@ -67,18 +182,24 @@ const Contact: React.FC = () => {
   });
 
   // Função de submissão do formulário
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: ContactFormValues) => {
     try {
       await contactMutation.mutateAsync(data);
       toast({
         title: t('form.successMessage'),
-        description: "Sua mensagem foi recebida e entraremos em contato em breve.",
+        description: t('form.successDescription', {
+          defaultValue: t('form.successMessage'),
+        }),
         variant: "default",
       });
       form.reset();
     } catch (error) {
       const description =
-        error instanceof Error ? error.message : "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.";
+        error instanceof Error
+          ? error.message
+          : t('form.errorDescription', {
+              defaultValue: t('form.errorMessage'),
+            });
       toast({
         title: t('form.errorMessage'),
         description,
