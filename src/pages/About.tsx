@@ -151,7 +151,7 @@ const About: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-boteco-primary hover:text-boteco-secondary transition-colors duration-300 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-boteco-secondary focus-visible:ring-offset-2"
-              aria-label={`${t('partnership.linkText')} - abre em nova aba`}
+              aria-label={t('partnership.linkAriaLabel')}
             >
               {t('partnership.linkText')}
               <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

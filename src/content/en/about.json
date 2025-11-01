@@ -12,6 +12,7 @@
     "title": "Technology Partnership",
     "description": "BotecoPro is developed with the technological support of Monynha Softwares, specialized in web & mobile platforms, integrations/APIs and technical consulting. A partnership focused on reliability, accessibility and continuous evolution.",
     "linkText": "Monynha Softwares",
-    "linkUrl": "https://monynha.com/about"
+    "linkUrl": "https://monynha.com/about",
+    "linkAriaLabel": "Monynha Softwares - opens in new tab"
   }
 }

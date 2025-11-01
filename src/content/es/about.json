@@ -12,6 +12,7 @@
     "title": "Asociación Tecnológica",
     "description": "BotecoPro se desarrolla con el soporte tecnológico de Monynha Softwares, especializada en plataformas web y móviles, integraciones/APIs y consultoría técnica. Una asociación enfocada en confiabilidad, accesibilidad y evolución continua.",
     "linkText": "Monynha Softwares",
-    "linkUrl": "https://monynha.com/about"
+    "linkUrl": "https://monynha.com/about",
+    "linkAriaLabel": "Monynha Softwares - se abre en nueva pestaña"
   }
 }
